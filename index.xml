@@ -1,0 +1,1216 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>G Chen on G Chen</title>
+    <link>http://gggchen.github.io/</link>
+    <description>Recent content in G Chen on G Chen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Chen</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Shadowsocks 与 科学上网</title>
+      <link>http://gggchen.github.io/post/climb-wall/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/climb-wall/</guid>
+      <description>
+
+&lt;p&gt;为什么要翻墙。我当初翻墙只是因为想用 Google 和看 porn。就像播客&lt;a href=&#34;https://www.nicktalk.com/podcasts/2017/5/28/ntp-38-&#34; target=&#34;_blank&#34;&gt;NTP #38 科學上網指南&lt;/a&gt;里讲的那样，翻墙能让你获得完整的互联网体验，而不是阉割版本的。顺便一提，这个播客基本涵盖了科学上网的各个方面，推荐收听。&lt;/p&gt;
+
+&lt;p&gt;翻墙方法有很多，比如 VPN 和 shadowsocks。我不选择 VPN 主要因为 VPN 只能全局代理。也就是访问国外网站也是利用国外服务器访问，高延迟会让体验很不舒服。而shadowsocks 可以设置使用代理的网址列表。在列表内的使用代理翻墙，国内网站不用 shadowsocks 直接访问，速度会快得多。&lt;/p&gt;
+
+&lt;h1 id=&#34;如何搭建-shadowsocks&#34;&gt;如何搭建 shadowsocks&lt;/h1&gt;
+
+&lt;p&gt;翻墙的基本思路为，既然国内的电脑无法访问国外网站如 Twitter，那就让国内电脑通过国外一台电脑为代理，访问国外网站 Twitter 再把这部分信息传递回国内电脑。所以需要国外一台电脑Virtual Private Server(VPS) 用来做代理访问国外网站，shadowsocks 为连接本地电脑和国外电脑的工具，需要安装在本地和国外电脑上，用来联通本地和国外。&lt;/p&gt;
+
+&lt;h2 id=&#34;建立-vps&#34;&gt;建立 VPS&lt;/h2&gt;
+
+&lt;p&gt;VPS 可选的服务提供商有很多。我自己因为 &lt;a href=&#34;https://education.github.com/pack&#34; target=&#34;_blank&#34;&gt;Github 学生计划的优惠&lt;/a&gt;最开始使用了 &lt;a href=&#34;https://www.digitalocean.com/&#34; target=&#34;_blank&#34;&gt;Digital Ocean&lt;/a&gt; 后来就一直路径依赖使用下来了。
+Digital Ocean 也提供了丰富的文档来介绍如何使用自家的产品，比如&lt;a href=&#34;https://www.digitalocean.com/docs/droplets/how-to/create/&#34; target=&#34;_blank&#34;&gt;如何创建一个服务器&lt;/a&gt;，一般最便宜的方案 5 美元每月已经够用了，DO 还提供了测速工具来选择哪个地区的服务器能更快连接。
+&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04&#34; target=&#34;_blank&#34;&gt;服务器的初始设置&lt;/a&gt; 以 Ubuntu 为例介绍了刚建立的服务器如何设置防火墙等让自己更安全。&lt;/p&gt;
+
+&lt;p&gt;其他 VPS 服务商还有比如 &lt;a href=&#34;https://www.vultr.com/&#34; target=&#34;_blank&#34;&gt;vultr&lt;/a&gt; 和 &lt;a href=&#34;https://cloud.google.com/&#34; target=&#34;_blank&#34;&gt;Google Cloud&lt;/a&gt;。如果决定使用 DO 为服务提供商，不妨使用我的&lt;a href=&#34;https://m.do.co/c/aa65d3d64a9d&#34; target=&#34;_blank&#34;&gt;分享链接&lt;/a&gt; 注册，这样我会因为你的使用而获得收益。&lt;/p&gt;
+
+&lt;h2 id=&#34;建立-shadowsocks&#34;&gt;建立 shadowsocks&lt;/h2&gt;
+
+&lt;p&gt;以 Ubuntu 为例介绍如何在服务器端安装 shadowsocks：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apt-get install python-pip
+pip install shadowsocks
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来需要配置 shadowsocks，使用 &lt;code&gt;nano&lt;/code&gt; 打开配置文件：
+&lt;code&gt;/etc/shadowsocks.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nano /ect/shadowsocks.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在打开的文件中粘贴入下列设置，把 IP 地址改成服务器地址，密码自己设置。&lt;code&gt;server port&lt;/code&gt; 为服务器对外提供的端口。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;IP adress of your server&amp;quot;,
+    &amp;quot;server_port&amp;quot;:8388,
+    &amp;quot;local_address&amp;quot;: &amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;PASSWORD&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;,
+    &amp;quot;fast_open&amp;quot;: false
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Ctrl+x&lt;/code&gt; 推出 nano，然后选择&lt;code&gt;y&lt;/code&gt; 保存修改。&lt;/p&gt;
+
+&lt;p&gt;shadowsocks 服务可以使用下列命令打开关闭：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo ssserver -c /etc/shadowsocks.json -d start
+sudo ssserver -c /etc/shadowsocks.json -d stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;需要注意的是，如果为了安全考虑开了防火墙，默认端口是不会打开的。所以需要下列命令来开放端口让自己电脑得以访问。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo ufw allow 8388
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;本地客户端&#34;&gt;本地客户端&lt;/h2&gt;
+
+&lt;p&gt;iOS 端我自己在使用&lt;a href=&#34;https://itunes.apple.com/us/app/shadowrocket/id932747118?mt=8&#34; target=&#34;_blank&#34;&gt;Shadowracket&lt;/a&gt;, 因为 Surge 太贵了。
+Mac OS 和其余PC 客户端可以在 &lt;a href=&#34;https://shadowsocks.org/en/download/clients.html&#34; target=&#34;_blank&#34;&gt;shadowsocks.org&lt;/a&gt; 中下载到。&lt;/p&gt;
+
+&lt;p&gt;按照上面的 &lt;code&gt;shadowsocks.json&lt;/code&gt; 中的 IP 地址，端口和密码，就可以在本地连接到服务器，添加代理上网了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>在大陆使用 Google Scholar</title>
+      <link>http://gggchen.github.io/post/google-scholar/</link>
+      <pubDate>Fri, 04 May 2018 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/google-scholar/</guid>
+      <description>
+
+&lt;p&gt;使用 shadowsocks 科学上网时, Google 和其他很多网站都能正常访问, 唯独 Google Scholar 会提示下面的错误, 而且没有 CAPTCHA 来验证自己不是电脑.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;We’re sorry… but your computer or network may be sending automated queries. To protect our users, we can’t process your request right now.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之前我为了检索论文, 只好自己买 VPN. 这个月到期之后决定不买 VPN 了, 因为我自己就有 shadowsocks, 为什么不解决这个问题. 据说是因为服务器的同一 IP 服务段有人使用爬虫, 所以 Google 限制访问了, 需要使用 ipv6 访问 Google. 我尝试了一下, 现在也终于能正常访问了.&lt;/p&gt;
+
+&lt;h2 id=&#34;enable-ipv6&#34;&gt;Enable ipv6&lt;/h2&gt;
+
+&lt;p&gt;要使用 ipv6 访问 Google, 首先需要先保证 ss 的服务器开启了 ipv6 的. 开启 ipv6 的部份可以参考 &lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-enable-ipv6-for-digitalocean-droplets&#34; target=&#34;_blank&#34;&gt;How To Enable IPv6 for DigitalOcean Droplets&lt;/a&gt;. 在确保了服务器已经开启 ipv6 后, 再进行以下配置.&lt;/p&gt;
+
+&lt;h2 id=&#34;修改-shadowsocks-配置&#34;&gt;修改 shadowsocks 配置&lt;/h2&gt;
+
+&lt;p&gt;打开 shadowsocks 的配置:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /etc/shadowsocks.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改第一行的 &lt;code&gt;&amp;quot;server&amp;quot;:&amp;quot;ipadress&amp;quot;&lt;/code&gt; 为 &lt;code&gt;&amp;quot;server&amp;quot;: &amp;quot;::&amp;quot;&lt;/code&gt;, 保证 shadowsocks 不仅仅使用 ipv4.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;server&amp;quot;:&amp;quot;::&amp;quot;,
+    &amp;quot;server_port&amp;quot;:8388,
+    &amp;quot;local_address&amp;quot;: &amp;quot;127.0.0.1&amp;quot;,
+    &amp;quot;local_port&amp;quot;:1080,
+    &amp;quot;password&amp;quot;:&amp;quot;mypassword&amp;quot;,
+    &amp;quot;timeout&amp;quot;:300,
+    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;,
+    &amp;quot;fast_open&amp;quot;: false
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面是可行解法, 另外我尝试过 &lt;a href=&#34;https://github.com/shadowsocks/shadowsocks-libev/issues/254&#34; target=&#34;_blank&#34;&gt;ss github issue 中提到的设置方法&lt;/a&gt; 改为 &lt;code&gt;&amp;quot;server&amp;quot;:[&amp;quot;[::0]&amp;quot;, &amp;quot;0.0.0.0&amp;quot;]&lt;/code&gt; 并不可行, 只能依照上面代码设置为 &lt;code&gt;&amp;quot;server&amp;quot;: &amp;quot;::&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;修改-hosts&#34;&gt;修改 hosts&lt;/h2&gt;
+
+&lt;p&gt;ssh 到服务器, 修改 hosts 文件, 手动设定 &lt;code&gt;scholar.google.com&lt;/code&gt; 网站的服务网址:&lt;/p&gt;
+
+&lt;p&gt;打开 hosts 文件:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vim /etc/hosts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在文件末尾加上:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# google scholar
+2404:6800:4008:c06::be scholar.google.com
+2404:6800:4008:c06::be scholar.google.com.hk
+2404:6800:4008:c06::be scholar.google.com.tw
+2401:3800:4001:10::101f scholar.google.cn
+2404:6800:4008:c06::be scholar.google.com.sg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后重启 shadowsocks 的服务:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo ssserver -c /etc/shadowsocks.json -d restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ipv6-地址变动&#34;&gt;ipv6 地址变动&lt;/h2&gt;
+
+&lt;p&gt;需要注意的是, &lt;code&gt;scholar.google.com&lt;/code&gt; 的 ipv6 的地址更换过, 因为早一点的教程, 会告诉你把 hosts 改成:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;2607:f8b0:4007:805::100f scholar.google.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是这些 2607 的 ipv6 地址根本没法连接, 上面的 2404 的才是现在2018年5月4日能使用的. 以后变动的话, 还要搜索新 ipv6 地址, 再做更改. 更改的地址可以参考 &lt;a href=&#34;https://raw.githubusercontent.com/lennylxx/ipv6-hosts/master/hosts&#34; target=&#34;_blank&#34;&gt;这个 hosts 文件&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;感受&#34;&gt;感受&lt;/h2&gt;
+
+&lt;p&gt;在国内总有一种被强奸的感觉, 一个很好的网站, 说不让你连接, 就不让你连接. 我今天花了一上午研究如何绕过长城, 整个人都很暴躁. 时间都浪费在争取那些应该能自由获取的东西, 这个政权还在投入大量人力物力阻碍信息的流动.&lt;/p&gt;
+
+&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.chenchen.co.uk/2017/11/30/Google_scholar_error.html&#34; target=&#34;_blank&#34;&gt;Digital Ocean + SS无法访问Google Scholar的解决方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.finaltheory.me/note/Solve-Google-Problems.html&#34; target=&#34;_blank&#34;&gt;解决DigitalOcean的VPS上Google搜索无法使用的问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.polarxiong.com/archives/%E6%90%AD%E5%BB%BAipv6-VPN-%E8%AE%A9ipv4%E4%B8%8Aipv6-%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%8F%90%E5%8D%87%E5%88%B0100M.html&#34; target=&#34;_blank&#34;&gt;使用shadowsocks，搭建ipv6 VPN&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>用爬虫批量下载课程主页的课件</title>
+      <link>http://gggchen.github.io/post/scraping/</link>
+      <pubDate>Mon, 30 Apr 2018 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/scraping/</guid>
+      <description>
+
+&lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
+
+&lt;p&gt;最近在看 Meshfree 拟合函数的方法, &lt;a href=&#34;https://www.worldscientific.com/worldscibooks/10.1142/6437&#34; target=&#34;_blank&#34;&gt;教材&lt;/a&gt; 需要用到的 Matlab 代码和数据有在&lt;a href=&#34;http://www.math.iit.edu/~fass/590/handouts/&#34; target=&#34;_blank&#34;&gt;课程主页&lt;/a&gt;上. 要跑每个代码需要先下载到本地. 简单的方法, 可以每个文件单独点击下载. 但是我懒得这样做(而且想练习一下之前看的爬虫), 所以写了程序来批量下载所有数据文件.&lt;/p&gt;
+
+&lt;p&gt;所以问题是, 已知一个网页, 网页上有链接指向想要下载的文件, 需要过滤得到需要文件的网址, 下载保存到本地.&lt;/p&gt;
+
+&lt;h2 id=&#34;问题解决&#34;&gt;问题解决&lt;/h2&gt;
+
+&lt;p&gt;使用 Python3.6&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from urllib.request import urlretrieve
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import re
+
+downloadDirectory = &#39;/Users/Username/Documents/meshfree/matlab-code/&#39;
+baseUrl = &#39;http://www.math.iit.edu/~fass/590/handouts/&#39;
+
+# open url and filter it to get a list of file names to be downloaded
+html = urlopen(baseUrl)
+bs = BeautifulSoup(html, &#39;html.parser&#39;)
+downloadList = bs.findAll(&amp;quot;a&amp;quot;, href=re.compile(&amp;quot;^[A-Za-z0-9_+]+\.[a-z+]+$&amp;quot;))
+
+# download files
+for download in downloadList:
+    path = download.attrs[&#39;href&#39;]
+    fileUrl = baseUrl + path
+    if fileUrl is not None:
+        print(fileUrl)
+        urlretrieve(fileUrl, downloadDirectory+path)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;urlretrieve&lt;/code&gt; 用于下载文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;urlopen&lt;/code&gt; 用于打开 url 网址, 获取 HTML 文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BeautifulSoup&lt;/code&gt; 用于解析 HTML 文件&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;re&lt;/code&gt; 利用正则表达式从 HTML 文件中获取想要的信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;downloadDirectory&lt;/code&gt;: 数据文件保存到本地的地址, 我的电脑上的一个路径.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;baseUrl&lt;/code&gt;: 目标网址&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;findAll&lt;/code&gt;: 从 HTML 文件中找到所有符合条件的网址&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;re.compile&lt;/code&gt;: 使用正则表达式过滤&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;downloadList&lt;/code&gt;: 过滤得到的待下载文件列表&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最后使用 &lt;code&gt;urlretrieve&lt;/code&gt; 函数逐一下载 待下载文件列表中的文件.&lt;/p&gt;
+
+&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.goodreads.com/book/show/25752783-web-scraping-with-python&#34; target=&#34;_blank&#34;&gt;Web Scraping with Python&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>朗读者</title>
+      <link>http://gggchen.github.io/post/the-reader/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/the-reader/</guid>
+      <description>
+
+&lt;p&gt;读了《朗读者》小说, 发现了一些电影中没有说明的细节.&lt;/p&gt;
+
+&lt;h2 id=&#34;剧情&#34;&gt;剧情&lt;/h2&gt;
+
+&lt;p&gt;十五岁的学生米夏在回家路上偶遇了三十六岁的汉娜, 两个人成为情人. 米夏每天放学先去去汉娜家给汉娜读书, 然后两人洗澡, 做爱. 汉娜在一天突然离开, 米夏很久之后才把汉娜忘掉, 却再也没法爱别人.&lt;/p&gt;
+
+&lt;p&gt;米夏进了大学读法律, 再次看到汉娜是二战之后在法庭上, 汉娜作为关押犹太人的看守而被审判. 汉娜被指控终身监禁. 米夏后来一直继续为汉娜朗读小说, 把录音的磁带寄给狱中的汉娜. 汉娜在出狱前一天在狱中自杀.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://gggchen.github.io/img/the-reader.jpg&#34; alt=&#34;朗读 图片来自豆瓣&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;阶级&#34;&gt;阶级&lt;/h2&gt;
+
+&lt;p&gt;电影只让我感觉这是一段在年龄上悬殊的感情, 小说中细致描写了双方的家庭, 让我意识到这段感情在阶级上也是很不匹配的. 汉娜是一个底层文盲, 米夏是高级知识分子的家庭.&lt;/p&gt;
+
+&lt;p&gt;汉娜不识字, 经历坎坷, 十七岁去柏林, 在西门子做女工, 参加了一战, 战争后找了所有能干的工作, 认识米夏的时候在做公交车检票员这种简单工作.&lt;/p&gt;
+
+&lt;p&gt;而米夏的父亲是一位哲学教授, 白天有学生排着队找他请教问题. 家里有着丰富的藏书, 他父亲自己还出过书.&lt;/p&gt;
+
+&lt;p&gt;看电影的时候, 我把自己想象成的是米夏, 一个男性角色. 读小说看到汉娜这么坎坷的经历, 能更多代入汉娜这个角色. 汉娜第一次来到米夏的家里, 看到他家有一面墙的藏书. 汉娜和米夏出去玩, 只能依赖米夏找餐馆点菜住宿, 这种无助的底层角色刚到大城市两眼一抹瞎的状态让我很代入, 我也羡慕别人能在家里有一面墙的藏书. 也想起了自己从村里到城市的大开眼界, 第一次出国住宿时候的茫然无措.&lt;/p&gt;
+
+&lt;h2 id=&#34;情侣的误会&#34;&gt;情侣的误会&lt;/h2&gt;
+
+&lt;p&gt;电影里也有汉娜和米夏的吵架, 吵得莫名其妙, 读了小说才明白.&lt;/p&gt;
+
+&lt;p&gt;汉娜是公交车剪票员, 米夏拐去搭乘她那一班公交车. 公车有两节, 两节都没有乘客, 前一节有司机, 所以米夏想单独和汉娜相处, 就一直呆在第二节车厢. 但是汉娜迟迟不来找自己, 和司机聊天. 米夏很生气, 自己专门来看她, 她却不理自己, 后来在一个荒凉地方下车了, 哭着走回去.而汉娜是不懂米夏想和她单独相处才没去找她, 可能也是为自己干这么简单的工作而不好意思了, 以为米夏不来第一节车厢找自己因为自己的工作太傻了. 这两个人才互相在乎而互相生气.&lt;/p&gt;
+
+&lt;p&gt;汉娜说「你根本没伤到我, 你还不够格呢!」, 汉娜虽然嘴里这样说, 但是是生气的.&lt;/p&gt;
+
+&lt;h2 id=&#34;法律的追溯权&#34;&gt;法律的追溯权&lt;/h2&gt;
+
+&lt;p&gt;小说比电影深刻一些在于严肃法律问题的探讨, 电影完全避而不谈了.&lt;/p&gt;
+
+&lt;p&gt;本书的作者是一位法官, 书中的米夏也是一位研究法律史的人. 再在法庭上遇见汉娜之前, 班上主要讨论的主题就是法律的追溯权. 为纳粹政府工作的人, 当初杀死犹太人的时候, 这些行为是合法的, 但是现在我们认为杀死犹太人是非法的, 所以这些汉娜这些工作人员因为过去的合法行为, 需要面临审判, 现在的法律要追溯到她们过去的行为. 米夏在庭审上遇见汉娜之前, 也是相信法律的追溯权的. 但是在法庭上见到自己的爱人受审判之后, 米夏内心就矛盾了, 我们真的应该追溯之前的犯罪, 我们在做正确的事情? 看到小说后半部分, 我猜想作者是把一些法律的严肃思考包装在一个爱情故事里, 把严肃问题通俗化了, 让更多人思考这样严肃的问题.&lt;/p&gt;
+
+&lt;h2 id=&#34;麻木不仁&#34;&gt;麻木不仁&lt;/h2&gt;
+
+&lt;p&gt;从小说里读到了两层的麻木不仁. 第一层是汉娜等为党卫军效力的人, 在杀死犹太人的时候, 不管是枪决还是送去毒气室. 她们并不恨犹太人, 她们也不爱犹太人, 她们对犹太人的态度是无所谓的, 不在乎的. 她们只是把今天的工作完成, 就像工人拧完今天的螺丝钉一样. 另一层的麻木不仁表现在对汉娜这些人的审判者上, 小说对法官和律师的描写很有意思. 法官和律师也并不真正关心正义, 法官连续庭审几天也很疲惫, 很不喜欢汉娜否定指控补充新的信息, 只想把活干完. 律师也是一样地例行公事, 关注自己辩护的辞令. 这些审判者虽然在审判犯下罪行的人, 但是小说把审判者和被审判者描写成了同一类人, 都想快速结束工作, 结束别人生命. 看似审判者代表了正义, 被审判者是罪恶的, 需要为过去的谋杀负责, 但是小说的描写说明, 审判者在审判的过程中, 犯下了和被审判者一样的罪行&amp;ndash; 麻木不仁.&lt;/p&gt;
+
+&lt;h2 id=&#34;中文翻译&#34;&gt;中文翻译&lt;/h2&gt;
+
+&lt;p&gt;说一说本书的中文翻译. 毕飞宇在他的《小说课》里聊到过小说的语言, 反面例子就是这版钱定平翻译的《朗读者》.
+在米夏第二次见到汉娜, 汉娜在厨房换衣服, 米夏在门外偷看, 他被她换衣服时的自然和放松打动, 但是钱先生把汉娜单腿站着穿丝袜的体态翻译成「金鸡独立」 美感全没有了!&lt;/p&gt;
+
+&lt;p&gt;毕飞宇说, 我虽然不懂外语, 但是这里翻译成「金鸡独立」肯定有问题. 其他很多处也有类似的别扭, 翻译者似乎很想卖弄自己会了一些四字成语, 不管合适还是不合适, 就用上了. 如果妳也要读这本小说, 可能德文或者英文版会更合适一些&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>LaTex 转成 Word</title>
+      <link>http://gggchen.github.io/post/latex2rtf/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/latex2rtf/</guid>
+      <description>&lt;p&gt;因为我电脑没有 word 软件, 而且更喜欢纯文本的格式, 写的文档都是 &lt;code&gt;org&lt;/code&gt;, &lt;code&gt;md&lt;/code&gt; 或者 &lt;code&gt;tex&lt;/code&gt; 的. 最近写的论文, 因为公式众多, 还有很多文章内的交叉引用, 就用了 LaTex 来写, 交上了 PDF 格式. 学院竟然要求 word 版本, 让我很崩溃. 一个统计学院竟不支持 LaTex, 可能盗版就是力量吧. 抱怨的话就不宣泄了, 我还是转了.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://gggchen.github.io/img/soulanimal.jpg&#34; alt=&#34;curse&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Pandoc 是个好用的工具, 但是转换的效果并不好, 搜了一下, 有工具 &lt;a href=&#34;http://latex2rtf.sourceforge.net/&#34; target=&#34;_blank&#34;&gt;latex2rtf&lt;/a&gt;. 可以把 latex 文件转换成带有复文本格式文件.&lt;/p&gt;
+
+&lt;p&gt;因为我的 &lt;code&gt;tex&lt;/code&gt; 文件是含有中文字符的, 最简单的命令如下, 不能将中文字符正确转化, 生成的 &lt;code&gt;rft&lt;/code&gt; 文件含有乱码.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;latex2rtf yourfile.tex
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;搜搜看看, 需要下面两步来实现中文字符的正确转化:
+1. 在 &lt;code&gt;yourfile.tex&lt;/code&gt; 里加上 &lt;code&gt;package&lt;/code&gt; 支持:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   \usepackage[utf8]{inputenc} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;使用编码格式的转换命令:
+&lt;code&gt;
+latex2rtf -C utf8 yourfile.tex
+&lt;/code&gt;
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;其中, &lt;code&gt;-C utf8&lt;/code&gt; 是控制编码格式, 详细可以查看 &lt;code&gt;latex2rtf -h&lt;/code&gt; 了解&lt;/p&gt;
+
+&lt;p&gt;还有其他用法, 可以看 &lt;a href=&#34;http://latex2rtf.sourceforge.net/usage.html&#34; target=&#34;_blank&#34;&gt;文档&lt;/a&gt;了解.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>《女性主义》读书笔记</title>
+      <link>http://gggchen.github.io/post/feminism/</link>
+      <pubDate>Thu, 08 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/feminism/</guid>
+      <description>
+
+&lt;p&gt;听说女权主义内部也是有众多流派的, 去年读了李银河的《女性主义》, 做了读书笔记, 今天整理一下. 因为从小在一个男权社会里生长, 难免潜移默化受到男权的价值观影响, 了解一下女权主义能更 liberal 一点. 而且李银河这本书挺学术地介绍了女权主义的各个流派, 介绍了各个流派的主要代表人物和思想, 相互的争执的点. 这本书是不错的女权主义的入门书籍, 推荐.&lt;/p&gt;
+
+&lt;p&gt;王小波写道, 这本书本来书名为《女权主义》, 但是审查部门不准许出现「女权」的字眼, 为了出版, 只好将 feminism 翻译为「女性主义」. 所以下面不沿用书中被审查后的字眼, 仍然采用「女权主义」称为各个流派.&lt;/p&gt;
+
+&lt;p&gt;全文都是对书中内容的引用, 分为两部分, 对一些议题的看法和女权主义的流派介绍.&lt;/p&gt;
+
+&lt;h2 id=&#34;男女区别&#34;&gt;男女区别&lt;/h2&gt;
+
+&lt;p&gt;女权主义对于男女是否有差别, 也有不同的看法, 可以分为三种:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;强调男女相同: 男女平等, 两性的相似点超过不同点.&lt;/li&gt;
+&lt;li&gt;强调男女不同: 女性优于男性, 女性所具有的女性特征比如和平, 关爱, 养育等优于攻击好战毁灭等男性特征.&lt;/li&gt;
+&lt;li&gt;男女差别的无必要: 混淆两性界限, 人的差异并不足以产生对立两分的结果. 克服心灵、身体的两分, 身体是可变的, 不是不可变.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;生育&#34;&gt;生育&lt;/h2&gt;
+
+&lt;p&gt;一些女权主义者反对强加在女性身上的生育义务的.
+比如波伏娃说, 一个人并非生下来就是女人, 而是变成女人的. 母性是使女性成为奴隶的最技巧的方法. 只要人们仍然认为女性的主要工作是养育小孩, 女性便不会投身政治、科技. 她们也便不会怀疑男人的优越性. 我们几乎不可能告诉女性洗碗是她们的神圣任务, 于是告诉她们养育孩子是她们的神圣任务.&lt;/p&gt;
+
+&lt;p&gt;费尔斯通 认为生育机制是女性受压迫的根源. 女性的生育功能造成两性不平等. 在孕产期, 女人的基本生活来源要依赖男人, 而人类婴儿有很长的育婴期, 这也导致了女性对男性的依赖. 她提出解决办法: 技术改造生育机制, 使生育得以在体外进行.&lt;/p&gt;
+
+&lt;p&gt;其他人也列举的不生育的好处:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;女性有更多时间过自己生活;&lt;/li&gt;
+&lt;li&gt;生育不应该决定女性的生活, 女性应当对自己的生活做出个人的决定.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;第二次浪潮与选美&#34;&gt;第二次浪潮与选美&lt;/h2&gt;
+
+&lt;p&gt;在女权运动第二次浪潮中, 运动在美国的第一个大动作是反对选美, 抵制女性必须遵守的规则和某些女性身体标准. 1968年女权主义抨击了“美国小姐”选美活动.&lt;/p&gt;
+
+&lt;p&gt;女人在日常生活中就是在进行一场持续不断的选美, 女性一直处在美貌竞赛的巨大压力下: 为了美打扮自己, 美容瘦身, 担心自己的相貌和身材达不到男性的审美标准. 女权主义者设置了自由垃圾桶, 将乳罩、腹带、紧身褡, 假睫毛一类东西扔进垃圾桶.&lt;/p&gt;
+
+&lt;h2 id=&#34;卖淫&#34;&gt;卖淫&lt;/h2&gt;
+
+&lt;p&gt;卖淫是一种没有受害人的犯罪行为或非罪行为. 因此卖淫问题不如说是一个道德伦理问题.
+如何处置卖淫现象的问题上大致有三种立场: 卖淫非法化; 卖淫合法化; 卖淫非罪化.
+女权主义者面临着两难选择: 如果同意卖淫合法化, 就相当于使女性身体商品化, 供男性剥削和消费; 但是反对卖淫, 禁娼限制了女性掌握和处置自己身体的权利.&lt;/p&gt;
+
+&lt;p&gt;联合国文献在1956年《关于个人和卖淫中的交易的研究》提出, 卖淫本身不应当是非法的.&lt;/p&gt;
+
+&lt;p&gt;我国刑法并不惩罚卖淫者和买淫者, 只惩罚强迫、组织、容留他人卖淫者. 但是, 在行政法规（国家治安管理处罚条例）中, 却是禁止卖淫嫖娼的. 这样的管理办法会导致
+娼妓的人权难得保障, 杀害她们受到的惩罚较轻. 妓女是男权制社会所有女性群体最孤立、最污名化, 不但被整个社会贬低诅咒, 还被警察、嫖客、皮条客甚至某些女权主义者贬低诅咒.
+作者希望能实现卖淫非罪化以将伤害减到最少. 拿非法化使妓女受剥削与非罪化相比, 两害相权取其轻.&lt;/p&gt;
+
+&lt;p&gt;另一方面, 女性把卖淫当作摆脱贫困的手段, 反映了女性经济地位低下. 作者希望 提高女性社会地位以最终消灭卖淫.&lt;/p&gt;
+
+&lt;h2 id=&#34;自由主义女权主义&#34;&gt;自由主义女权主义&lt;/h2&gt;
+
+&lt;p&gt;主要观点: 在一个公平的社会里, 每一个成员都应该得到发挥自己潜力的机会, 男女应该拥有同等的竞争机会. 女性的不成功、不理性和看起来智力低下, 是因为她们没有获得和男性同等的受教育的机会. 反对性别差异, 强调两性的相似性.&lt;/p&gt;
+
+&lt;p&gt;目标: 努力消除男女不平等, 为女性争取受教育权利、同工同酬的权利并争取相应法律改革.&lt;/p&gt;
+
+&lt;p&gt;代表人物:  弗里丹认为女权运动不愿意处理家庭问题. 不喜欢激进女权主义的观点.（激进主义女权主义: 反对男人、反对家庭、烧掉胸罩; 不要刮掉腋毛和腿毛, 拒绝美容院和化妆品, 不要男士付餐馆的账单或为你开门, 不给他做早餐, 不洗他的袜子. ）
+弗里丹批评激进女权主义者在反对的情绪中犯了一个错误: 过于生硬地套阶级斗争和种族压迫那一套. 把马克思主义应用到新的领域.
+弗里丹最开始反对选美, 后来认为新阶段到来了. 女性运动开始反对选美因为那是对女性的蔑视. 现在既然女性已经是个人, 可以选择变得更加美丽.&lt;/p&gt;
+
+&lt;p&gt;对自由主义女权主义的批评:  强调每个人的个人努力, 忽略了女性群体所处的不利地位, 忽略了集体行动的必要性&lt;/p&gt;
+
+&lt;h2 id=&#34;激进主义女权主义&#34;&gt;激进主义女权主义&lt;/h2&gt;
+
+&lt;p&gt;主要观点: 对女性的压迫超越了民族国家, 超越了社会形态. 这些压迫如果仅仅是改变女性的经济地位也难以改变. 认为敌人是社会和男人. 六七十年代, 女性的集会上经常会出现这样的场面: 一位女性高声问与会女性: 谁是我们的敌人？大家齐声回答去: 男人！&lt;/p&gt;
+
+&lt;p&gt;认为自由主义女性走得不够远, 不仅要推翻男权制的法律、政治和经济结构, 还要推翻其社会、文化制度, 尤其是家庭、教会和学院. 拒绝学院传统, 认为白种西方男人精英政治是有问题的, 只是维护统治结构和等级的.&lt;/p&gt;
+
+&lt;p&gt;激进女权主义者麦金农(MacKinnon)说: 做一个女人就是做一个被操的人…男人操女人; 主语-谓语-宾语.
+性别身份就是男性把自己的性要求强加在女性身上. 性关系本身就是男性对女性的压迫.
+按照麦金农的观点, 社会上的人被划分为两群: fuckors and fuckees&lt;/p&gt;
+
+&lt;p&gt;激进派要求伴侣之间的性平等, 双方都既是主体, 又是客体; 反对男权主义的性实践, 虐恋, 猎艳式的临时性关系, 童恋, 以及阳刚阴柔(butch/femme)角色的划分, 因为会导致女性性的客体化.&lt;/p&gt;
+
+&lt;h2 id=&#34;后现代女权主义&#34;&gt;后现代女权主义&lt;/h2&gt;
+
+&lt;p&gt;主要观点: 除了自然科学, 所谓的客观真理只是一个梦想, 其实并不存在. 权力、理性、真理都是不清白的, 都是某种价值观（或利益）的表现.
+质疑宏大叙事, 质疑启蒙时代的知识. 不仅反对性别的两分, 而且反对性别概念本身. 反对性别是天生的, 不可改变的.
+后现代女权主义反对政治行动理念, 认为会陷入施虐与受虐的螺旋, 权力与反抗的螺旋. 按照福柯的逻辑, 当我们用对立的话语反击压迫时——如用女权主义话语挑战男尊女卑时——我们就进入了统治话语领域. 我们发明了新的标签和身份, 在向压迫挑战的同时, 也用新的方式压抑我们. 陷入一种身份: 女权主义者或者反对性别主义的人, 应该怎么想怎么做. 我们成为另一套体系的一部分.&lt;/p&gt;
+
+&lt;p&gt;代表人物: 法国女权主义者威蒂格认为女性并非生来就是女人, 女性的身体也是社会造成的. 反对激进主义者对女性气质的讴歌, 主张真正的女性解放要超越激进女权主义的女性优越论. 真正的解放是消灭作为阶级的男人和女人, 理想的新社会中只有“人”, 没有女人和男人.&lt;/p&gt;
+
+&lt;h2 id=&#34;文化女权主义&#34;&gt;文化女权主义&lt;/h2&gt;
+
+&lt;p&gt;主要观点: 强调女性具有的特质优于男性文化: 批评男性的攻击性占有性等特征, 肯定女性的被动性, 抚育性, 富有感情, 对他人的依赖.&lt;/p&gt;
+
+&lt;p&gt;对文化女权主义的批评:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;并没有摆脱种族主义、法西斯主义的范畴. 没有证据表明女性一定和平, 男性一定战争. 撒切尔夫人当政, 英国开战阿根廷, 女人当政不能制止战争.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;即使男性真的天性好斗, 也有荷尔蒙缺乏, 也不能被算为劣等种族. 不能因为天生特质, 像皮肤、天生残疾, 就把一些人视为劣等人.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;文化女权主义也被视为一种分离主义的女权主义. 女性比男性高明, 社会如果建立女性价值观上, 会更有生产能力, 更公正. 建立女性文化, 从而使男女两性隔离. 分离主义女权主义主张完全脱离男权文化, 建立女性文化. 竞争与强权的世界格局是男性造成的, 应当建立单独的女性社区.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;权力女权主义&#34;&gt;权力女权主义&lt;/h2&gt;
+
+&lt;p&gt;权力女权主义认为其他女权主义者犯了错误: 强调女性是受害者、受压迫者. 权力女权主义告诉女性: 女性不是受害者, 除非她们自己选择当受害者.
+反对反强奸游行, 认为是哀鸣, 把自己摆在弱者的位置.
+反对政治正确, 总是要求人们保持政治上的正确性, 导致了教条主义的不宽容气氛.&lt;/p&gt;
+
+&lt;p&gt;目标: 改变妈妈做饭, 爸爸读报, 妈妈打毛衣, 爸爸看电视的刻板印象. 从幼年时代, 给孩子灌输新观念: 男女都是一样的人, 除了生理上的区别之外, 在学校、家庭生活和社会就业都没理由因性别不同而有所区别. 教育女孩大胆一些, 男孩子温柔细致一些, 帮助男孩女孩从小相互了解.
+(而中国的传媒却在讨论女性的男性化问题. 希望让女人更像女人, 男人更像男人. 提醒人们注意女性解放中的危险. )&lt;/p&gt;
+
+&lt;h2 id=&#34;男性运动&#34;&gt;男性运动&lt;/h2&gt;
+
+&lt;p&gt;男性运动: 鼓励男性公开宣称他们拒绝男性气质的传统, 转而分享温柔的感觉, 表达更慈爱、更关怀、较少竞争性的男性气质.
+他们能够敏感脆弱、温柔多情、富有同情心; 既然不需要打猎, 他们就不必有大块的肌肉; 他们可以承认他们害怕, 他们甚至会哭泣.&lt;/p&gt;
+
+&lt;h2 id=&#34;后女权主义&#34;&gt;后女权主义&lt;/h2&gt;
+
+&lt;p&gt;反思了女权主义:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;女权主义夸大了男女不平等的问题, 是一种受害者的哲学&lt;/li&gt;
+&lt;li&gt;男女不平等不应该以对立态度提出, 而应该以寻求两性和谐的态度提出&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;新女权主义&#34;&gt;新女权主义&lt;/h2&gt;
+
+&lt;p&gt;新女权主义务实, 不讲理论. 平衡工作和家庭. 新女权主义欢迎女性也欢迎男性, 欢迎保守派也欢迎左派社会主义者. 承认男权制的存在, 并且试图改变它.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Emacs cannot find pdflatex PATH</title>
+      <link>http://gggchen.github.io/post/pdflatex/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/pdflatex/</guid>
+      <description>
+
+&lt;h2 id=&#34;problem-description&#34;&gt;Problem description&lt;/h2&gt;
+
+&lt;p&gt;After installing Spacemacs, my org file cannot export to PDF file, the following error message always pops out:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;command not found: pdflatex
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;It finally turns out it is my Macbook move &lt;code&gt;/usr/texbin&lt;/code&gt; to &lt;code&gt;/Library/TeX/texbin&lt;/code&gt;, according to &lt;a href=&#34;https://superuser.com/questions/982647/cannot-find-pdflatex-after-upgrade-to-mac-os-x-10-11-el-capitan&#34; target=&#34;_blank&#34;&gt;this answer&lt;/a&gt;, I added &lt;code&gt;export PATH=&amp;quot;$PATH:/Library/TeX/texbin&amp;quot;&lt;/code&gt;to my &lt;code&gt;.zshrc&lt;/code&gt;. and then&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source .zshrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to update my settings.&lt;/p&gt;
+
+&lt;p&gt;After restarting my emacs, finally Emacs can export org file to PDF file. :D&lt;/p&gt;
+
+&lt;h2 id=&#34;rule-out-other-possible-problem&#34;&gt;Rule out other possible problem&lt;/h2&gt;
+
+&lt;p&gt;I also tried to solve this by some other methods but failed.&lt;/p&gt;
+
+&lt;h3 id=&#34;possibility1-no-latex-installed-in-my-computer&#34;&gt;Possibility1: no Latex installed in my computer&lt;/h3&gt;
+
+&lt;p&gt;But I can build PDF from &lt;code&gt;.tex&lt;/code&gt; file smoothly in Sublime. It seems that Sublime could find pdflatex in my computer but Emacs cannot.&lt;/p&gt;
+
+&lt;h3 id=&#34;possibility2-emacs-did-not-include-my-system-zsh-path-thus-fail-to-find-pdflatex&#34;&gt;Possibility2: Emacs did not include my system zsh PATH thus fail to find pdflatex&lt;/h3&gt;
+
+&lt;p&gt;When I run &lt;code&gt;which pdflatex&lt;/code&gt;, zsh cannot find my pdflatex as well.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;which pdflatex
+pdflatex not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is no pdflatex recognized by my zsh as well. And What I use is &lt;a href=&#34;http://spacemacs.org/&#34; target=&#34;_blank&#34;&gt;Spacemacs&lt;/a&gt; thus &lt;a href=&#34;https://github.com/purcell/exec-path-from-shell&#34; target=&#34;_blank&#34;&gt;exec-path-from-shell&lt;/a&gt; is already installed for me to ensure environment variables inside Emacs look the same as in the user&amp;rsquo;s shell.&lt;/p&gt;
+
+&lt;p&gt;It turns out there is no &lt;code&gt;texbin&lt;/code&gt; under my &lt;code&gt;/usr&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;p&gt;I Google this problem. Mac OS X El Capitan moved my &lt;code&gt;/usr/texbin&lt;/code&gt; to &lt;code&gt;/Library/TeX/texbin&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Debug Ocenaudio</title>
+      <link>http://gggchen.github.io/post/ocenaudio/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/ocenaudio/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.ocenaudio.com/&#34; target=&#34;_blank&#34;&gt;Oceanaudio&lt;/a&gt; is a good and beautiful software to edit audio documents. But recently, ocenaudio on my Macbook is very unstable, the sound it plays is too strange, just like somepeople talk with her/his mounth closed.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;v tried substitutes to ocenaudio, like &lt;a href=&#34;http://www.audacityteam.org/&#34; target=&#34;_blank&#34;&gt;Audacity&lt;/a&gt; and &lt;a href=&#34;http://ardour.org/&#34; target=&#34;_blank&#34;&gt;Ardour&lt;/a&gt;, but UI of Audacity is bad designed and Ardour 5 is for people to record and edit, not for me.&lt;/p&gt;
+
+&lt;p&gt;I finally fixed the problem on my Ocenaudio.
+It turned out when I adjest the buffer size, it works fine again.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;code&gt;Preference/Sound/Buffer Size&lt;/code&gt;, if it is &lt;code&gt;1024 samples&lt;/code&gt;, then I change it to &lt;code&gt;512 samples&lt;/code&gt;, if it is &lt;code&gt;512 samples&lt;/code&gt;, I change it to &lt;code&gt;1024 samples&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I could edit my audio document now ヽ( ^∀^)ﾉ&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Warning on Replace Broken iPhone Screen</title>
+      <link>http://gggchen.github.io/post/iphone-screen/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/iphone-screen/</guid>
+      <description>&lt;p&gt;Most articles describe replacement of iPhone screen or battery cells as easy, something to repair a Thinkpad person computer. but they fail to underline the possible risk.&lt;/p&gt;
+
+&lt;p&gt;I changed my iPhone 6s broken screen this month but failed. I bought a new screen along with a repair kit from Amazon.&lt;/p&gt;
+
+&lt;p&gt;I was excited once I received the package because I envision I could say goodbye to this broken screen and have a brand new iPhone. I opened my iPhone in a rash without backup. The repair is a long and hard process, not fun at all. These tutorial had warned me the screws are easy to lost. I drew picture on paper to help to memorize their location. I did not mess up my screw. The tuorial show me to disconnect the cable joining the mainboard with battery. It surely could make sure I would burn my board. But when I want to reinstall everything back. I had probrems. I cannot connect the cable only with niezi, so I use my figures without any gloves. Finally I changed the broken screen with new screen and build it a whole. But I cannot power on. Even with charge on. I thought I burn my cell phone when I tried to connect the cable to the battery.&lt;/p&gt;
+
+&lt;p&gt;I sent my iPhone to Genius Bar. The mechaina said Apple won&amp;rsquo;t repair iPhone once customers open their iPhone themselves for the reason that possible risk of explosion. They swape a new iPhone for me with charge of $300.&lt;/p&gt;
+
+&lt;p&gt;If I&amp;rsquo;d asked Genius Bar to replace my iPhone at first, the charge is only $190. Moreover, I would not lose my data for Apple warn that they could erase all your data, so they inform this risk. I would follow their instructions.&lt;/p&gt;
+
+&lt;p&gt;Lessons:
+1. Backup first before repairment.
+2. risk to burn the main borad&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>稍后读并且存档</title>
+      <link>http://gggchen.github.io/post/read-it-later/</link>
+      <pubDate>Fri, 14 Jul 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/read-it-later/</guid>
+      <description>
+
+&lt;p&gt;解决的问题:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;长文章当时读不完就收藏了, 但是收藏的文章从来不会读完&lt;/li&gt;
+&lt;li&gt;读过的文章没有将整个网页保存起来, 以后网页一旦失效, 就找不到了&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;解决方法:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;使用 &lt;a href=&#34;https://getpocket.com/&#34; target=&#34;_blank&#34;&gt;Pocket&lt;/a&gt; 或者 Instapaper&lt;/li&gt;
+&lt;li&gt;使用 &lt;a href=&#34;https://ifttt.com/&#34; target=&#34;_blank&#34;&gt;ifttt&lt;/a&gt; 将  Pocket 读完的文章自动存档到 &lt;a href=&#34;https://www.evernote.com/&#34; target=&#34;_blank&#34;&gt;Evernote&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;稍后读&#34;&gt;稍后读&lt;/h2&gt;
+
+&lt;p&gt;之前在 Safari Reading List, Evernote 等地方收藏了一堆的文章, 但是我从来不读. 就像一直戏谑的, read it later 变成 read it never. 后来听了 &lt;a href=&#34;http://checked.fm/&#34; target=&#34;_blank&#34;&gt;Checked&lt;/a&gt; 某一期的博客, 认识到了而且可以用 Pocket 或者 Instapaper 解决, 就开始使用了这个 Pocket 作为稍后读的工具.&lt;/p&gt;
+
+&lt;h3 id=&#34;我的稍后读流程&#34;&gt;我的稍后读流程&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得阅读有压力, 或者一时没有时间读, 就用 Reeder3 发送到 Pocket&lt;/li&gt;
+&lt;li&gt;平时各种空闲时间, 不打开微信各种社交软件, 而是打开 Pocket 查看之前收藏的文章, 这样一天大概是能够把之前加入的文章读完的&lt;/li&gt;
+&lt;li&gt;在 Pocket 读完的文章, 勾选读完之后, ifttt 会自动帮我把文章全文存档到 Evernote&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;下面详细说明利用 ifttt 存档到 Evernote&lt;/p&gt;
+
+&lt;h2 id=&#34;笔记存档&#34;&gt;笔记存档&lt;/h2&gt;
+
+&lt;h3 id=&#34;使用方法&#34;&gt;使用方法&lt;/h3&gt;
+
+&lt;p&gt;在 &lt;a href=&#34;http://www.ukeeper.com/&#34; target=&#34;_blank&#34;&gt;http://www.ukeeper.com/&lt;/a&gt; 用邮箱注册账户, 把用来发消息的 Gmail 邮箱填写到 &lt;code&gt;Regular e-mail&lt;/code&gt;, Evernote 的邮箱填写到 &lt;code&gt;Forwarding e-mail&lt;/code&gt;. 邮箱的地址在 Evernote 的 &lt;code&gt;settings/account summary/Email notes to&lt;/code&gt; 下面, 一般为 &lt;code&gt;xxxx.xxxx@m.evernote.com&lt;/code&gt; 这样的形式. Evernote 需要购买中级或者高级版本, 才可以使用发送邮件到 Evernote 的邮箱保存笔记的功能, 才能使用 &lt;a href=&#34;http://www.ukeeper.com/&#34; target=&#34;_blank&#34;&gt;http://www.ukeeper.com/&lt;/a&gt; 发送邮件到 Evernote 从而保存笔记.&lt;/p&gt;
+
+&lt;p&gt;在 ifttt 中使用这个 &lt;a href=&#34;https://ifttt.com/applets/CpkZGRbF-save-archived-items-in-pocket-full-articles-using-ukeeper-com&#34; target=&#34;_blank&#34;&gt;applet&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了&lt;/p&gt;
+
+&lt;h3 id=&#34;ifttt-的-applet-配置原理&#34;&gt;ifttt 的 applet 配置原理&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果 ifttt 检测到我的 Pocket 中 读完(Archive) 了文章&lt;/li&gt;
+&lt;li&gt;那么 ifttt 就会利用绑定的 Gmail 发送一封邮件到 &lt;a href=&#34;mailto:drops@ukeeper.com&#34; target=&#34;_blank&#34;&gt;drops@ukeeper.com&lt;/a&gt;, 标题为&amp;rdquo;文章的标题 + @Archive, #Pocket, #Tags&amp;rdquo;, 邮件正文为 Pocket 保存文章的 Url&lt;/li&gt;
+&lt;li&gt;然后 ukeeper.com 会自动把 Url 提取出页面, 变成邮件正文, 而标题仍然是 &amp;ldquo;文章的标题 + @Archive, #Pocket, #Tags&amp;rdquo;(@Archive 为指定 Evernote 中保存文件夹到 Archive 文件夹, 标签为 pocket 和文章的其他标签) 发送到我的notebook 的 Archive 文件夹, 贴上 pocket 和 Pocket 原有的标签&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这里之所以执着于标签, 是想像 Checked 的主播 Hum 一样, 想让 Pocket 和 Evernote 使用同一套标签体系. 而之所以用标签, 而不是文件夹管理, 是因为文件夹的层次结构树状的, 就是一篇文章在A目录下, 就不能在 B 目录下. 而不同标签可以加在同一文件上.&lt;/p&gt;
+
+&lt;p&gt;下面附上我 ifttt filter code 的代码:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var PocketTagList = Pocket.newReadItemRil.Tags.split(&#39;, &#39;);
+var PocketTag = PocketTagList.join(&#39;, #&#39;);
+
+Gmail.sendAnEmail.setSubject(Pocket.newReadItemRil.Title + &#39; @Archive, #Pocket, #&#39; + PocketTag);
+Gmail.sendAnEmail.setBody(Pocket.newReadItemRil.Url);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://sspai.com/post/33933&#34; target=&#34;_blank&#34;&gt;用 GTD 的方法结束稍后读&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SML mode in Spacemacs</title>
+      <link>http://gggchen.github.io/post/sml/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/sml/</guid>
+      <description>
+
+&lt;h1 id=&#34;sml-repl-in-spacemacs&#34;&gt;SML REPL in Spacemacs&lt;/h1&gt;
+
+&lt;p&gt;After installing sml and adding a sml layer in my spacemacs, I typed &lt;code&gt;C-c-C-s&lt;/code&gt; or &lt;code&gt;M-x sml RET&lt;/code&gt;, a sml REPL did not show up. An error message showed up instead:&lt;/p&gt;
+
+&lt;p&gt;{% codeblock lang:sh %}
+sml: no such file or directory
+{% endcodeblock %}&lt;/p&gt;
+
+&lt;p&gt;But I could type &lt;code&gt;sml&lt;/code&gt; to start a sml REPL in my terminal. It turned out I should add the sml path to my emacs. After searching with Google, I typed following into my terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ which sml
+/usr/local/smlnj/bin/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then I added sml path in my operation system to my &lt;code&gt;.spacemacs&lt;/code&gt; file &lt;code&gt;user-init&lt;/code&gt; function, adding sml path to spacemacs exec-path:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;(setq exec-path (cons &amp;quot;/usr/local/smlnj/bin/&amp;quot; exec-path))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then restart Emacs, sml REPL could work.&lt;/p&gt;
+
+&lt;h1 id=&#34;make-changes-in-sml-mode-package&#34;&gt;make changes in sml-mode package&lt;/h1&gt;
+
+&lt;p&gt;When I write code everytime in &lt;code&gt;sml-mode&lt;/code&gt;, sml auto complete key words for me, this auto completition is terrible, I try to avoid this.&lt;/p&gt;
+
+&lt;p&gt;Everytime I type &lt;code&gt;val&lt;/code&gt; then &lt;code&gt;SPACE&lt;/code&gt;, sml will complete it as &lt;code&gt;val =&lt;/code&gt;, the cursor is after the &lt;code&gt;=&lt;/code&gt;, I have to &lt;code&gt;C-b&lt;/code&gt; to make the cursor go back after val and type the variable name.&lt;/p&gt;
+
+&lt;p&gt;It turns out that sml-mode is to blame, the function to enable auto completition is within the &lt;code&gt;sml-mode.el&lt;/code&gt; in sml-mode. This function is as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;(defmacro sml-def-skeleton (name interactor &amp;amp;rest elements)
+  (let ((fsym (intern (concat &amp;quot;sml-form-&amp;quot; name))))
+    `(progn
+       (add-to-list &#39;sml-forms-alist &#39;,(cons name fsym))
+       (define-abbrev sml-mode-abbrev-table ,name &amp;quot;&amp;quot; &#39;,fsym nil &#39;system)
+       (let ((abbrev (abbrev-symbol ,name sml-mode-abbrev-table)))
+         (abbrev-put abbrev :case-fixed t)
+         (abbrev-put abbrev :enable-function
+                     (lambda () (not (nth 8 (syntax-ppss))))))
+       (define-skeleton ,fsym
+         ,(format &amp;quot;SML-mode skeleton for `%s..&#39; expressions&amp;quot; name)
+         ,interactor
+         ,(concat name &amp;quot; &amp;quot;) &amp;gt;
+         ,@elements))))
+(put &#39;sml-def-skeleton &#39;lisp-indent-function 2)
+
+(sml-def-skeleton &amp;quot;let&amp;quot; nil
+   @ &amp;quot;\nin &amp;quot; &amp;gt; _ &amp;quot;\nend&amp;quot; &amp;gt;)
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Since I know little about elisp, the only solution to me is to comment these funcitons. I have to do so in the sml-package, but if I delete it in the elpa directory, it will be download again automatically and my deletation disappear.&lt;/p&gt;
+
+&lt;p&gt;Refer to an &lt;a href=&#34;https://emacs.stackexchange.com/questions/20453/how-to-use-a-local-version-of-a-package-in-spacemacs&#34; target=&#34;_blank&#34;&gt;solution&lt;/a&gt;, I fork sml-mode from &lt;a href=&#34;https://github.com/emacsmirror/sml-mode&#34; target=&#34;_blank&#34;&gt;emacsmirror&lt;/a&gt;, then comment this redundant function in my fork version.&lt;/p&gt;
+
+&lt;p&gt;Edit my &lt;code&gt;.spacemacs&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;   dotspacemacs-additional-packages
+   &#39;((sml-mode :location (recipe :fetcher github :repo &amp;quot;CauchyChe/sml-mode&amp;quot;)))
+   ;; A list of packages that cannot be updated.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart my emacs, spacemacs will download sml-mode from Github, auto completition is disabled.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>成都大使馆 J1 面签经验</title>
+      <link>http://gggchen.github.io/post/visa_exp/</link>
+      <pubDate>Sun, 30 Apr 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/visa_exp/</guid>
+      <description>&lt;p&gt;我的准备材料:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;DS-160 表格；&lt;/li&gt;
+&lt;li&gt;美国项目主办方提供的 DS-2019 表；&lt;/li&gt;
+&lt;li&gt;护照；&lt;/li&gt;
+&lt;li&gt;照片(没有用, 不需要)；&lt;/li&gt;
+&lt;li&gt;身份证；&lt;/li&gt;
+&lt;li&gt;面签缴费收据（中信的）(并没有看这个)；&lt;/li&gt;
+&lt;li&gt;SERVIS 缴费收据(也并没有看这个)&lt;/li&gt;
+&lt;li&gt;存款证明(用上了)&lt;/li&gt;
+&lt;li&gt;个人英文简历(没有用上)；&lt;/li&gt;
+&lt;li&gt;户籍证明(父母和我的户口本)(没有用上)；&lt;/li&gt;
+&lt;li&gt;在读证明(没有用上)；&lt;/li&gt;
+&lt;li&gt;本科学士学位证书(没有用上)；&lt;/li&gt;
+&lt;li&gt;学习计划(没有用到)&lt;/li&gt;
+&lt;li&gt;成绩单(没有用到)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;9:45到大使馆。不知道从哪进，马路对面，先转一圈，发现就一片地方存包，随便找个店，门不大生意冷清的，进去存包。老板是个秃顶的中年男人，看起来正经人，后来证明人不错。存了包，问老板在哪进啊，老板给我指了方向：你看那排队人多的地方就是，指给我看。&lt;/p&gt;
+
+&lt;p&gt;过了马路，果然看到大使馆入口了，看到门口一列人排队，我以为得马上排队，赶紧排在队伍后面，树上挂着牌子：9:15，没留神，问了队前面的人才了解，这只是　9:15　的那一拨。我一看，那边树上还挂着牌子呢，有9:30，9:45，10:00的队，我的10:45还没被召唤到。&lt;/p&gt;
+
+&lt;p&gt;这得好等啊，我就在马路牙子上坐着，等着9:30，9:45，10:00分别进去，我的10:45也终于可以排队了。漫长的等待。&lt;/p&gt;
+
+&lt;p&gt;一个规律，开始各种大妈大叔还很多，慢慢地等的人就全变成学生了。我一个人来的，全程无聊极了，只能偷听别人说话。&lt;/p&gt;
+
+&lt;p&gt;那边妹子们在聊天：
+「…（某个同学）她/他连自己要去的学校都说不上来，当然被拒了」&lt;/p&gt;
+
+&lt;p&gt;吓到我赶紧掏出材料看看我要去的学校。后面我就被问到了(´･_･`)&lt;/p&gt;
+
+&lt;p&gt;另外一群电子科技大学的：
+「转 CS 好一点，就算不留美国，回来也很好啊。」
+「AI，AI 不好录吧！」
+「（某个同学）被 CMU 录了」&lt;/p&gt;
+
+&lt;p&gt;终于排队到大使馆门口了！&lt;/p&gt;
+
+&lt;p&gt;拿出来护照和预约证明，预约费收据，工作人员给护照背面贴上一张码。这些程序都不需要记，看前面队伍的人手里拿什么再掏出来不迟。然后是武警哥哥，要身份证和护照。&lt;/p&gt;
+
+&lt;p&gt;完了进大使馆安全检查。文件里有没拆封也有问题，有几个人被赶出去了没进安检，出去再回来（似乎把有问题的物品丢掉）再进来。也不是很大的问题，因为不用重新排队马上进来了。&lt;/p&gt;
+
+&lt;p&gt;安检完了是一个斜坡，看起来原本是残障人士通道，但是大使馆内空间局促，只能利用这个空间了。在斜坡上面排队，看了一眼墙上的时间，已经 11:30 了。斜坡上来是面签大厅，人都排着队直接去面签了，根本不像网上写着，还给号码，坐着等，像银行一样等叫号，叫道了去面签，这里排到谁谁面签。而且都是站着完成整个流程，也不会像银行大厅坐着办业务。下面有三步，材料初步检验，录入指纹，正式面签。材料初步检验和录入指纹各自有两个窗口，正式面签有 10+ 个窗口。&lt;/p&gt;
+
+&lt;p&gt;面签大厅进来先是材料初步检验，工作人员告诉我拿出来我 DS-2019 和护照，然后招呼我走近一个窗口，一个中国大姐，我把 DS-2019 和护照连同其他材料也丢进窗口，大姐只拿了 DS-2019 和护照，看我不拿走其他材料，凶我：不需要的材料拿走就好。我赶紧把其他支持材料拿走了。大姐查了我的材料，把我的 DS-2019 和护照 用橡皮筋捆在一起，给我。&lt;/p&gt;
+
+&lt;p&gt;然后另一个窗口采集指纹，里面坐着的那位看起来是非裔大哥，胡子拉茬，态度还好（相比刚才大姐）按照旁边的图示，先左手，再右手，然后大拇指，完成了。（卧槽我想，隐私全泄露给美国政府了，这想犯罪不留下痕迹只能学《七宗罪》了）末了大哥问我是去读 Ph.d 么，我说不是。大哥解释说 just out of curiosity
+Goodbye
+我回了句 bye&lt;/p&gt;
+
+&lt;p&gt;继续排队等正式面签。一个弯弯曲曲的队伍，排着等，队伍的尽头由工作人员引导去了各个窗口面签，排着队也闲着无聊只能听别人在窗口面签的问题和回答。&lt;/p&gt;
+
+&lt;p&gt;1x号窗口一白人大姐，问问题又多又尖锐。
+质问一个妹子，（英文）「我需要你详细的学习计划」，妹子补充说了几句，白人大姐不满意，「你这可是Ph.d 啊，这样简单的学习计划可不行，我需要的是四页纸的。你可以回去写好详细的 study plan 再发 Email 联系我们，我们再重新面。」
+妹子失望地走了。我想 Ph.d 要求详细的学习计划也无可厚非，不过我受着打击也难受，心疼在这个窗口面的人。&lt;/p&gt;
+
+&lt;p&gt;我想，千万别让我遇见 1x 号。&lt;/p&gt;
+
+&lt;p&gt;还好没遇见 1x 号。被安排在和蔼的大哥。&lt;/p&gt;
+
+&lt;p&gt;（英语）
+Good morning, Sir 我递上材料。
+你去什么地方
+你为什么去这个地方？
+我解释了一下，他不满意，指了指我的 J1 说问我怎么申到这个的
+我在 xxxx 学习，学校提供的机会
+你学什么专业
+怎么有钱去学习
+我赶紧把存款证明塞给他了&lt;/p&gt;
+
+&lt;p&gt;他在我的 DS-2019 上盖章，拿走了我的护照，他说祝你好运。
+谢谢，走了。&lt;/p&gt;
+
+&lt;p&gt;照片不需要…也不需要缴费，直接出门了。&lt;/p&gt;
+
+&lt;p&gt;完了我才知道，成都的大使馆空间多么紧凑，为啥要人一拨一拨地进，室内根本没有多余的空间给人等着。人都在队伍里，像流水线上等待装配的零件。处理完了就赶紧出来。&lt;/p&gt;
+
+&lt;p&gt;完了取包的时候，我问存包的大叔，这怎么取自己的签证啊，大叔看了看我的预约单，上面写着我的邮寄地址，告诉我会寄到这个地方，给我打电话，再交钱。&lt;/p&gt;
+
+&lt;p&gt;结束。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>learn how to learn</title>
+      <link>http://gggchen.github.io/post/learn_motivate/</link>
+      <pubDate>Tue, 06 Dec 2016 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/learn_motivate/</guid>
+      <description>
+
+&lt;p&gt;以前对于如何学习有着不很系统的, 基于我自己经验的了解, 学习了
+C站上的&lt;a href=&#34;https://www.coursera.org/learn/learning-how-to-learn/home/info&#34; target=&#34;_blank&#34;&gt;learn how to learn&lt;/a&gt; 课程之后, 才知道学习背后的生理上和心理上的原因, 还改变了之前一些错误的认识, 像以为通宵熬夜学习是学习的好方法.&lt;/p&gt;
+
+&lt;p&gt;强烈推荐跟着学一下这门课.&lt;/p&gt;
+
+&lt;h2 id=&#34;chunks&#34;&gt;chunks&lt;/h2&gt;
+
+&lt;h3 id=&#34;什么是-chunk&#34;&gt;什么是 chunk?&lt;/h3&gt;
+
+&lt;p&gt;大脑形成的一群相互连接的神经元, 所以能够顺利完成一系列动作. 最好的 chunk 是这样, 一旦这个chunk 形成了, 不需要记住所有细节, 下意识就可以完成一个动作. 《倚天屠龙记》中赵敏找武当的麻烦, 张无忌需要短时间跟张三丰学会太极剑, 张无忌临时学了然后又自己演练了一会, 张三丰问他还记得多少, 张无忌说还记得一两招, 张三丰就等无忌又练了一段, 最后张无忌回答说他已经完全忘记了, 张三丰说你可以上了.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;例子&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;学习的过程是循序渐进的, 最开始是小的 chunk, 最后小 chunk 连起来形成大的 chunk&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过学习一门新语言, 比如日语, 从50音图开始, 学习语音语调, 掌握词汇, 后来能够根据情景流畅地说出一个句子.&lt;/li&gt;
+&lt;li&gt;学会骑自行车之后, 就能协调地在平衡的情况下蹬脚蹬.&lt;/li&gt;
+&lt;li&gt;弹吉他, 先练习指法, 练习一个个片段, 最后熟练弹奏一段曲子&lt;/li&gt;
+&lt;li&gt;学数学, 最开始试图解答一个问题, 需要的认知负荷很大, 最好先用例子明白核心和背后的原则, 然后再看概念. 类似先依照地图走到想去的地方, 最后自己不需要地图也能够走到. 熟悉例子之后, 思考为什么每一步要这样走, 为什么在这个时候走这一步.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;怎样形成-chunk&#34;&gt;怎样形成 chunk?&lt;/h3&gt;
+
+&lt;p&gt;怎样形成一个 chunk, 不管是体育训练肌肉记忆, 还是思维训练解决一个问题, 都是类似的:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;集中注意力在要学习的材料
+戒绝电话, 各种社交软件&lt;/li&gt;
+&lt;li&gt;理解: 如果信息不被理解, 那就是无用的&lt;/li&gt;
+&lt;li&gt;回顾: 如果不经常使用, 记忆会衰退地很快, 会在课堂上明明理解了, 但是下来做题又不会了&lt;/li&gt;
+&lt;li&gt;自己做一遍: 看着别人做一遍, 总是别人的技能, 需要自己做一遍才能发现自己哪个节点不会, 最后自己掌握技能. 从这个意义上来说, 犯错是件好事.&lt;/li&gt;
+&lt;li&gt;联系情景: 这一步要求不仅仅知道怎样完成这个 chunk, 还需要知道什么时候用到这个 chunk. 重复练习把初始的问题解决办法应用到相关和不相关的问题上, 学会什么时候使用, 什么时候不使用. 这样会帮助把这个技能和其他技能相结合, 最后这些技能分门别类, 形成一个技能库. 如果不知道什么时候该使用该技能, 什么时候不适合使用, 这个技能很难有用. 通过不同情景练习的强化, 更广泛的神经元被连接到这个 chunk 上, 确保不仅仅是能顺畅使用, 还能在不同时候灵活召唤出来这个大招.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这里需要格外强调如何完成chunk(how)和何时使用该技能(when)的区别, 前者是用的时候能够顺畅地完成, 后者是知道什么时候用到这个技能. 勤加练习会帮助 how 和 when 技能的形成. 另外书本上的每一章的标题和副标题会有帮助, 帮助形成 when 的思维.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;回忆(Recall)&lt;/p&gt;
+
+&lt;p&gt;一提到复习, 比较容易的方式是反复地看书, 看笔记. 其实这是很低效率的方法, 因为书看再多, 书上的内容也只是作者的. 甚至高亮也是一种欺骗, 以为自己划下的句子都记住了, 产生虚假的成就感.&lt;/p&gt;
+
+&lt;p&gt;更高效的方式, 试图回忆起读过的材料, 如果回忆不起来, 就看看那些回忆不起的内容, 以后再试着回忆一遍, 这样重复. 这种方法是测试为导向的, 了解自己真正掌握了多少内容, 还有多少不明白的.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;情绪&lt;/p&gt;
+
+&lt;p&gt;学习时候的情绪也很重要. 当学习那些有趣的东西, 学起来会更加容易.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Overlearning, Einstellung, Interleaving&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Overlearning: 需要持续训练, 但是可能反复测试自己, 都是已经掌握了这个能力了, 那就没必要浪费时间继续学习这个, 否则叫做 overlearning&lt;/li&gt;
+&lt;li&gt;Einstellung: 德语词, mindset, 路障, 引申含义为思维固化. 这个词是为了说明 chunk 的不好的一面, 当你形成一定的神经连接之后, 这样的连接可能会阻止其他更好的想法的形成.&lt;/li&gt;
+&lt;li&gt;interleaving: 一旦了解了最基础的 idea, 在不同变化, 不同随机组合中尝试, 练习, 大有益处.
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;为什么在一些场景用一个技巧, 另一些用其他的一本书的不同章节的习题同时混着做, 增加难读(这一题用哪一块的知识呢?) 但会学得更深.&lt;/p&gt;
+
+&lt;p&gt;也不必羡慕那些很能在各种情况集中注意力的人, 我们这些经常走神的人也是很有优势的, 因为他们容易形成 Einstrllung, 但是我们的思维更发散, 可能更富有创新性.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;拖延症&#34;&gt;拖延症&lt;/h2&gt;
+
+&lt;h3 id=&#34;关于拖延症&#34;&gt;关于拖延症&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;为什么拖延&lt;/p&gt;
+
+&lt;p&gt;生活太艰难了, 打算专心干一件事情的时候, 这件事往往会很麻烦. 复习专业课, 那些专业术语总是艰涩难懂, 数学公式各种上下标, &amp;#x2026; 所以啊, 还是其他各种事情更有意思一点, 不如扣一会手机吧, 看看微信有没有人联系我, 看看&lt;/p&gt;
+
+&lt;p&gt;我们会对那些让我们感到不舒服的事情拖延, 把注意力转移到其他地方, 这让我们舒服, 虽然只是暂时的.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;病入膏肓的拖癌&lt;/p&gt;
+
+&lt;p&gt;拖延症和成瘾症状类似,拖延提供了暂时的因为远离无聊现实的兴奋和宽慰. 很容易这样&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;会在交稿的 deadline 之前大量时间浏览各种网上信息, 告诉自己在为写稿手机资料, 但是迟迟不肯真正动笔去写.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;告诉自己有机化学需要空间想象能力, 刚好这个是你不擅长的, 所以当然你学不好有机化学.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;想出一些听起来很对的理由: 如果我现在复习地太超前了, 就会忘掉的.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;还会告诉自己, 我已经懒癌病入膏肓了, 无药可医, 我已经放弃治疗了.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a id=&#34;orgf0e2bff&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;如何避免拖延&#34;&gt;如何避免拖延&lt;/h3&gt;
+
+&lt;p&gt;意志力是稀缺资源, 尽量别浪费意志力对抗拖延症上面, 而是养成好的习惯, 不假思索地把事情都完成了, 而不需要艰难的思想斗争. 习惯的养成, 就像学习倒车一样, 最开始控制不好车的方向, 把车开得七扭八歪的, 后来养成习惯就单手扶方向盘也能倒. 对抗拖延症也是一样, 习惯养成就好.&lt;/p&gt;
+
+&lt;p&gt;立即行动的习惯养成, 需要四个部分: cue, routine, reward 和 belief.&lt;/p&gt;
+
+&lt;p&gt;还可以使用番茄工作法, 专心工作25分钟, 然后放松一会, 然后继续工作.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;the Cue&lt;/p&gt;
+
+&lt;p&gt;看见生活中的一些事, 会开始做另一些事. 比如, 看见 to-do list 里面的项目1 事项, 就开始做这件事; 或者, 看见朋友来的一个短信, 就开始出去玩了.&lt;/p&gt;
+
+&lt;p&gt;意志力需要花费在见到 Cue 的反应上, 也是唯一需要花费意志力的地方.&lt;/p&gt;
+
+&lt;p&gt;the Cue 可以细分为 4 类:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Location&lt;/li&gt;
+&lt;li&gt;Time&lt;/li&gt;
+&lt;li&gt;How you feel&lt;/li&gt;
+&lt;li&gt;Reaction
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;所以如果要专心做事, 要培养好的 Cue, 需要关掉手机, 远离网络, 需要没有干扰的一段时间.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;the Routine&lt;/p&gt;
+
+&lt;p&gt;因为学习活动, 自己会经常转移到那些不那么痛苦的活动钟, 一旦有 cue 自己会自动进入这些活动.&lt;/p&gt;
+
+&lt;p&gt;避免这些, 需要找到症结, 并且制定计划.&lt;/p&gt;
+
+&lt;p&gt;可以制定计划, 比如说, 去图书馆学习的时候, 把手机放进车里, 这样来避免分心 可以找一个安静的环境学习.&lt;/p&gt;
+
+&lt;p&gt;计划很可能不是那么顺利地进行着, 可能经常需要调整计划, 本身很难一次性, 一步做到.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;the Reward&lt;/p&gt;
+
+&lt;p&gt;习惯的养成需要愉悦感来维系. 拖延是因为这件事情很痛苦, 人容易把注意力转移到那些更容易愉快的事情上.&lt;/p&gt;
+
+&lt;p&gt;但是优秀的习惯同样可以通过奖赏来获得, 只要能够找到奖励好学习习惯的正确方式.&lt;/p&gt;
+
+&lt;p&gt;奖励可以是满足自己成就感的奖励: 一晚上看剧而不需要愧疚. 越是大的 achievement, 可以给予越大的 reward.&lt;/p&gt;
+
+&lt;p&gt;而且长此以往, 事情做的越多, 自己也就越擅长, 也就更喜欢.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;the Belief&lt;/p&gt;
+
+&lt;p&gt;需要相信自己的习惯是可以改变的, 更加有动力来行动.&lt;/p&gt;
+
+&lt;p&gt;每次如果压力太大, 就会反弹, 反弹进入旧的行为模式.
+这个时候就需要信念, 相信自己的新系统工作良好, 能够帮助自己.
+最好能够有一块的伙伴, 同学, 相互鼓励.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;过程和结果&#34;&gt;过程和结果&lt;/h3&gt;
+
+&lt;p&gt;避免拖延需要关注过程, 而不是执着于结果. &lt;strong&gt;过程&lt;/strong&gt; 意味着, 时间的流动、习惯养成和行动本身. 结果是最后呈现的结局.&lt;/p&gt;
+
+&lt;p&gt;避免拖延, 就是不要关注结果. 注意力保持在关注于过程上,养成那些你需要做的那些不愉快的日常任务习惯.&lt;/p&gt;
+
+&lt;p&gt;比如说, 还有五道题目没有完成, 关注结果, 会让你希望自己有一种魔法, 能够瞬间完成这 五 道题目. 这会让你痛苦, 逃避, 实际上你完成所有的五道题目需要上天或者上周的时间.&lt;/p&gt;
+
+&lt;p&gt;最重要的是现在就着手去做, 慢慢推进, 开始做个番茄钟 25 分钟, 而不是直接一步完成它, 觉得自己牛逼闪闪.&lt;/p&gt;
+
+&lt;h3 id=&#34;不要苛责自己&#34;&gt;不要苛责自己&lt;/h3&gt;
+
+&lt;p&gt;当一个人开始工作的时候, 开始的时候, 会有不高兴的情绪, 这是很正常的, 即使是那些平时你喜欢的那些活动. 负面情绪不可怕, 关键是你自己怎么解释和处理这些情绪.&lt;/p&gt;
+
+&lt;p&gt;调查发现非拖延者会把负面情绪放在一边, 然后对自己说「不要浪费时间了, 动手开干吧」一旦你开始做了, 一切都会变好.&lt;/p&gt;
+
+&lt;p&gt;避免评判自己: 我是不是离目标更近了? 而是需要放松, 让自己进入心流.&lt;/p&gt;
+
+&lt;p&gt;当烦心事, 骚扰的事情经过思维的时候, 只是让他流过就好了. 心流的被打扰也是不可避免的.&lt;/p&gt;
+
+&lt;p&gt;你需要一个安静的地方, 或者一副降噪耳机.&lt;/p&gt;
+
+&lt;h2 id=&#34;记忆&#34;&gt;记忆&lt;/h2&gt;
+
+&lt;h3 id=&#34;关于记忆&#34;&gt;关于记忆&lt;/h3&gt;
+
+&lt;p&gt;短期记忆就像电脑的 ROM 一样, 容易丢失; 而长期记忆像硬盘里的文件, 可以保存得更长久. 将短期记忆保存成长期记忆, 需要大量重复练习, 还可以借助一定技巧.&lt;/p&gt;
+
+&lt;p&gt;长期记忆需要大量练习, 还需要长时间积累. 根据艾宾浩斯遗忘曲线, 重复的时间间隔可以逐渐加长, 比如在一个月中1, 3, 5, 10&amp;#x2026;天中记忆. 这一点软件 Anki 做得非常好&lt;/p&gt;
+
+&lt;h3 id=&#34;联想记忆技巧&#34;&gt;联想记忆技巧&lt;/h3&gt;
+
+&lt;p&gt;怎样使记忆群化, 而且更持久: 联想记忆&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;记四种植物: Garlic, Rose, Hawthorn, Musta, 首字母联系成  GRHM, 因为 GRAHAM 是一种饼干, 可以联想饼干的形状帮助记忆&lt;/li&gt;
+&lt;li&gt;年份, 1965年, 可以记忆成亲戚的出生日&lt;/li&gt;
+&lt;li&gt;数字: 11.0 记忆陈百米成绩&lt;/li&gt;
+&lt;li&gt;数字: 18 刚刚成年的人, 想象数字是自己的年龄, 记忆如果自己是这样的感受&lt;/li&gt;
+&lt;li&gt;医学上人体骨骼, 记忆顺口溜&lt;/li&gt;
+&lt;li&gt;购物清单, 想象自己走在自己熟悉的场景中, 发生一系列关于需要记忆食物的 shocking stuff, 比如大瓶的牛奶在门口, 大块面包躺在沙发上, 鸡蛋在桌子上破碎&lt;/li&gt;
+&lt;li&gt;其他 list 也可以使用类似的方法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最初使用这种方法也许会慢, 但是记忆多了之后, 会快很多. 研究发现专业人士 expert 会用这种方法提高效率, 而且用得越多, 创造性越好&lt;/p&gt;
+
+&lt;h2 id=&#34;其他tips&#34;&gt;其他tips&lt;/h2&gt;
+
+&lt;h3 id=&#34;睡眠&#34;&gt;睡眠&lt;/h3&gt;
+
+&lt;p&gt;远古人的睡觉是很危险的, 既然睡觉没有因为进化而消失, 一定非常重要. 至少有下面的作用:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;清理代谢废物&lt;/li&gt;
+&lt;li&gt;清理不重要的记忆&lt;/li&gt;
+&lt;li&gt;强化重要的记忆&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;所以如果需要强化记忆, 最好在睡觉之前看一看.&lt;/p&gt;
+
+&lt;h3 id=&#34;interview-with-dr-terrence&#34;&gt;Interview with Dr.Terrence&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不要总是反反复复地读书, 干中学(learn by doing).&lt;/li&gt;
+&lt;li&gt;最好还有一群人有要学习的内容的氛围, 在潜移默化中吸收要学的内容.&lt;/li&gt;
+&lt;li&gt;坚持运动, 帮助保持大脑的神经连接的活络&lt;/li&gt;
+&lt;li&gt;还需要有耐心, 和持之以恒.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>中年男人的放飞自我</title>
+      <link>http://gggchen.github.io/post/comeing_up_for_air/</link>
+      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/comeing_up_for_air/</guid>
+      <description>&lt;p&gt;人在任何时候都会危机, 其中中年危机好像尤为明显, 据说中年的三大情结: 没推倒的女同学, 不似从前的母校和回不去的故乡. 最近读了两本中年危机追寻人生意义的小说, 一本是毛姆的《月亮和六便士》, 另一本是乔治奥威尔的《上来透口气》. 乔治奥威尔完胜, 我很喜欢这本小说, 也很推荐阅读.&lt;/p&gt;
+
+&lt;p&gt;《月亮与六便士》里的斯特里克兰德, 一个伦敦的证券经纪人, 四十岁之后突然感觉自己老了, 来不及了, 抛弃家庭和孩子, 去巴黎学画了, 最后成为了一代绘画大师, 也是真实人物画家高更的生活改编的.
+乔治奥威尔的《上来透口气》写了一个四十岁的卖保险的中年男人, 有天早上他拿到了新做的假牙后，突然感到需要「上来透口气」, 也开始折腾寻找人生, 童年, 青春.&lt;/p&gt;
+
+&lt;p&gt;首先是视角, 毛姆的《月亮和六便士》读起来感觉很假, 可能是因为叙述视角不是斯特里克兰德本人, 而是作者, 旁观者的角度看斯特里克兰德, 看他的生活, 看他的家庭, 看斯特里克兰德学画之前的生活和学画之后的生活. 就像之前读的一些不是自传的传记, 作者走不进主人公本人的生活, 只能揣测, 读者也只能猜, 猜为啥放着本来的工作不要, 学画, 猜学画要遭遇哪些困难, 支撑他一路走下来的动力是什么, 最后有没有遗憾. 但是这种猜测总是感觉不可靠.&lt;/p&gt;
+
+&lt;p&gt;而乔治奥威尔就高明多了, 小说的展开是中年男人本人, 我可以清楚地了解这个男人平时的生活是怎么样的, 对老婆没什么感情, 也聊不来, 孩子像个吸血鬼只知道整天要钱, 工作索然无味, 描写沉闷地快要把他淹死的生活, 很真实. 所以这个中年人想脱离沉闷的生活, 上来透口气, 我就不感觉吃惊, 一开始读到这种生活, 我就希望这个人能脱离了. 最后他回忆到小时候的爱好钓鱼, 但是生活总是不如意, 真正开心钓鱼的时间很少, 那么这个男人选择去老家那个大湖钓鱼来放松, 我感觉也是很合理的.&lt;/p&gt;
+
+&lt;p&gt;但是《月亮与六便士》的人物啊, 突然就抛弃家庭去学画了, 也不知道学画的钱是怎么来的, 最后莫名其妙又跑到另一个南太平洋的小岛上了, 突兀啊! 《上来透口气》还铺垫了回老家, 买钓具的钱是怎么意外来的.&lt;/p&gt;
+
+&lt;p&gt;故事其他方面的真实性上, 《上来透口气》又赢了. 毛姆为了说明斯特里克兰德追求梦想去学画的做法如何对, 用了很多笔墨来说明斯特里克兰德的对女性的性吸引力, 读起来莫名其妙. 先是作者去巴黎找斯特里克兰德, 去咖啡馆吃饭, 一个妓女主动过来搭讪, 帅哥来一发吗? 斯特里克兰德拒绝了, 妓女说不要钱的, 只是被这个男人所吸引, 斯特里克兰德还是拒绝了她&amp;hellip; 太假了, 为了说明斯特里克兰德很有雄性魅力, 追求梦想的男人很具有吸引力, 用这种故事, 只能让读者感觉作者叙述能力太差. 后来又来了, 讲另一个巴黎的男性画家朋友, 家有娇妻, 这个太太看到斯特里克兰德就发现这才是真男人, 然后爱上他了&amp;hellip; 我的天, 我已经烦了&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;《上来透口气》中的老男人, 终于回到自己的故乡下宾菲尔德, 那里已经完全变了. 而且他也并不会在家乡有一场艳遇, 他在住的宾馆看上了个局子优雅的女士, 上去搭讪, 对方保持冷淡的克制. 见到自己初恋, 她也体型完全走形了, 他进了她的店里买东西, 最后决定还是不说出来自己是谁.&lt;/p&gt;
+
+&lt;p&gt;还有在价值观上, 毛姆有些吹捧追求自己梦想的好处, 不敢这样做的, 都是懦夫. George Orwell 就很克制, 最后回到家乡, 那个鱼塘也不见了. 「因为世事难料啊」乔治奥威尔说, 不是想干一些事情, 就一定能完成啊.&lt;/p&gt;
+
+&lt;p&gt;毛姆还有一种道德上高高在上的优越感, 梦想高于一切. 写斯特里克兰德最后出名之后, 他的妻子和孩子态度转变. 成名之前对斯特里克兰德是恨, 等他出名之后, 就靠斯特里克兰德的名气来吸引眼球获得优越感. 虽然这种势利的心态有些讨厌, 也是正常人的表现了. 而且人家斯特里克兰德没说明白就抛弃家庭和孩子出去学画了, 虽然画画很厉害, 那作为丈夫和父亲, 还是失败的.&lt;/p&gt;
+
+&lt;p&gt;最后我很喜欢乔治奥威尔诙谐的语言, 读起来一点也不说教, 读着读着就能遇见一句让我笑出声的话, 当然也有孙仲旭翻译的味道保持很好. 之前读了他的《动物农场》和《1984》并没有感觉到他的幽默, 读这本小说开心死了哈哈哈哈&lt;/p&gt;
+
+&lt;p&gt;比如开始说自己胖:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;我外表是胖，但内在的我是瘦的。你有没有想到过每个胖人的内部都有个瘦人，就像有人所说，每块石头里都有座雕像？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一种世事无奈的感叹:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;几乎紧接着那时候，冒出来一些事情，让我无法按计划去做。如果冒出来的不是这件事，也会有别的。世事无常啊。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;说婚姻的无趣, 孩子是枷锁:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;再说还有孩子，孩子是“纽带”，人们这样说，要么说是个“结”，可就不说是铅球加镣铐。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;中年危机的绝望心态:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;前一天夜里上床时，还感觉多少还年轻，还对女的有想法什么的，第二天早晨一觉醒来，就清清楚楚地意识到自己不过是个可怜的老胖子，往前看除了进坟墓就没什么指望了，你只能拼了老命干活，好给孩子们买靴子穿。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;参加一个无聊的会议, 等着开始却总是不开始:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这种会议从来不会准时开始，总是会拖上一阵子，装作说不准还会来几个人。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习中的线性回归</title>
+      <link>http://gggchen.github.io/post/ml-regression/</link>
+      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/ml-regression/</guid>
+      <description>
+
+&lt;h2 id=&#34;模型&#34;&gt;模型&lt;/h2&gt;
+
+&lt;h3 id=&#34;hypothesis&#34;&gt;hypothesis&lt;/h3&gt;
+
+&lt;p&gt;$$ h_{\theta}= \theta X = {\sum}_{i=1}^{n} x_i&amp;rsquo; \theta $$&lt;/p&gt;
+
+&lt;p&gt;其中：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;X is a m x n matrix
+n is the number of the features
+m is the number of training examples.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;gradient&#34;&gt;gradient&lt;/h3&gt;
+
+&lt;p&gt;\[
+\theta_j :=\theta_j- \alpha \frac{\partial}{\partial \theta_j} J(\theta_j)
+\]
+写成矩阵形式即：
+\[
+\theta := \theta - \alpha X^T(X \theta - y)
+\]&lt;/p&gt;
+
+&lt;h3 id=&#34;cost-function&#34;&gt;cost function:&lt;/h3&gt;
+
+&lt;p&gt;\[
+J(\theta) = \frac12 {(X \theta - y)}^T (X \theta - y) = \frac12 \sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})^2
+\]&lt;/p&gt;
+
+&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
+
+&lt;h3 id=&#34;梯度下降法&#34;&gt;梯度下降法&lt;/h3&gt;
+
+&lt;p&gt;核心思想：选择初始点，不断迭代直到找到最优点。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://gggchen.github.io/images/gradient-descent.png&#34; alt=&#34;gradient descent&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为什么取 -$\frac{\partial}{\partial \theta_j} J(\theta_j)$为方向？为什么不是正的，或者是正负之间的某个夹角？&lt;/p&gt;
+
+&lt;p&gt;根据 泰勒展开式
+\[
+J(x + \alpha) \approx J(x) + \alpha \nabla J(x)  = J(x) + | \alpha | |\nabla | \cos \theta
+\]
+其中如果选择同方向，会使得 $\cos \theta = 1 $,反方向使得 $\cos \theta = -1$&lt;/p&gt;
+
+&lt;p&gt;因此选择反方向能够使得 $J(\theta) $最快下降。&lt;/p&gt;
+
+&lt;h4 id=&#34;batch-gradient-descent&#34;&gt;batch gradient descent&lt;/h4&gt;
+
+&lt;h5 id=&#34;gradient-1&#34;&gt;gradient:&lt;/h5&gt;
+
+&lt;p&gt;\[
+\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta)
+\]&lt;/p&gt;
+
+&lt;p&gt;\[
+\theta := \theta - \alpha X^T(X\theta - y)
+\]&lt;/p&gt;
+
+&lt;p&gt;$\theta_j $的每一步都是迭代都是将训练集中的所有样本点都遍历一遍才走出的，这样在大样本情况下计算量很大，这样也就有了下面的 &lt;code&gt;Stochastic gradient descent&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;stocstic-gradient-descent&#34;&gt;stocstic gradient descent&lt;/h4&gt;
+
+&lt;p&gt;每一个样本点都会走微小的一步，这样不需要遍历$m$项才走了。
+\[
+cost(\theta, (x^{(i), y^{(i)}})) = &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; (h_{\theta}(x^{(i)}) - y^{(i)})^2
+\]&lt;/p&gt;
+
+&lt;p&gt;\[
+J_{(train)}(\theta ) = 1/m \sum_{m = 1}^m cost(\theta, (X^{(i)}, y^{(i)}))
+\]&lt;/p&gt;
+
+&lt;h5 id=&#34;具体步骤&#34;&gt;具体步骤：&lt;/h5&gt;
+
+&lt;p&gt;首先需要把数据集随机排列，然后：&lt;/p&gt;
+
+&lt;p&gt;Repeat
+{
+    for i = 1,&amp;hellip;,m{
+    \[
+        \theta_j := \theta_j - \alpha (h_{\theta} (x^i) - y^i) x^i_j for j = 0,&amp;hellip;,n
+    \]
+    }&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;依靠样本点的挨个输入来调参，会比 &lt;code&gt;batch&lt;/code&gt;方法走得更加曲折，最后也不会停在全局最小点（如果能够找到的话），而是在最小附近打转。&lt;/p&gt;
+
+&lt;p&gt;经验表明外部的repeat，即从 $1 $到 $m $完全执行完成，需要大概 $1-10$ 圈能够找到全局最小点（如果能够找到的话）&lt;/p&gt;
+
+&lt;p&gt;而使用 &lt;code&gt;batch gradient descent&lt;/code&gt;的方法，$m $极大，需要计算很久才能够走上一步。&lt;/p&gt;
+
+&lt;h4 id=&#34;mini-batch-gradient-descent&#34;&gt;mini-Batch gradient descent&lt;/h4&gt;
+
+&lt;p&gt;$eg: b= 10, examples((x^i, y^i), &amp;hellip;, (x^{i+9}, y^{i+9}))$&lt;/p&gt;
+
+&lt;p&gt;\[
+\theta_j := \theta_j - \alpha (&lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;) \sum_{k=i}^{i+9} (h_{\theta}(x^{k}) - y^k) x^j_k
+\]&lt;/p&gt;
+
+&lt;p&gt;\[
+i := i+10
+\]&lt;/p&gt;
+
+&lt;p&gt;伪代码(b = 10, m = 1000)&lt;/p&gt;
+
+&lt;p&gt;repeat{
+    for i = 1, 11, 21, 31, 991{
+    \[
+        \theta_j = \theta_j - \alpha (&lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;) \sum_{k=i}^{i+9} (h_{\theta}(x^{k}) - y^k) x^j_k \ for \ every \ j = 0,&amp;hellip;,n
+        \]
+}
+}&lt;/p&gt;
+
+&lt;h4 id=&#34;各种方法的对比&#34;&gt;各种方法的对比&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;batch: 每次循环使用所有 m个样本点
+
+sotchastic: 每次循环只用 1 个样本点
+
+mini-batch: 使用 b 个样本点每次循环（b: mini-batch size, 可取 b = 2:100
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;牛顿法&#34;&gt;牛顿法：&lt;/h3&gt;
+
+&lt;p&gt;不使用一阶&lt;/p&gt;
+
+&lt;p&gt;原理：&lt;/p&gt;
+
+&lt;p&gt;拟牛顿法&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.coursera.org/learn/machine-learning/home&#34; target=&#34;_blank&#34;&gt;Machine Learning by Stanford University&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on G Chen</title>
+    <link>http://gggchen.github.io/post/</link>
+    <description>Recent content in Posts on G Chen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Chen</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://gggchen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shadowsocks 与 科学上网</title>
+      <link>http://gggchen.github.io/post/climb-wall/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/climb-wall/</guid>
+      <description>为什么要翻墙。我当初翻墙只是因为想用 Google 和看 porn。就像播客NTP #38 科學上網指南里讲的那样，翻墙能让你获得完整的互联网体验，而不是阉割版本的。顺便一提，这个播客基本涵盖了科学上网的各个方面，推荐收听。
+翻墙方法有很多，比如 VPN 和 shadowsocks。我不选择 VPN 主要因为 VPN 只能全局代理。也就是访问国外网站也是利用国外服务器访问，高延迟会让体验很不舒服。而shadowsocks 可以设置使用代理的网址列表。在列表内的使用代理翻墙，国内网站不用 shadowsocks 直接访问，速度会快得多。
+如何搭建 shadowsocks 翻墙的基本思路为，既然国内的电脑无法访问国外网站如 Twitter，那就让国内电脑通过国外一台电脑为代理，访问国外网站 Twitter 再把这部分信息传递回国内电脑。所以需要国外一台电脑Virtual Private Server(VPS) 用来做代理访问国外网站，shadowsocks 为连接本地电脑和国外电脑的工具，需要安装在本地和国外电脑上，用来联通本地和国外。
+建立 VPS VPS 可选的服务提供商有很多。我自己因为 Github 学生计划的优惠最开始使用了 Digital Ocean 后来就一直路径依赖使用下来了。 Digital Ocean 也提供了丰富的文档来介绍如何使用自家的产品，比如如何创建一个服务器，一般最便宜的方案 5 美元每月已经够用了，DO 还提供了测速工具来选择哪个地区的服务器能更快连接。 服务器的初始设置 以 Ubuntu 为例介绍了刚建立的服务器如何设置防火墙等让自己更安全。
+其他 VPS 服务商还有比如 vultr 和 Google Cloud。如果决定使用 DO 为服务提供商，不妨使用我的分享链接 注册，这样我会因为你的使用而获得收益。
+建立 shadowsocks 以 Ubuntu 为例介绍如何在服务器端安装 shadowsocks：
+apt-get install python-pip pip install shadowsocks  接下来需要配置 shadowsocks，使用 nano 打开配置文件： /etc/shadowsocks.</description>
+    </item>
+    
+    <item>
+      <title>在大陆使用 Google Scholar</title>
+      <link>http://gggchen.github.io/post/google-scholar/</link>
+      <pubDate>Fri, 04 May 2018 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/google-scholar/</guid>
+      <description>使用 shadowsocks 科学上网时, Google 和其他很多网站都能正常访问, 唯独 Google Scholar 会提示下面的错误, 而且没有 CAPTCHA 来验证自己不是电脑.
+We’re sorry… but your computer or network may be sending automated queries. To protect our users, we can’t process your request right now.  之前我为了检索论文, 只好自己买 VPN. 这个月到期之后决定不买 VPN 了, 因为我自己就有 shadowsocks, 为什么不解决这个问题. 据说是因为服务器的同一 IP 服务段有人使用爬虫, 所以 Google 限制访问了, 需要使用 ipv6 访问 Google. 我尝试了一下, 现在也终于能正常访问了.
+Enable ipv6 要使用 ipv6 访问 Google, 首先需要先保证 ss 的服务器开启了 ipv6 的. 开启 ipv6 的部份可以参考 How To Enable IPv6 for DigitalOcean Droplets.</description>
+    </item>
+    
+    <item>
+      <title>用爬虫批量下载课程主页的课件</title>
+      <link>http://gggchen.github.io/post/scraping/</link>
+      <pubDate>Mon, 30 Apr 2018 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/scraping/</guid>
+      <description>问题描述 最近在看 Meshfree 拟合函数的方法, 教材 需要用到的 Matlab 代码和数据有在课程主页上. 要跑每个代码需要先下载到本地. 简单的方法, 可以每个文件单独点击下载. 但是我懒得这样做(而且想练习一下之前看的爬虫), 所以写了程序来批量下载所有数据文件.
+所以问题是, 已知一个网页, 网页上有链接指向想要下载的文件, 需要过滤得到需要文件的网址, 下载保存到本地.
+问题解决 使用 Python3.6
+from urllib.request import urlretrieve from urllib.request import urlopen from bs4 import BeautifulSoup import re downloadDirectory = &#39;/Users/Username/Documents/meshfree/matlab-code/&#39; baseUrl = &#39;http://www.math.iit.edu/~fass/590/handouts/&#39; # open url and filter it to get a list of file names to be downloaded html = urlopen(baseUrl) bs = BeautifulSoup(html, &#39;html.parser&#39;) downloadList = bs.findAll(&amp;quot;a&amp;quot;, href=re.compile(&amp;quot;^[A-Za-z0-9_+]+\.[a-z+]+$&amp;quot;)) # download files for download in downloadList: path = download.</description>
+    </item>
+    
+    <item>
+      <title>朗读者</title>
+      <link>http://gggchen.github.io/post/the-reader/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/the-reader/</guid>
+      <description>读了《朗读者》小说, 发现了一些电影中没有说明的细节.
+剧情 十五岁的学生米夏在回家路上偶遇了三十六岁的汉娜, 两个人成为情人. 米夏每天放学先去去汉娜家给汉娜读书, 然后两人洗澡, 做爱. 汉娜在一天突然离开, 米夏很久之后才把汉娜忘掉, 却再也没法爱别人.
+米夏进了大学读法律, 再次看到汉娜是二战之后在法庭上, 汉娜作为关押犹太人的看守而被审判. 汉娜被指控终身监禁. 米夏后来一直继续为汉娜朗读小说, 把录音的磁带寄给狱中的汉娜. 汉娜在出狱前一天在狱中自杀.
+阶级 电影只让我感觉这是一段在年龄上悬殊的感情, 小说中细致描写了双方的家庭, 让我意识到这段感情在阶级上也是很不匹配的. 汉娜是一个底层文盲, 米夏是高级知识分子的家庭.
+汉娜不识字, 经历坎坷, 十七岁去柏林, 在西门子做女工, 参加了一战, 战争后找了所有能干的工作, 认识米夏的时候在做公交车检票员这种简单工作.
+而米夏的父亲是一位哲学教授, 白天有学生排着队找他请教问题. 家里有着丰富的藏书, 他父亲自己还出过书.
+看电影的时候, 我把自己想象成的是米夏, 一个男性角色. 读小说看到汉娜这么坎坷的经历, 能更多代入汉娜这个角色. 汉娜第一次来到米夏的家里, 看到他家有一面墙的藏书. 汉娜和米夏出去玩, 只能依赖米夏找餐馆点菜住宿, 这种无助的底层角色刚到大城市两眼一抹瞎的状态让我很代入, 我也羡慕别人能在家里有一面墙的藏书. 也想起了自己从村里到城市的大开眼界, 第一次出国住宿时候的茫然无措.
+情侣的误会 电影里也有汉娜和米夏的吵架, 吵得莫名其妙, 读了小说才明白.
+汉娜是公交车剪票员, 米夏拐去搭乘她那一班公交车. 公车有两节, 两节都没有乘客, 前一节有司机, 所以米夏想单独和汉娜相处, 就一直呆在第二节车厢. 但是汉娜迟迟不来找自己, 和司机聊天. 米夏很生气, 自己专门来看她, 她却不理自己, 后来在一个荒凉地方下车了, 哭着走回去.而汉娜是不懂米夏想和她单独相处才没去找她, 可能也是为自己干这么简单的工作而不好意思了, 以为米夏不来第一节车厢找自己因为自己的工作太傻了. 这两个人才互相在乎而互相生气.</description>
+    </item>
+    
+    <item>
+      <title>LaTex 转成 Word</title>
+      <link>http://gggchen.github.io/post/latex2rtf/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/latex2rtf/</guid>
+      <description>因为我电脑没有 word 软件, 而且更喜欢纯文本的格式, 写的文档都是 org, md 或者 tex 的. 最近写的论文, 因为公式众多, 还有很多文章内的交叉引用, 就用了 LaTex 来写, 交上了 PDF 格式. 学院竟然要求 word 版本, 让我很崩溃. 一个统计学院竟不支持 LaTex, 可能盗版就是力量吧. 抱怨的话就不宣泄了, 我还是转了.
+Pandoc 是个好用的工具, 但是转换的效果并不好, 搜了一下, 有工具 latex2rtf. 可以把 latex 文件转换成带有复文本格式文件.
+因为我的 tex 文件是含有中文字符的, 最简单的命令如下, 不能将中文字符正确转化, 生成的 rft 文件含有乱码.
+latex2rtf yourfile.tex  搜搜看看, 需要下面两步来实现中文字符的正确转化: 1. 在 yourfile.tex 里加上 package 支持:
+ \usepackage[utf8]{inputenc}   使用编码格式的转换命令:  latex2rtf -C utf8 yourfile.tex    其中, -C utf8 是控制编码格式, 详细可以查看 latex2rtf -h 了解</description>
+    </item>
+    
+    <item>
+      <title>《女性主义》读书笔记</title>
+      <link>http://gggchen.github.io/post/feminism/</link>
+      <pubDate>Thu, 08 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/feminism/</guid>
+      <description>听说女权主义内部也是有众多流派的, 去年读了李银河的《女性主义》, 做了读书笔记, 今天整理一下. 因为从小在一个男权社会里生长, 难免潜移默化受到男权的价值观影响, 了解一下女权主义能更 liberal 一点. 而且李银河这本书挺学术地介绍了女权主义的各个流派, 介绍了各个流派的主要代表人物和思想, 相互的争执的点. 这本书是不错的女权主义的入门书籍, 推荐.
+王小波写道, 这本书本来书名为《女权主义》, 但是审查部门不准许出现「女权」的字眼, 为了出版, 只好将 feminism 翻译为「女性主义」. 所以下面不沿用书中被审查后的字眼, 仍然采用「女权主义」称为各个流派.
+全文都是对书中内容的引用, 分为两部分, 对一些议题的看法和女权主义的流派介绍.
+男女区别 女权主义对于男女是否有差别, 也有不同的看法, 可以分为三种:
+ 强调男女相同: 男女平等, 两性的相似点超过不同点. 强调男女不同: 女性优于男性, 女性所具有的女性特征比如和平, 关爱, 养育等优于攻击好战毁灭等男性特征. 男女差别的无必要: 混淆两性界限, 人的差异并不足以产生对立两分的结果. 克服心灵、身体的两分, 身体是可变的, 不是不可变.  生育 一些女权主义者反对强加在女性身上的生育义务的. 比如波伏娃说, 一个人并非生下来就是女人, 而是变成女人的. 母性是使女性成为奴隶的最技巧的方法. 只要人们仍然认为女性的主要工作是养育小孩, 女性便不会投身政治、科技. 她们也便不会怀疑男人的优越性. 我们几乎不可能告诉女性洗碗是她们的神圣任务, 于是告诉她们养育孩子是她们的神圣任务.
+费尔斯通 认为生育机制是女性受压迫的根源. 女性的生育功能造成两性不平等. 在孕产期, 女人的基本生活来源要依赖男人, 而人类婴儿有很长的育婴期, 这也导致了女性对男性的依赖. 她提出解决办法: 技术改造生育机制, 使生育得以在体外进行.
+其他人也列举的不生育的好处:
+ 女性有更多时间过自己生活; 生育不应该决定女性的生活, 女性应当对自己的生活做出个人的决定.</description>
+    </item>
+    
+    <item>
+      <title>Emacs cannot find pdflatex PATH</title>
+      <link>http://gggchen.github.io/post/pdflatex/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/pdflatex/</guid>
+      <description>Problem description After installing Spacemacs, my org file cannot export to PDF file, the following error message always pops out:
+command not found: pdflatex  Solution It finally turns out it is my Macbook move /usr/texbin to /Library/TeX/texbin, according to this answer, I added export PATH=&amp;quot;$PATH:/Library/TeX/texbin&amp;quot;to my .zshrc. and then
+source .zshrc  to update my settings.
+After restarting my emacs, finally Emacs can export org file to PDF file.</description>
+    </item>
+    
+    <item>
+      <title>Debug Ocenaudio</title>
+      <link>http://gggchen.github.io/post/ocenaudio/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/ocenaudio/</guid>
+      <description>Oceanaudio is a good and beautiful software to edit audio documents. But recently, ocenaudio on my Macbook is very unstable, the sound it plays is too strange, just like somepeople talk with her/his mounth closed.
+I&amp;rsquo;v tried substitutes to ocenaudio, like Audacity and Ardour, but UI of Audacity is bad designed and Ardour 5 is for people to record and edit, not for me.
+I finally fixed the problem on my Ocenaudio.</description>
+    </item>
+    
+    <item>
+      <title>Warning on Replace Broken iPhone Screen</title>
+      <link>http://gggchen.github.io/post/iphone-screen/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/iphone-screen/</guid>
+      <description>Most articles describe replacement of iPhone screen or battery cells as easy, something to repair a Thinkpad person computer. but they fail to underline the possible risk.
+I changed my iPhone 6s broken screen this month but failed. I bought a new screen along with a repair kit from Amazon.
+I was excited once I received the package because I envision I could say goodbye to this broken screen and have a brand new iPhone.</description>
+    </item>
+    
+    <item>
+      <title>稍后读并且存档</title>
+      <link>http://gggchen.github.io/post/read-it-later/</link>
+      <pubDate>Fri, 14 Jul 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/read-it-later/</guid>
+      <description>解决的问题:
+ 长文章当时读不完就收藏了, 但是收藏的文章从来不会读完 读过的文章没有将整个网页保存起来, 以后网页一旦失效, 就找不到了  解决方法:
+ 使用 Pocket 或者 Instapaper 使用 ifttt 将 Pocket 读完的文章自动存档到 Evernote  稍后读 之前在 Safari Reading List, Evernote 等地方收藏了一堆的文章, 但是我从来不读. 就像一直戏谑的, read it later 变成 read it never. 后来听了 Checked 某一期的博客, 认识到了而且可以用 Pocket 或者 Instapaper 解决, 就开始使用了这个 Pocket 作为稍后读的工具.
+我的稍后读流程  浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得阅读有压力, 或者一时没有时间读, 就用 Reeder3 发送到 Pocket 平时各种空闲时间, 不打开微信各种社交软件, 而是打开 Pocket 查看之前收藏的文章, 这样一天大概是能够把之前加入的文章读完的 在 Pocket 读完的文章, 勾选读完之后, ifttt 会自动帮我把文章全文存档到 Evernote  下面详细说明利用 ifttt 存档到 Evernote</description>
+    </item>
+    
+    <item>
+      <title>SML mode in Spacemacs</title>
+      <link>http://gggchen.github.io/post/sml/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/sml/</guid>
+      <description>SML REPL in Spacemacs After installing sml and adding a sml layer in my spacemacs, I typed C-c-C-s or M-x sml RET, a sml REPL did not show up. An error message showed up instead:
+{% codeblock lang:sh %} sml: no such file or directory {% endcodeblock %}
+But I could type sml to start a sml REPL in my terminal. It turned out I should add the sml path to my emacs.</description>
+    </item>
+    
+    <item>
+      <title>成都大使馆 J1 面签经验</title>
+      <link>http://gggchen.github.io/post/visa_exp/</link>
+      <pubDate>Sun, 30 Apr 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/visa_exp/</guid>
+      <description>我的准备材料:
+ DS-160 表格； 美国项目主办方提供的 DS-2019 表； 护照； 照片(没有用, 不需要)； 身份证； 面签缴费收据（中信的）(并没有看这个)； SERVIS 缴费收据(也并没有看这个) 存款证明(用上了) 个人英文简历(没有用上)； 户籍证明(父母和我的户口本)(没有用上)； 在读证明(没有用上)； 本科学士学位证书(没有用上)； 学习计划(没有用到) 成绩单(没有用到)  9:45到大使馆。不知道从哪进，马路对面，先转一圈，发现就一片地方存包，随便找个店，门不大生意冷清的，进去存包。老板是个秃顶的中年男人，看起来正经人，后来证明人不错。存了包，问老板在哪进啊，老板给我指了方向：你看那排队人多的地方就是，指给我看。
+过了马路，果然看到大使馆入口了，看到门口一列人排队，我以为得马上排队，赶紧排在队伍后面，树上挂着牌子：9:15，没留神，问了队前面的人才了解，这只是　9:15　的那一拨。我一看，那边树上还挂着牌子呢，有9:30，9:45，10:00的队，我的10:45还没被召唤到。
+这得好等啊，我就在马路牙子上坐着，等着9:30，9:45，10:00分别进去，我的10:45也终于可以排队了。漫长的等待。
+一个规律，开始各种大妈大叔还很多，慢慢地等的人就全变成学生了。我一个人来的，全程无聊极了，只能偷听别人说话。
+那边妹子们在聊天： 「…（某个同学）她/他连自己要去的学校都说不上来，当然被拒了」
+吓到我赶紧掏出材料看看我要去的学校。后面我就被问到了(´･_･`)
+另外一群电子科技大学的： 「转 CS 好一点，就算不留美国，回来也很好啊。」 「AI，AI 不好录吧！」 「（某个同学）被 CMU 录了」
+终于排队到大使馆门口了！
+拿出来护照和预约证明，预约费收据，工作人员给护照背面贴上一张码。这些程序都不需要记，看前面队伍的人手里拿什么再掏出来不迟。然后是武警哥哥，要身份证和护照。
+完了进大使馆安全检查。文件里有没拆封也有问题，有几个人被赶出去了没进安检，出去再回来（似乎把有问题的物品丢掉）再进来。也不是很大的问题，因为不用重新排队马上进来了。
+安检完了是一个斜坡，看起来原本是残障人士通道，但是大使馆内空间局促，只能利用这个空间了。在斜坡上面排队，看了一眼墙上的时间，已经 11:30 了。斜坡上来是面签大厅，人都排着队直接去面签了，根本不像网上写着，还给号码，坐着等，像银行一样等叫号，叫道了去面签，这里排到谁谁面签。而且都是站着完成整个流程，也不会像银行大厅坐着办业务。下面有三步，材料初步检验，录入指纹，正式面签。材料初步检验和录入指纹各自有两个窗口，正式面签有 10+ 个窗口。
+面签大厅进来先是材料初步检验，工作人员告诉我拿出来我 DS-2019 和护照，然后招呼我走近一个窗口，一个中国大姐，我把 DS-2019 和护照连同其他材料也丢进窗口，大姐只拿了 DS-2019 和护照，看我不拿走其他材料，凶我：不需要的材料拿走就好。我赶紧把其他支持材料拿走了。大姐查了我的材料，把我的 DS-2019 和护照 用橡皮筋捆在一起，给我。
+然后另一个窗口采集指纹，里面坐着的那位看起来是非裔大哥，胡子拉茬，态度还好（相比刚才大姐）按照旁边的图示，先左手，再右手，然后大拇指，完成了。（卧槽我想，隐私全泄露给美国政府了，这想犯罪不留下痕迹只能学《七宗罪》了）末了大哥问我是去读 Ph.d 么，我说不是。大哥解释说 just out of curiosity Goodbye 我回了句 bye
+继续排队等正式面签。一个弯弯曲曲的队伍，排着等，队伍的尽头由工作人员引导去了各个窗口面签，排着队也闲着无聊只能听别人在窗口面签的问题和回答。
+1x号窗口一白人大姐，问问题又多又尖锐。 质问一个妹子，（英文）「我需要你详细的学习计划」，妹子补充说了几句，白人大姐不满意，「你这可是Ph.</description>
+    </item>
+    
+    <item>
+      <title>learn how to learn</title>
+      <link>http://gggchen.github.io/post/learn_motivate/</link>
+      <pubDate>Tue, 06 Dec 2016 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/learn_motivate/</guid>
+      <description>以前对于如何学习有着不很系统的, 基于我自己经验的了解, 学习了 C站上的learn how to learn 课程之后, 才知道学习背后的生理上和心理上的原因, 还改变了之前一些错误的认识, 像以为通宵熬夜学习是学习的好方法.
+强烈推荐跟着学一下这门课.
+chunks 什么是 chunk? 大脑形成的一群相互连接的神经元, 所以能够顺利完成一系列动作. 最好的 chunk 是这样, 一旦这个chunk 形成了, 不需要记住所有细节, 下意识就可以完成一个动作. 《倚天屠龙记》中赵敏找武当的麻烦, 张无忌需要短时间跟张三丰学会太极剑, 张无忌临时学了然后又自己演练了一会, 张三丰问他还记得多少, 张无忌说还记得一两招, 张三丰就等无忌又练了一段, 最后张无忌回答说他已经完全忘记了, 张三丰说你可以上了.
+ 例子  学习的过程是循序渐进的, 最开始是小的 chunk, 最后小 chunk 连起来形成大的 chunk
+ 通过学习一门新语言, 比如日语, 从50音图开始, 学习语音语调, 掌握词汇, 后来能够根据情景流畅地说出一个句子. 学会骑自行车之后, 就能协调地在平衡的情况下蹬脚蹬. 弹吉他, 先练习指法, 练习一个个片段, 最后熟练弹奏一段曲子 学数学, 最开始试图解答一个问题, 需要的认知负荷很大, 最好先用例子明白核心和背后的原则, 然后再看概念. 类似先依照地图走到想去的地方, 最后自己不需要地图也能够走到. 熟悉例子之后, 思考为什么每一步要这样走, 为什么在这个时候走这一步.  怎样形成 chunk? 怎样形成一个 chunk, 不管是体育训练肌肉记忆, 还是思维训练解决一个问题, 都是类似的:</description>
+    </item>
+    
+    <item>
+      <title>中年男人的放飞自我</title>
+      <link>http://gggchen.github.io/post/comeing_up_for_air/</link>
+      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/comeing_up_for_air/</guid>
+      <description>&lt;p&gt;人在任何时候都会危机, 其中中年危机好像尤为明显, 据说中年的三大情结: 没推倒的女同学, 不似从前的母校和回不去的故乡. 最近读了两本中年危机追寻人生意义的小说, 一本是毛姆的《月亮和六便士》, 另一本是乔治奥威尔的《上来透口气》. 乔治奥威尔完胜, 我很喜欢这本小说, 也很推荐阅读.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习中的线性回归</title>
+      <link>http://gggchen.github.io/post/ml-regression/</link>
+      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/ml-regression/</guid>
+      <description>模型 hypothesis $$ h_{\theta}= \theta X = {\sum}_{i=1}^{n} x_i&amp;rsquo; \theta $$
+其中：
+X is a m x n matrix n is the number of the features m is the number of training examples.  gradient \[ \theta_j :=\theta_j- \alpha \frac{\partial}{\partial \theta_j} J(\theta_j) \] 写成矩阵形式即： \[ \theta := \theta - \alpha X^T(X \theta - y) \]
+cost function: \[ J(\theta) = \frac12 {(X \theta - y)}^T (X \theta - y) = \frac12 \sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})^2 \]</description>
+    </item>
+    
+    <item>
+      <title>和 hexo 斗志斗勇</title>
+      <link>http://gggchen.github.io/post/hexo_bug/</link>
+      <pubDate>Fri, 27 Nov 2015 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/hexo_bug/</guid>
+      <description>没想到想用个 blog 还这么麻烦。最初为了让大陆访问快一点，捣鼓半天把 blog 放在 github 和 gitcafe 上，配置麻烦不说， gitcafe 总是有问题。所以我的 blog 从国外可以正常访问，从国内访问总是有问题。虽然最后能够实现国内外不同访问，总是出错还是怪麻烦，没办法最后弃用 gitcafe 。
+更新：用了 hexo 快一年了，博客没写几篇，尽捣鼓怎么解决 hexo 的 bug 了，很多问题搜也搜不出来，我的内心是崩溃的啊，今天终于再一次把博客配置好了。把之前跳过的坑都一一表明，希望像我一样的小白用户能够避开。
+上一次被 hexo 整崩溃之后，还试了试用 Django 在 DigitalOcean 上面搭博客，博客是搭好了，但是怎么展示数学公式什么的比 hexo 还麻烦，DigitalOcaen 还要交钱，我还天天担心自己服务器被黑。天啊，两害相轻，还是回到了 hexo。
+权限问题 sudo 最初我的 hexo 会有以下的错误错误：
+输入：
+$hexo deploy  后，会出现这样的错误：
+INFO Deploying: git INFO Clearing .deploy folder... FATAL Something&#39;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html Error: EACCES, unlink &#39;/Users/xxx/Documents/xxx/.deploy_git/archives/index.html&#39;  这样应该hexo deploy的命令前面加上sudo，也就是：
+$ sudo hexo deploy  github 连接问题 当然还可能是其他问题，比如说是 github 的问题，可以使用ssh -T git@github.</description>
+    </item>
+    
+    <item>
+      <title>阅读GRE文章的正确姿势</title>
+      <link>http://gggchen.github.io/post/gre_reading/</link>
+      <pubDate>Thu, 13 Aug 2015 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/gre_reading/</guid>
+      <description>阅读做题的步骤  看长阅读还是短阅读 看看题目数目 看看第一题 读文章＋7原则＋做骨架＋找中心 做题 general题目还是detail  做题的姿势  桉顺序做题 遇到难题排除 实在不行猜一个，不要留着以后做 mark一下 有空回头看看  排除法的标记：
+A. X B. √ C. ~  如何正确地读 要关注结构，积极高效地读：最开始读得慢，抓住重点，后来读得快。先看题目再在原文中找，或者太抓细节都是不高效的方式。
+七原则
+ 投入：a 哄自己开心：“太好了，下面6分钟我可以了解一下海啸。”b 辨别好坏，如果海洋受到A的威胁，对A生气，这个坏家伙！ 找简单故事：几个字概括 读→大脑形成图像 正在读的和刚读过的联系起来：支持还是反对，有无回答之前的问题 注意信号：分段和信号词 加快速度别陷入细节，除了：段落开头，Big Surprise, Big Result  ** Point 是核心**
+我：不加分辨地读全文→做题→被难题困住→读文章→随便猜一个
+更好：抓住文章结构
+短文章 一道题：快速读后选
+3道题：理解文章
+** 做笔记**
+ 每段中心 Big Suprise Big Result 读完后找全文中心  长文章  首段细细读 剩下段落找中心以及在全文中的作用，细节略去，需要时再读细节。 别读细节，还会起反作用，不仅理解不了中心，而且细节题靠记忆不靠谱，还得回文定位才好 读完找中心  题型 general questions 不用读文章，直接做题</description>
+    </item>
+    
+    <item>
+      <title>亚马逊的推荐系统</title>
+      <link>http://gggchen.github.io/post/recommendations/</link>
+      <pubDate>Sun, 09 Aug 2015 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/recommendations/</guid>
+      <description>协作型过滤collaborative filtering 对一大群人进行搜索，并从中找出与我们品味相近的一小群人。
+搜集偏好 对于python，是使用一个嵌套的字典，大型网站可建立数据库
+对相似度评价 欧几里德距离：在坐标轴中的距离
+皮尔逊相关度：即使一个人比另一个人对同一个物品评分都高，但是高的程度一致，也认定是相关。
+其他相关方法：jaccard系数或曼哈顿距离算法还有其他算法都行，只要以一个浮点数作为返回值，而且数值越大相似度越大。最后会看到采用什么相似度评价方法，对结果影响不大。
+推荐物品 需要利用已有用户的加权来对目标用户进行推荐，也就是对目标用户没有看的电影进行打分，加权的方式是： 假设 $ P_i $ 是其他用户，$ P_i $ 和目标用户的相似度是$ s_i $，$ X_i $是目标用户没看过的电影，$ P_i $对$ X_i $的打分为$ M_i $，那么对$ X_i $ 的打分$ R_i $可以表示为：
+$$ R_i = \frac{\sum M_i s_i}{\sum si}$$
+接下来根据目标用户所有没看过的电影，按照打分$ R_i $进行排序，分高的优先推荐。
+求和的是刚好看过目标客户没看过的这部电影的其他用户数。
+匹配商品 上述方法称为基于用户的协作型过滤(user-based collaborative filtering)，对于像Amazon这样存在上百万客户的大型网站，对每个用户和其他用户比较，再对每位用户评过分的商品比较，速度可能很慢；而且商品过多，用户偏好方面彼此很少会有重叠，用户相似性难以判断。所以要使用另外的方法，称为基于物品的协作型过滤(item-based collaborative filtering)可以将大量计算任务预先执行，能够更快地推荐。物品间变化不像用户间比较那么频繁，不需要不停计算每样物品相似的其他物品，可以将计算安排在网络流量不大的时候进行，或者独立于主应用之外的另一台计算机单独进行。
+根据人群对某两件商品的评分确定两件商品的相关系数，负数表示喜欢一件商品会存在讨厌另一件商品的倾向。根据相关系数建立每一件商品和其他商品的相似度列表数据集。
+目标客户看过的电影$ Y_i $评分为$ M_i $，没看过的电影$ X_i $ 和$ Y_i $的相似度为$ s_i $，对$ X_i $的评分为$ R_i $:
+$$R_i = \frac{\sum M_i s_i} {\sum s_i} $$</description>
+    </item>
+    
+  </channel>
+</rss>

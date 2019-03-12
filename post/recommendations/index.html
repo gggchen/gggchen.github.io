@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.51" />
+  
+  
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://gggchen.github.io/post/recommendations/">
+
+  
+  
+
+
+  
+
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="http://gggchen.github.io/index.xml" type="application/rss+xml" title="G Chen">
+  <link rel="feed" href="http://gggchen.github.io/index.xml" type="application/rss+xml" title="G Chen">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="http://gggchen.github.io/post/recommendations/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/kungmacs">
+  <meta property="twitter:creator" content="@https://twitter.com/kungmacs">
+  
+  <meta property="og:site_name" content="G Chen">
+  <meta property="og:url" content="http://gggchen.github.io/post/recommendations/">
+  <meta property="og:title" content="亚马逊的推荐系统 | G Chen">
+  <meta property="og:description" content="">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2015-08-09T00:00:00&#43;02:00">
+  
+  <meta property="article:modified_time" content="2015-08-09T00:00:00&#43;02:00">
+  
+
+  
+
+  <title>亚马逊的推荐系统 | G Chen</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">G Chen</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <div class="article-inner">
+      <h1 itemprop="name">亚马逊的推荐系统</h1>
+
+      
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2015-08-09 00:00:00 &#43;0200 CEST" itemprop="datePublished">
+      Aug 9, 2015
+    </time>
+  </span>
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+</div>
+
+
+      <div class="article-style" itemprop="articleBody">
+        
+
+<h2 id="协作型过滤collaborative-filtering">协作型过滤collaborative filtering</h2>
+
+<p>对一大群人进行搜索，并从中找出与我们品味相近的一小群人。</p>
+
+<h2 id="搜集偏好">搜集偏好</h2>
+
+<p>对于python，是使用一个嵌套的字典，大型网站可建立数据库</p>
+
+<h2 id="对相似度评价">对相似度评价</h2>
+
+<p>欧几里德距离：在坐标轴中的距离</p>
+
+<p>皮尔逊相关度：即使一个人比另一个人对同一个物品评分都高，但是高的程度一致，也认定是相关。</p>
+
+<p>其他相关方法：jaccard系数或曼哈顿距离算法还有其他算法都行，只要以一个浮点数作为返回值，而且数值越大相似度越大。最后会看到采用什么相似度评价方法，对结果影响不大。</p>
+
+<h2 id="推荐物品">推荐物品</h2>
+
+<p>需要利用已有用户的加权来对目标用户进行推荐，也就是对目标用户没有看的电影进行打分，加权的方式是：
+假设 $ P_i $ 是其他用户，$ P_i $ 和目标用户的相似度是$ s_i $，$ X_i $是目标用户没看过的电影，$ P_i $对$ X_i $的打分为$ M_i $，那么对$ X_i $ 的打分$ R_i $可以表示为：</p>
+
+<p>$$ R_i = \frac{\sum M_i s_i}{\sum si}$$</p>
+
+<p>接下来根据目标用户所有没看过的电影，按照打分$ R_i $进行排序，分高的优先推荐。</p>
+
+<p>求和的是刚好看过目标客户没看过的这部电影的其他用户数。</p>
+
+<h2 id="匹配商品">匹配商品</h2>
+
+<p>上述方法称为<strong>基于用户的协作型过滤</strong>(user-based collaborative filtering)，对于像Amazon这样存在上百万客户的大型网站，对每个用户和其他用户比较，再对每位用户评过分的商品比较，速度可能很慢；而且商品过多，用户偏好方面彼此很少会有重叠，用户相似性难以判断。所以要使用另外的方法，称为<strong>基于物品的协作型过滤</strong>(item-based collaborative filtering)可以将大量计算任务预先执行，能够更快地推荐。物品间变化不像用户间比较那么频繁，不需要不停计算每样物品相似的其他物品，可以将计算安排在网络流量不大的时候进行，或者独立于主应用之外的另一台计算机单独进行。</p>
+
+<p>根据人群对某两件商品的评分确定两件商品的相关系数，负数表示喜欢一件商品会存在讨厌另一件商品的倾向。根据相关系数建立每一件商品和其他商品的相似度列表数据集。</p>
+
+<p>目标客户看过的电影$ Y_i $评分为$ M_i $，没看过的电影$ X_i $ 和$ Y_i $的相似度为$ s_i $，对$ X_i $的评分为$ R_i $:</p>
+
+<p>$$R_i = \frac{\sum M_i s_i} {\sum s_i} $$</p>
+
+<p><strong>note</strong>：目标客户看过的电影为$ m $，没看过的为$ n $，存在$ m &lt;&lt; n $，所以求和以$ m $为准了。m既然有限，挑选的时候，可以依照相似度，相似度高的优先。</p>
+
+<p>和上面的公式形式一样，不同的是$ s_i $所代表的含义，前者是用户间的相似度，后者是商品之间的相似度。</p>
+
+      </div>
+
+      
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/python">python</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/notes">notes</a>
+  
+</div>
+
+
+
+    </div>
+  </div>
+
+</article>
+
+
+
+
+
+<div class="container article-widget">
+  <nav>
+  <ul class="pager">
+    
+
+    
+    <li class="next"><a href="http://gggchen.github.io/post/gre_reading/">阅读GRE文章的正确姿势 <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2019 Chen &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

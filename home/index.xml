@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on G Chen</title>
+    <link>http://gggchen.github.io/home/</link>
+    <description>Recent content in Homes on G Chen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Chen</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gggchen.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Recent Posts</title>
+      <link>http://gggchen.github.io/home/posts/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://gggchen.github.io/home/posts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://gggchen.github.io/home/about/</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://gggchen.github.io/home/about/</guid>
+      <description>个人博客。
+内容丰富，包括时评、杂文、短篇小说、诗歌和散文等
+主要是个人的读书笔记。
+已坚持写作十余年
+博客终于坚持到第四年了，噢液!
+本博客受众广泛，经常有读者发来热情洋溢的读者来信
+该博客主要的读者一直是作者本人。</description>
+    </item>
+    
+    <item>
+      <title>Tags</title>
+      <link>http://gggchen.github.io/home/tags/</link>
+      <pubDate>Wed, 20 Sep 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/home/tags/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

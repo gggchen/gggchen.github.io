@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on G Chen</title>
+    <link>http://gggchen.github.io/tags/</link>
+    <description>Recent content in Tags on G Chen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Chen</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://gggchen.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Content tagged as &#39;Academic&#39;</title>
+      <link>http://gggchen.github.io/tags/academic/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/academic/</guid>
+      <description>Here is a list of all the content that has been tagged as academic.</description>
+    </item>
+    
+    <item>
+      <title>coursera</title>
+      <link>http://gggchen.github.io/tags/coursera/</link>
+      <pubDate>Tue, 06 Dec 2016 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/coursera/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emacs</title>
+      <link>http://gggchen.github.io/tags/emacs/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>exp</title>
+      <link>http://gggchen.github.io/tags/exp/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/exp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notes</title>
+      <link>http://gggchen.github.io/tags/notes/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>http://gggchen.github.io/tags/python/</link>
+      <pubDate>Mon, 30 Apr 2018 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tech</title>
+      <link>http://gggchen.github.io/tags/tech/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/tech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>http://gggchen.github.io/tags/tools/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

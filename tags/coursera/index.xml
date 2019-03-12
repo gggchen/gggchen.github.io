@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>coursera on G Chen</title>
+    <link>http://gggchen.github.io/tags/coursera/</link>
+    <description>Recent content in coursera on G Chen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Chen</copyright>
+    <lastBuildDate>Tue, 06 Dec 2016 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://gggchen.github.io/tags/coursera/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>learn how to learn</title>
+      <link>http://gggchen.github.io/post/learn_motivate/</link>
+      <pubDate>Tue, 06 Dec 2016 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/learn_motivate/</guid>
+      <description>以前对于如何学习有着不很系统的, 基于我自己经验的了解, 学习了 C站上的learn how to learn 课程之后, 才知道学习背后的生理上和心理上的原因, 还改变了之前一些错误的认识, 像以为通宵熬夜学习是学习的好方法.
+强烈推荐跟着学一下这门课.
+chunks 什么是 chunk? 大脑形成的一群相互连接的神经元, 所以能够顺利完成一系列动作. 最好的 chunk 是这样, 一旦这个chunk 形成了, 不需要记住所有细节, 下意识就可以完成一个动作. 《倚天屠龙记》中赵敏找武当的麻烦, 张无忌需要短时间跟张三丰学会太极剑, 张无忌临时学了然后又自己演练了一会, 张三丰问他还记得多少, 张无忌说还记得一两招, 张三丰就等无忌又练了一段, 最后张无忌回答说他已经完全忘记了, 张三丰说你可以上了.
+ 例子  学习的过程是循序渐进的, 最开始是小的 chunk, 最后小 chunk 连起来形成大的 chunk
+ 通过学习一门新语言, 比如日语, 从50音图开始, 学习语音语调, 掌握词汇, 后来能够根据情景流畅地说出一个句子. 学会骑自行车之后, 就能协调地在平衡的情况下蹬脚蹬. 弹吉他, 先练习指法, 练习一个个片段, 最后熟练弹奏一段曲子 学数学, 最开始试图解答一个问题, 需要的认知负荷很大, 最好先用例子明白核心和背后的原则, 然后再看概念. 类似先依照地图走到想去的地方, 最后自己不需要地图也能够走到. 熟悉例子之后, 思考为什么每一步要这样走, 为什么在这个时候走这一步.  怎样形成 chunk? 怎样形成一个 chunk, 不管是体育训练肌肉记忆, 还是思维训练解决一个问题, 都是类似的:</description>
+    </item>
+    
+    <item>
+      <title>机器学习中的线性回归</title>
+      <link>http://gggchen.github.io/post/ml-regression/</link>
+      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/ml-regression/</guid>
+      <description>模型 hypothesis $$ h_{\theta}= \theta X = {\sum}_{i=1}^{n} x_i&amp;rsquo; \theta $$
+其中：
+X is a m x n matrix n is the number of the features m is the number of training examples.  gradient \[ \theta_j :=\theta_j- \alpha \frac{\partial}{\partial \theta_j} J(\theta_j) \] 写成矩阵形式即： \[ \theta := \theta - \alpha X^T(X \theta - y) \]
+cost function: \[ J(\theta) = \frac12 {(X \theta - y)}^T (X \theta - y) = \frac12 \sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})^2 \]</description>
+    </item>
+    
+  </channel>
+</rss>

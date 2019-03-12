@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>emacs on G Chen</title>
+    <link>http://gggchen.github.io/tags/emacs/</link>
+    <description>Recent content in emacs on G Chen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Chen</copyright>
+    <lastBuildDate>Mon, 20 Nov 2017 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="http://gggchen.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Emacs cannot find pdflatex PATH</title>
+      <link>http://gggchen.github.io/post/pdflatex/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/pdflatex/</guid>
+      <description>Problem description After installing Spacemacs, my org file cannot export to PDF file, the following error message always pops out:
+command not found: pdflatex  Solution It finally turns out it is my Macbook move /usr/texbin to /Library/TeX/texbin, according to this answer, I added export PATH=&amp;quot;$PATH:/Library/TeX/texbin&amp;quot;to my .zshrc. and then
+source .zshrc  to update my settings.
+After restarting my emacs, finally Emacs can export org file to PDF file.</description>
+    </item>
+    
+    <item>
+      <title>SML mode in Spacemacs</title>
+      <link>http://gggchen.github.io/post/sml/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/sml/</guid>
+      <description>SML REPL in Spacemacs After installing sml and adding a sml layer in my spacemacs, I typed C-c-C-s or M-x sml RET, a sml REPL did not show up. An error message showed up instead:
+{% codeblock lang:sh %} sml: no such file or directory {% endcodeblock %}
+But I could type sml to start a sml REPL in my terminal. It turned out I should add the sml path to my emacs.</description>
+    </item>
+    
+  </channel>
+</rss>

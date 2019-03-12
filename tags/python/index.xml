@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on G Chen</title>
+    <link>http://gggchen.github.io/tags/python/</link>
+    <description>Recent content in python on G Chen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Chen</copyright>
+    <lastBuildDate>Mon, 30 Apr 2018 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="http://gggchen.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用爬虫批量下载课程主页的课件</title>
+      <link>http://gggchen.github.io/post/scraping/</link>
+      <pubDate>Mon, 30 Apr 2018 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/scraping/</guid>
+      <description>问题描述 最近在看 Meshfree 拟合函数的方法, 教材 需要用到的 Matlab 代码和数据有在课程主页上. 要跑每个代码需要先下载到本地. 简单的方法, 可以每个文件单独点击下载. 但是我懒得这样做(而且想练习一下之前看的爬虫), 所以写了程序来批量下载所有数据文件.
+所以问题是, 已知一个网页, 网页上有链接指向想要下载的文件, 需要过滤得到需要文件的网址, 下载保存到本地.
+问题解决 使用 Python3.6
+from urllib.request import urlretrieve from urllib.request import urlopen from bs4 import BeautifulSoup import re downloadDirectory = &#39;/Users/Username/Documents/meshfree/matlab-code/&#39; baseUrl = &#39;http://www.math.iit.edu/~fass/590/handouts/&#39; # open url and filter it to get a list of file names to be downloaded html = urlopen(baseUrl) bs = BeautifulSoup(html, &#39;html.parser&#39;) downloadList = bs.findAll(&amp;quot;a&amp;quot;, href=re.compile(&amp;quot;^[A-Za-z0-9_+]+\.[a-z+]+$&amp;quot;)) # download files for download in downloadList: path = download.</description>
+    </item>
+    
+    <item>
+      <title>亚马逊的推荐系统</title>
+      <link>http://gggchen.github.io/post/recommendations/</link>
+      <pubDate>Sun, 09 Aug 2015 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/recommendations/</guid>
+      <description>协作型过滤collaborative filtering 对一大群人进行搜索，并从中找出与我们品味相近的一小群人。
+搜集偏好 对于python，是使用一个嵌套的字典，大型网站可建立数据库
+对相似度评价 欧几里德距离：在坐标轴中的距离
+皮尔逊相关度：即使一个人比另一个人对同一个物品评分都高，但是高的程度一致，也认定是相关。
+其他相关方法：jaccard系数或曼哈顿距离算法还有其他算法都行，只要以一个浮点数作为返回值，而且数值越大相似度越大。最后会看到采用什么相似度评价方法，对结果影响不大。
+推荐物品 需要利用已有用户的加权来对目标用户进行推荐，也就是对目标用户没有看的电影进行打分，加权的方式是： 假设 $ P_i $ 是其他用户，$ P_i $ 和目标用户的相似度是$ s_i $，$ X_i $是目标用户没看过的电影，$ P_i $对$ X_i $的打分为$ M_i $，那么对$ X_i $ 的打分$ R_i $可以表示为：
+$$ R_i = \frac{\sum M_i s_i}{\sum si}$$
+接下来根据目标用户所有没看过的电影，按照打分$ R_i $进行排序，分高的优先推荐。
+求和的是刚好看过目标客户没看过的这部电影的其他用户数。
+匹配商品 上述方法称为基于用户的协作型过滤(user-based collaborative filtering)，对于像Amazon这样存在上百万客户的大型网站，对每个用户和其他用户比较，再对每位用户评过分的商品比较，速度可能很慢；而且商品过多，用户偏好方面彼此很少会有重叠，用户相似性难以判断。所以要使用另外的方法，称为基于物品的协作型过滤(item-based collaborative filtering)可以将大量计算任务预先执行，能够更快地推荐。物品间变化不像用户间比较那么频繁，不需要不停计算每样物品相似的其他物品，可以将计算安排在网络流量不大的时候进行，或者独立于主应用之外的另一台计算机单独进行。
+根据人群对某两件商品的评分确定两件商品的相关系数，负数表示喜欢一件商品会存在讨厌另一件商品的倾向。根据相关系数建立每一件商品和其他商品的相似度列表数据集。
+目标客户看过的电影$ Y_i $评分为$ M_i $，没看过的电影$ X_i $ 和$ Y_i $的相似度为$ s_i $，对$ X_i $的评分为$ R_i $:
+$$R_i = \frac{\sum M_i s_i} {\sum s_i} $$</description>
+    </item>
+    
+  </channel>
+</rss>
