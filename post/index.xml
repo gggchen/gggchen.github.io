@@ -139,7 +139,7 @@ I was excited once I received the package because I envision I could say goodbye
       <description>解决的问题:
  长文章当时读不完就收藏了, 但是收藏的文章从来不会读完 读过的文章没有将整个网页保存起来, 以后网页一旦失效, 就找不到了  解决方法:
  使用 Pocket 或者 Instapaper 使用 ifttt 将 Pocket 读完的文章自动存档到 Evernote  稍后读 之前在 Safari Reading List, Evernote 等地方收藏了一堆的文章, 但是我从来不读. 就像一直戏谑的, read it later 变成 read it never. 后来听了 Checked 某一期的博客, 认识到了而且可以用 Pocket 或者 Instapaper 解决, 就开始使用了这个 Pocket 作为稍后读的工具.
-我的稍后读流程  浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得阅读有压力, 或者一时没有时间读, 就用 Reeder3 发送到 Pocket 平时各种空闲时间, 不打开微信各种社交软件, 而是打开 Pocket 查看之前收藏的文章, 这样一天大概是能够把之前加入的文章读完的 在 Pocket 读完的文章, 勾选读完之后, ifttt 会自动帮我把文章全文存档到 Evernote  下面详细说明利用 ifttt 存档到 Evernote</description>
+我的稍后读流程  浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得读某一篇时觉得一时没有时间读, 就用 Reeder3 发送到 Pocket 平时各种空闲时间, 不打开微信各种社交软件, 而是打开 Pocket 查看之前收藏的文章, 这样一天大概是能够把之前加入的文章读完的 在 Pocket 读完的文章, 勾选读完之后, ifttt 会自动帮我把文章全文存档到 Evernote  下面详细说明利用 ifttt 存档到 Evernote</description>
     </item>
     
     <item>

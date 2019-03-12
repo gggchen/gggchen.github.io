@@ -209,7 +209,7 @@
 <h3 id="我的稍后读流程">我的稍后读流程</h3>
 
 <ol>
-<li>浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得阅读有压力, 或者一时没有时间读, 就用 Reeder3 发送到 Pocket</li>
+<li>浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得读某一篇时觉得一时没有时间读, 就用 Reeder3 发送到 Pocket</li>
 <li>平时各种空闲时间, 不打开微信各种社交软件, 而是打开 Pocket 查看之前收藏的文章, 这样一天大概是能够把之前加入的文章读完的</li>
 <li>在 Pocket 读完的文章, 勾选读完之后, ifttt 会自动帮我把文章全文存档到 Evernote</li>
 </ol>
@@ -218,13 +218,27 @@
 
 <h2 id="笔记存档">笔记存档</h2>
 
-<h3 id="使用方法">使用方法</h3>
+<p>需要做的准备:</p>
 
-<p>在 <a href="http://www.ukeeper.com/" target="_blank">http://www.ukeeper.com/</a> 用邮箱注册账户, 把用来发消息的 Gmail 邮箱填写到 <code>Regular e-mail</code>, Evernote 的邮箱填写到 <code>Forwarding e-mail</code>. 邮箱的地址在 Evernote 的 <code>settings/account summary/Email notes to</code> 下面, 一般为 <code>xxxx.xxxx@m.evernote.com</code> 这样的形式. Evernote 需要购买中级或者高级版本, 才可以使用发送邮件到 Evernote 的邮箱保存笔记的功能, 才能使用 <a href="http://www.ukeeper.com/" target="_blank">http://www.ukeeper.com/</a> 发送邮件到 Evernote 从而保存笔记.</p>
+<ul>
+<li>一个任意的 Gmail 邮箱</li>
+<li>Evernote 的中级或高级帐号. Evernote 需要购买中级或者高级版本, 才可以使用发送邮件到 Evernote 的邮箱保存该邮件为笔记的功能.</li>
+<li>Evernote 在<code>settings/account summary/Email notes to</code> 下面, 找到形式为 <code>xxxx.xxxx@m.evernote.com</code> 的邮箱, 这是用来接受笔记并且保存的邮箱</li>
+<li>安装并且注册 ifttt</li>
+</ul>
 
-<p>在 ifttt 中使用这个 <a href="https://ifttt.com/applets/CpkZGRbF-save-archived-items-in-pocket-full-articles-using-ukeeper-com" target="_blank">applet</a></p>
+<h3 id="配置方法">配置方法</h3>
 
-<p>绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了</p>
+<h4 id="ukeeper">Ukeeper</h4>
+
+<p><img src="/img/ukeeper.png" alt="ukeeper" />
+在 <a href="http://www.ukeeper.com/" target="_blank">http://www.ukeeper.com/</a> 用邮箱注册账户, 把用来发消息的 Gmail 邮箱填写到 <code>Regular e-mail</code>, Evernote 的邮箱填写到 <code>Forwarding e-mail</code>.</p>
+
+<h4 id="ifttt">ifttt</h4>
+
+<p>在 ifttt 中使用我所创建的一个 <a href="https://ifttt.com/applets/CpkZGRbF-save-archived-items-in-pocket-full-articles-using-ukeeper-com" target="_blank">applet</a></p>
+
+<p>绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了.</p>
 
 <h3 id="ifttt-的-applet-配置原理">ifttt 的 applet 配置原理</h3>
 

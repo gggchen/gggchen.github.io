@@ -579,7 +579,7 @@ It turned out when I adjest the buffer size, it works fine again.&lt;/p&gt;
 &lt;h3 id=&#34;我的稍后读流程&#34;&gt;我的稍后读流程&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得阅读有压力, 或者一时没有时间读, 就用 Reeder3 发送到 Pocket&lt;/li&gt;
+&lt;li&gt;浏览 RSS 订阅的消息. 我使用 Reeder3 来订阅 RSS 源, 如果觉得读某一篇时觉得一时没有时间读, 就用 Reeder3 发送到 Pocket&lt;/li&gt;
 &lt;li&gt;平时各种空闲时间, 不打开微信各种社交软件, 而是打开 Pocket 查看之前收藏的文章, 这样一天大概是能够把之前加入的文章读完的&lt;/li&gt;
 &lt;li&gt;在 Pocket 读完的文章, 勾选读完之后, ifttt 会自动帮我把文章全文存档到 Evernote&lt;/li&gt;
 &lt;/ol&gt;
@@ -588,13 +588,27 @@ It turned out when I adjest the buffer size, it works fine again.&lt;/p&gt;
 
 &lt;h2 id=&#34;笔记存档&#34;&gt;笔记存档&lt;/h2&gt;
 
-&lt;h3 id=&#34;使用方法&#34;&gt;使用方法&lt;/h3&gt;
+&lt;p&gt;需要做的准备:&lt;/p&gt;
 
-&lt;p&gt;在 &lt;a href=&#34;http://www.ukeeper.com/&#34; target=&#34;_blank&#34;&gt;http://www.ukeeper.com/&lt;/a&gt; 用邮箱注册账户, 把用来发消息的 Gmail 邮箱填写到 &lt;code&gt;Regular e-mail&lt;/code&gt;, Evernote 的邮箱填写到 &lt;code&gt;Forwarding e-mail&lt;/code&gt;. 邮箱的地址在 Evernote 的 &lt;code&gt;settings/account summary/Email notes to&lt;/code&gt; 下面, 一般为 &lt;code&gt;xxxx.xxxx@m.evernote.com&lt;/code&gt; 这样的形式. Evernote 需要购买中级或者高级版本, 才可以使用发送邮件到 Evernote 的邮箱保存笔记的功能, 才能使用 &lt;a href=&#34;http://www.ukeeper.com/&#34; target=&#34;_blank&#34;&gt;http://www.ukeeper.com/&lt;/a&gt; 发送邮件到 Evernote 从而保存笔记.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个任意的 Gmail 邮箱&lt;/li&gt;
+&lt;li&gt;Evernote 的中级或高级帐号. Evernote 需要购买中级或者高级版本, 才可以使用发送邮件到 Evernote 的邮箱保存该邮件为笔记的功能.&lt;/li&gt;
+&lt;li&gt;Evernote 在&lt;code&gt;settings/account summary/Email notes to&lt;/code&gt; 下面, 找到形式为 &lt;code&gt;xxxx.xxxx@m.evernote.com&lt;/code&gt; 的邮箱, 这是用来接受笔记并且保存的邮箱&lt;/li&gt;
+&lt;li&gt;安装并且注册 ifttt&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;在 ifttt 中使用这个 &lt;a href=&#34;https://ifttt.com/applets/CpkZGRbF-save-archived-items-in-pocket-full-articles-using-ukeeper-com&#34; target=&#34;_blank&#34;&gt;applet&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置方法&#34;&gt;配置方法&lt;/h3&gt;
 
-&lt;p&gt;绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了&lt;/p&gt;
+&lt;h4 id=&#34;ukeeper&#34;&gt;Ukeeper&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://gggchen.github.io/img/ukeeper.png&#34; alt=&#34;ukeeper&#34; /&gt;
+在 &lt;a href=&#34;http://www.ukeeper.com/&#34; target=&#34;_blank&#34;&gt;http://www.ukeeper.com/&lt;/a&gt; 用邮箱注册账户, 把用来发消息的 Gmail 邮箱填写到 &lt;code&gt;Regular e-mail&lt;/code&gt;, Evernote 的邮箱填写到 &lt;code&gt;Forwarding e-mail&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;ifttt&#34;&gt;ifttt&lt;/h4&gt;
+
+&lt;p&gt;在 ifttt 中使用我所创建的一个 &lt;a href=&#34;https://ifttt.com/applets/CpkZGRbF-save-archived-items-in-pocket-full-articles-using-ukeeper-com&#34; target=&#34;_blank&#34;&gt;applet&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了.&lt;/p&gt;
 
 &lt;h3 id=&#34;ifttt-的-applet-配置原理&#34;&gt;ifttt 的 applet 配置原理&lt;/h3&gt;
 
