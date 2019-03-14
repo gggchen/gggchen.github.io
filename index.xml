@@ -608,7 +608,8 @@ It turned out when I adjest the buffer size, it works fine again.&lt;/p&gt;
 
 &lt;p&gt;在 ifttt 中使用我所创建的一个 &lt;a href=&#34;https://ifttt.com/applets/CpkZGRbF-save-archived-items-in-pocket-full-articles-using-ukeeper-com&#34; target=&#34;_blank&#34;&gt;applet&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了.&lt;/p&gt;
+&lt;p&gt;绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了.
+这里的 To Address 中的邮箱选择默认的 &lt;a href=&#34;mailto:drops@ukeeper.com&#34; target=&#34;_blank&#34;&gt;drops@ukeeper.com&lt;/a&gt; 就好, 不需要做更改.&lt;/p&gt;
 
 &lt;h3 id=&#34;ifttt-的-applet-配置原理&#34;&gt;ifttt 的 applet 配置原理&lt;/h3&gt;
 
@@ -619,6 +620,15 @@ It turned out when I adjest the buffer size, it works fine again.&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;这里之所以执着于标签, 是想像 Checked 的主播 Hum 一样, 想让 Pocket 和 Evernote 使用同一套标签体系. 而之所以用标签, 而不是文件夹管理, 是因为文件夹的层次结构树状的, 就是一篇文章在A目录下, 就不能在 B 目录下. 而不同标签可以加在同一文件上.&lt;/p&gt;
+
+&lt;h2 id=&#34;debug&#34;&gt;Debug&lt;/h2&gt;
+
+&lt;p&gt;如果并不能实现 Pocket 发送文章保存到 Evernote 的功能, 请测试:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ifttt 是否工作: 将 ifttt 中的 To Address 改为你的任意其他邮箱, 在 Pocket 中 Archive 一篇文章, 是否在邮箱中能收到由 ifttt 发送到该邮箱的邮件.&lt;/li&gt;
+&lt;li&gt;ukeeper 和 Evernote 是否工作, 用注册 ukeeper 的 Gmail 邮箱向 &lt;a href=&#34;mailto:drops@ukeeper.com&#34; target=&#34;_blank&#34;&gt;drops@ukeeper.com&lt;/a&gt; 发送一封邮件, 是否在 Evernote 中能够收到保存的笔记&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;下面附上我 ifttt filter code 的代码:&lt;/p&gt;
 

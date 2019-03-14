@@ -238,7 +238,8 @@
 
 <p>在 ifttt 中使用我所创建的一个 <a href="https://ifttt.com/applets/CpkZGRbF-save-archived-items-in-pocket-full-articles-using-ukeeper-com" target="_blank">applet</a></p>
 
-<p>绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了.</p>
+<p>绑定 Gmail 邮箱(和上面 ukeeper 的 Regular e-mail 一致), 绑定 Pocket 账户, 就能愉快地使用了.
+这里的 To Address 中的邮箱选择默认的 <a href="mailto:drops@ukeeper.com" target="_blank">drops@ukeeper.com</a> 就好, 不需要做更改.</p>
 
 <h3 id="ifttt-的-applet-配置原理">ifttt 的 applet 配置原理</h3>
 
@@ -249,6 +250,15 @@
 </ul>
 
 <p>这里之所以执着于标签, 是想像 Checked 的主播 Hum 一样, 想让 Pocket 和 Evernote 使用同一套标签体系. 而之所以用标签, 而不是文件夹管理, 是因为文件夹的层次结构树状的, 就是一篇文章在A目录下, 就不能在 B 目录下. 而不同标签可以加在同一文件上.</p>
+
+<h2 id="debug">Debug</h2>
+
+<p>如果并不能实现 Pocket 发送文章保存到 Evernote 的功能, 请测试:</p>
+
+<ol>
+<li>ifttt 是否工作: 将 ifttt 中的 To Address 改为你的任意其他邮箱, 在 Pocket 中 Archive 一篇文章, 是否在邮箱中能收到由 ifttt 发送到该邮箱的邮件.</li>
+<li>ukeeper 和 Evernote 是否工作, 用注册 ukeeper 的 Gmail 邮箱向 <a href="mailto:drops@ukeeper.com" target="_blank">drops@ukeeper.com</a> 发送一封邮件, 是否在 Evernote 中能够收到保存的笔记</li>
+</ol>
 
 <p>下面附上我 ifttt filter code 的代码:</p>
 
