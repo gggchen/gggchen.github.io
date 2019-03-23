@@ -11,6 +11,58 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>我的 Podcast 节目收听列表</title>
+      <link>http://gggchen.github.io/post/podcast/</link>
+      <pubDate>Sat, 23 Mar 2019 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/podcast/</guid>
+      <description>
+
+&lt;p&gt;我收听的 Podcast 列表不完全归纳, 按照「想到哪写到哪」排序. 有次见到同学的播客应用的截屏, 和我收听的节目重合很高, 也许中文节目就那么些吧, 因此觉得收听播客关注列表大同小异.&lt;/p&gt;
+
+&lt;h2 id=&#34;aspirin-fm-https-aspirinfm-fireside-fm&#34;&gt;&lt;a href=&#34;https://aspirinfm.fireside.fm/&#34; target=&#34;_blank&#34;&gt;Aspirin FM&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;三个互相了解的好朋友聊天, 互相开一些玩笑. 有主题但是经常跑题但并不是缺点. 听起来很放松, 如果更新了经常把这个播客最早播放, 因为欢快又轻松. 曾经有几期讲了 A 君和 D 小姐的爱情故事, 让我大开眼界.&lt;/p&gt;
+
+&lt;h2 id=&#34;blow-your-mind-https-www-lizhi-fm-user-924&#34;&gt;&lt;a href=&#34;https://www.lizhi.fm/user/924&#34; target=&#34;_blank&#34;&gt;Blow your mind&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;简里里和峰哥这对伴侣太让人羡慕, 听两个人聊天很有启发性. 印象深刻的有之前的峰哥讲故事, 峰哥小本本和最近简里里的女性系列. 峰哥用数学角度解释问题, 很对我胃口又耳目一新, 简里里用心理学来解释问题, 很治愈我的心理焦虑和不安.&lt;/p&gt;
+
+&lt;h2 id=&#34;迟早更新-http-www-weareones-com-podcast&#34;&gt;&lt;a href=&#34;http://www.weareones.com/podcast&#34; target=&#34;_blank&#34;&gt;迟早更新&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;有书评, 游记, 博物馆参观体验还有个人小感悟等, 如果我要做一个播客, 这就是我想要做的播客啊. 过年的时候会有迟早过年系列, 从这个节目得到很多好书推荐, 比如枪枪推荐的&lt;a href=&#34;https://book.douban.com/subject/26854318/&#34; target=&#34;_blank&#34;&gt;《现代艺术150年》&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;内核恐慌-https-kernelpanic-fm&#34;&gt;&lt;a href=&#34;https://kernelpanic.fm/&#34; target=&#34;_blank&#34;&gt;内核恐慌&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;一听再听反复收听的博客, 之前有一期两个人在&lt;a href=&#34;https://kernelpanic.fm/4&#34; target=&#34;_blank&#34;&gt;编辑器巡礼&lt;/a&gt;中聊了 Vim 键位原理, 两种 mode 的编辑模式, 后来我再学 Vim 才上手无障碍. 后来一年才更新一期, 只好把历史节目拿出来反复收听.&lt;/p&gt;
+
+&lt;h2 id=&#34;字谈字畅-https-thetype-com-typechat&#34;&gt;&lt;a href=&#34;https://thetype.com/typechat/&#34; target=&#34;_blank&#34;&gt;字谈字畅&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;讲了很多字体排印设计相关的话题, 培养了我一些字体美感的认识, 让我自己也买了平头笔, 试着自己练一练英语的书法. 后来我非参数统计学到了样条(Spline), 很惊奇地发现计算机字母形状的保存是靠样条来做的.&lt;/p&gt;
+
+&lt;p&gt;其他一些推荐语简短一些, 但是同样有趣的播客:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://bowuzhi.fm/&#34; target=&#34;_blank&#34;&gt;博物志&lt;/a&gt; 博物馆相关. &lt;a href=&#34;https://bowuzhi.fm/podcast/115&#34; target=&#34;_blank&#34;&gt;钵钵鸡不是鸡&lt;/a&gt;那一期推荐了成都的美食, 刚好我当时在成都, 快毕业了, 又补完了荞面和成都博物馆文殊院. 最近也加入了博物志的会员.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://emacscast.org/&#34; target=&#34;_blank&#34;&gt;玩世&lt;/a&gt; 出国读书的经历真实又有趣, 当小说读了, 一会聊故事, 一会儿聊起了物理学的理解, 夹杂之前在国内的回忆, 偶尔还唱起来.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://storyfm.cn/&#34; target=&#34;_blank&#34;&gt;故事FM&lt;/a&gt; 听到了很多故事, 很多人不一样的人生.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://crazy.capital/&#34; target=&#34;_blank&#34;&gt;疯投圈&lt;/a&gt; 听两个主播从商业、科技和投资的角度看问题挺有意思的.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pretro.xyz/&#34; target=&#34;_blank&#34;&gt;提前怀旧&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.lizhi.fm/user/2579240391643675180&#34; target=&#34;_blank&#34;&gt;得意忘形播客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://renjianzhinan.fm/&#34; target=&#34;_blank&#34;&gt;人间指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;延边物语&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://emacscast.org/&#34; target=&#34;_blank&#34;&gt;EmacsCast&lt;/a&gt; 英文播客, 讲自己使用 Emacs 的体验.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://yitianshijie.net/&#34; target=&#34;_blank&#34;&gt;一天世界&lt;/a&gt; 估计大部分人都收听了吧.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://player.fm/series/series-1464342&#34; target=&#34;_blank&#34;&gt;笙考数理化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;胡先笙文史札记&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;参考:
+&lt;a href=&#34;https://sspai.com/post/52250&#34; target=&#34;_blank&#34;&gt;二零一八年，我的年度十大音频内容&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Shadowsocks 与 科学上网</title>
       <link>http://gggchen.github.io/post/climb-wall/</link>
       <pubDate>Sat, 05 Jan 2019 00:00:00 +0100</pubDate>
@@ -1089,151 +1141,6 @@ C站上的&lt;a href=&#34;https://www.coursera.org/learn/learning-how-to-learn/h
 &lt;blockquote&gt;
 &lt;p&gt;这种会议从来不会准时开始，总是会拖上一阵子，装作说不准还会来几个人。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>机器学习中的线性回归</title>
-      <link>http://gggchen.github.io/post/ml-regression/</link>
-      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
-      
-      <guid>http://gggchen.github.io/post/ml-regression/</guid>
-      <description>
-
-&lt;h2 id=&#34;模型&#34;&gt;模型&lt;/h2&gt;
-
-&lt;h3 id=&#34;hypothesis&#34;&gt;hypothesis&lt;/h3&gt;
-
-&lt;p&gt;$$ h_{\theta}= \theta X = {\sum}_{i=1}^{n} x_i&amp;rsquo; \theta $$&lt;/p&gt;
-
-&lt;p&gt;其中：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;X is a m x n matrix
-n is the number of the features
-m is the number of training examples.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;gradient&#34;&gt;gradient&lt;/h3&gt;
-
-&lt;p&gt;\[
-\theta_j :=\theta_j- \alpha \frac{\partial}{\partial \theta_j} J(\theta_j)
-\]
-写成矩阵形式即：
-\[
-\theta := \theta - \alpha X^T(X \theta - y)
-\]&lt;/p&gt;
-
-&lt;h3 id=&#34;cost-function&#34;&gt;cost function:&lt;/h3&gt;
-
-&lt;p&gt;\[
-J(\theta) = \frac12 {(X \theta - y)}^T (X \theta - y) = \frac12 \sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})^2
-\]&lt;/p&gt;
-
-&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
-
-&lt;h3 id=&#34;梯度下降法&#34;&gt;梯度下降法&lt;/h3&gt;
-
-&lt;p&gt;核心思想：选择初始点，不断迭代直到找到最优点。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://gggchen.github.io/images/gradient-descent.png&#34; alt=&#34;gradient descent&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;为什么取 -$\frac{\partial}{\partial \theta_j} J(\theta_j)$为方向？为什么不是正的，或者是正负之间的某个夹角？&lt;/p&gt;
-
-&lt;p&gt;根据 泰勒展开式
-\[
-J(x + \alpha) \approx J(x) + \alpha \nabla J(x)  = J(x) + | \alpha | |\nabla | \cos \theta
-\]
-其中如果选择同方向，会使得 $\cos \theta = 1 $,反方向使得 $\cos \theta = -1$&lt;/p&gt;
-
-&lt;p&gt;因此选择反方向能够使得 $J(\theta) $最快下降。&lt;/p&gt;
-
-&lt;h4 id=&#34;batch-gradient-descent&#34;&gt;batch gradient descent&lt;/h4&gt;
-
-&lt;h5 id=&#34;gradient-1&#34;&gt;gradient:&lt;/h5&gt;
-
-&lt;p&gt;\[
-\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta)
-\]&lt;/p&gt;
-
-&lt;p&gt;\[
-\theta := \theta - \alpha X^T(X\theta - y)
-\]&lt;/p&gt;
-
-&lt;p&gt;$\theta_j $的每一步都是迭代都是将训练集中的所有样本点都遍历一遍才走出的，这样在大样本情况下计算量很大，这样也就有了下面的 &lt;code&gt;Stochastic gradient descent&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;stocstic-gradient-descent&#34;&gt;stocstic gradient descent&lt;/h4&gt;
-
-&lt;p&gt;每一个样本点都会走微小的一步，这样不需要遍历$m$项才走了。
-\[
-cost(\theta, (x^{(i), y^{(i)}})) = &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; (h_{\theta}(x^{(i)}) - y^{(i)})^2
-\]&lt;/p&gt;
-
-&lt;p&gt;\[
-J_{(train)}(\theta ) = 1/m \sum_{m = 1}^m cost(\theta, (X^{(i)}, y^{(i)}))
-\]&lt;/p&gt;
-
-&lt;h5 id=&#34;具体步骤&#34;&gt;具体步骤：&lt;/h5&gt;
-
-&lt;p&gt;首先需要把数据集随机排列，然后：&lt;/p&gt;
-
-&lt;p&gt;Repeat
-{
-    for i = 1,&amp;hellip;,m{
-    \[
-        \theta_j := \theta_j - \alpha (h_{\theta} (x^i) - y^i) x^i_j for j = 0,&amp;hellip;,n
-    \]
-    }&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;依靠样本点的挨个输入来调参，会比 &lt;code&gt;batch&lt;/code&gt;方法走得更加曲折，最后也不会停在全局最小点（如果能够找到的话），而是在最小附近打转。&lt;/p&gt;
-
-&lt;p&gt;经验表明外部的repeat，即从 $1 $到 $m $完全执行完成，需要大概 $1-10$ 圈能够找到全局最小点（如果能够找到的话）&lt;/p&gt;
-
-&lt;p&gt;而使用 &lt;code&gt;batch gradient descent&lt;/code&gt;的方法，$m $极大，需要计算很久才能够走上一步。&lt;/p&gt;
-
-&lt;h4 id=&#34;mini-batch-gradient-descent&#34;&gt;mini-Batch gradient descent&lt;/h4&gt;
-
-&lt;p&gt;$eg: b= 10, examples((x^i, y^i), &amp;hellip;, (x^{i+9}, y^{i+9}))$&lt;/p&gt;
-
-&lt;p&gt;\[
-\theta_j := \theta_j - \alpha (&lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;) \sum_{k=i}^{i+9} (h_{\theta}(x^{k}) - y^k) x^j_k
-\]&lt;/p&gt;
-
-&lt;p&gt;\[
-i := i+10
-\]&lt;/p&gt;
-
-&lt;p&gt;伪代码(b = 10, m = 1000)&lt;/p&gt;
-
-&lt;p&gt;repeat{
-    for i = 1, 11, 21, 31, 991{
-    \[
-        \theta_j = \theta_j - \alpha (&lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;) \sum_{k=i}^{i+9} (h_{\theta}(x^{k}) - y^k) x^j_k \ for \ every \ j = 0,&amp;hellip;,n
-        \]
-}
-}&lt;/p&gt;
-
-&lt;h4 id=&#34;各种方法的对比&#34;&gt;各种方法的对比&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;batch: 每次循环使用所有 m个样本点
-
-sotchastic: 每次循环只用 1 个样本点
-
-mini-batch: 使用 b 个样本点每次循环（b: mini-batch size, 可取 b = 2:100
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;牛顿法&#34;&gt;牛顿法：&lt;/h3&gt;
-
-&lt;p&gt;不使用一阶&lt;/p&gt;
-
-&lt;p&gt;原理：&lt;/p&gt;
-
-&lt;p&gt;拟牛顿法&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.coursera.org/learn/machine-learning/home&#34; target=&#34;_blank&#34;&gt;Machine Learning by Stanford University&lt;/a&gt;&lt;/p&gt;
-</description>
     </item>
     
   </channel>
