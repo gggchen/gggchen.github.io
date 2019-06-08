@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.51" />
+  
+  
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://gggchen.github.io/post/emacs_as_r_ide/">
+
+  
+  
+
+
+  
+
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="http://gggchen.github.io/index.xml" type="application/rss+xml" title="G Chen">
+  <link rel="feed" href="http://gggchen.github.io/index.xml" type="application/rss+xml" title="G Chen">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="http://gggchen.github.io/post/emacs_as_r_ide/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/kungmacs">
+  <meta property="twitter:creator" content="@https://twitter.com/kungmacs">
+  
+  <meta property="og:site_name" content="G Chen">
+  <meta property="og:url" content="http://gggchen.github.io/post/emacs_as_r_ide/">
+  <meta property="og:title" content="Use Emacs as R IDE | G Chen">
+  <meta property="og:description" content="">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-05-26T00:00:00&#43;02:00">
+  
+  <meta property="article:modified_time" content="2019-05-26T00:00:00&#43;02:00">
+  
+
+  
+
+  <title>Use Emacs as R IDE | G Chen</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">G Chen</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <div class="article-inner">
+      <h1 itemprop="name">Use Emacs as R IDE</h1>
+
+      
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2019-05-26 00:00:00 &#43;0200 CEST" itemprop="datePublished">
+      May 26, 2019
+    </time>
+  </span>
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+</div>
+
+
+      <div class="article-style" itemprop="articleBody">
+        
+
+<blockquote>
+<p>如果机器能让我省一秒钟，我愿意用两天去寻找它</p>
+
+<p>祝佳音, 科技作者，触乐创始人<a href="https://liqi.io/zhujiayin/" target="_blank">https://liqi.io/zhujiayin/</a></p>
+</blockquote>
+
+<p>R 的环境选择很多, 有人使用原生的 R, 更多人用的 RStudio, 甚至 Eclisp, Vim 也有结合 R 使用的插件. 工具有时候并不重要, 比如本人导师, 在用 Basic R, 但是并不影响他 R 水平比我不知道高到哪里去了.
+但是我在使用 Emcas 的过程中还是体会到很多方便, 我也习惯了不使用鼠标,
+RStudio 每次切换 tab 都让我苦找, 尤其是打开的 tab 极其多的时候, 而且 IDE 打开还是太重, 不如编辑器灵活.
+当然 Emacs 也有缺点, 比如配置麻烦, 但是配置的问题可以通过使用一些新手友好的 start kit 解决, 比如 Spacemacs.
+虽然新手友好了, 但是本文仍然是面向不怕麻烦的人, 的确会让写代码快捷很多, 但是在此之前需要解决各种出其不意, 也要能折腾.
+即使配置麻烦, 现在每天我还没完全配置好我的 Emacs, 但是我仍然愿意一直用它. 因为如果一个工具能让我每天节省一秒, 我也愿意花一个月来学习它.</p>
+
+<h1 id="environment-setup">Environment setup</h1>
+
+<p>我想 Linux 或者 BSD 用户不需要讲太多, 直接 Google 安装就完事了, 但是 Mac OS 和 Windows 操作系统的用户还是需要告知怎样安装环境.
+R 是统计编程语言环境, Emacs 是一个编辑器, 可以理解为给原生的 R 搭配了一个绚烂的皮肤; Spacemacs 是面向新手的配置, 因为原生的 Emacs 配置起来太麻烦了, 新手可以更好地用 Emacs, 如果一段时间后不满意可以再重新自己配置.</p>
+
+<h2 id="r">R</h2>
+
+<p>官方网站在 <a href="https://www.r-project.org/" target="_blank">https://www.r-project.org/</a>, 官网上说得很明白了, 就寻找比较近的镜像(mirror)安装就好. 为了防止 Windows 用户困惑, 下面直接给出 R 语言的清华大学的镜像链接: <a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/" target="_blank">https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/</a>
+下载完了, 一路 下一步(Next) 安装就完事了.</p>
+
+<h2 id="install-emacs">Install Emacs</h2>
+
+<p><a href="https://www.gnu.org/software/emacs/" target="_blank">https://www.gnu.org/software/emacs/</a> 官网上很明白了, 三个下载按钮, Linux, Windows 和 MacOS, 点击下载就好了.</p>
+
+<h2 id="install-spacemacs">Install spacemacs</h2>
+
+<p><a href="http://spacemacs.org/" target="_blank">http://spacemacs.org/</a></p>
+
+<p><img src="/img/Emacs_R.png" alt="Emacs as R IDE screenshot" /></p>
+
+<h1 id="three-methods-to-use-r-in-emacs">Three methods to use R in Emacs</h1>
+
+<h2 id="r-repl">R REPL</h2>
+
+<p>Read–eval–print loop(REPL) is a interactive shell for a language. For R language, it is the same as basic R.</p>
+
+<p>You can use <code>SPC SPC R return</code> or <code>M-x R return</code> to start a new R session.</p>
+
+<h2 id="r-scripts">R scripts</h2>
+
+<p>By using R scripts, you can edit and save your R command history.
+   After creating a R file, <code>C-return</code> to run a line. You can also selected then run a block of R code.</p>
+
+<h2 id="literature-programming-in-org-mode">Literature programming in org mode</h2>
+
+<p>Literature programming enable one to write codes in essay. One advantage of such paradigm is that more comments than code can be written.
+Logic of codes can be explained before programming.
+It is also easier to reread codes after a few weeks or for other people. By typing <code>&lt;s TAB</code>, code environment is created automatically. <code>C-c C-c</code> to run current code block.</p>
+
+<p>If you are used to Rmarkdown, org-mode can also export result to PDF and HTML. By <code>C-c C-e</code>, you can choose format of export file.</p>
+
+<p>Not good for trail. If you want to try parameters of one method using R, org mode is not a good choice. But it will fit if you have created a script R files and want to write an essay about your research process.</p>
+
+      </div>
+
+      
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/emacs">emacs</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/tools">tools</a>
+  
+</div>
+
+
+
+    </div>
+  </div>
+
+</article>
+
+
+
+<div class="article-container article-widget">
+  <div class="hr-light"></div>
+  <h3>Related</h3>
+  <ul>
+    
+    <li><a href="/post/pdflatex/">Emacs cannot find pdflatex PATH</a></li>
+    
+    <li><a href="/post/sml/">SML mode in Spacemacs</a></li>
+    
+    <li><a href="/post/climb-wall/">Shadowsocks 与 科学上网</a></li>
+    
+    <li><a href="/post/google-scholar/">在大陆使用 Google Scholar</a></li>
+    
+    <li><a href="/post/latex2rtf/">LaTex 转成 Word</a></li>
+    
+  </ul>
+</div>
+
+
+
+<div class="container article-widget">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="http://gggchen.github.io/post/podcast/"><span
+      aria-hidden="true">&larr;</span> 我的 Podcast 节目收听列表</a></li>
+    
+
+    
+  </ul>
+</nav>
+
+</div>
+
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2019 Chen &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lisp.min.js"></script>
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+

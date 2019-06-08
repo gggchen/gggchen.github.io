@@ -11,6 +11,72 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Use Emacs as R IDE</title>
+      <link>http://gggchen.github.io/post/emacs_as_r_ide/</link>
+      <pubDate>Sun, 26 May 2019 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/emacs_as_r_ide/</guid>
+      <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;如果机器能让我省一秒钟，我愿意用两天去寻找它&lt;/p&gt;
+
+&lt;p&gt;祝佳音, 科技作者，触乐创始人&lt;a href=&#34;https://liqi.io/zhujiayin/&#34; target=&#34;_blank&#34;&gt;https://liqi.io/zhujiayin/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;R 的环境选择很多, 有人使用原生的 R, 更多人用的 RStudio, 甚至 Eclisp, Vim 也有结合 R 使用的插件. 工具有时候并不重要, 比如本人导师, 在用 Basic R, 但是并不影响他 R 水平比我不知道高到哪里去了.
+但是我在使用 Emcas 的过程中还是体会到很多方便, 我也习惯了不使用鼠标,
+RStudio 每次切换 tab 都让我苦找, 尤其是打开的 tab 极其多的时候, 而且 IDE 打开还是太重, 不如编辑器灵活.
+当然 Emacs 也有缺点, 比如配置麻烦, 但是配置的问题可以通过使用一些新手友好的 start kit 解决, 比如 Spacemacs.
+虽然新手友好了, 但是本文仍然是面向不怕麻烦的人, 的确会让写代码快捷很多, 但是在此之前需要解决各种出其不意, 也要能折腾.
+即使配置麻烦, 现在每天我还没完全配置好我的 Emacs, 但是我仍然愿意一直用它. 因为如果一个工具能让我每天节省一秒, 我也愿意花一个月来学习它.&lt;/p&gt;
+
+&lt;h1 id=&#34;environment-setup&#34;&gt;Environment setup&lt;/h1&gt;
+
+&lt;p&gt;我想 Linux 或者 BSD 用户不需要讲太多, 直接 Google 安装就完事了, 但是 Mac OS 和 Windows 操作系统的用户还是需要告知怎样安装环境.
+R 是统计编程语言环境, Emacs 是一个编辑器, 可以理解为给原生的 R 搭配了一个绚烂的皮肤; Spacemacs 是面向新手的配置, 因为原生的 Emacs 配置起来太麻烦了, 新手可以更好地用 Emacs, 如果一段时间后不满意可以再重新自己配置.&lt;/p&gt;
+
+&lt;h2 id=&#34;r&#34;&gt;R&lt;/h2&gt;
+
+&lt;p&gt;官方网站在 &lt;a href=&#34;https://www.r-project.org/&#34; target=&#34;_blank&#34;&gt;https://www.r-project.org/&lt;/a&gt;, 官网上说得很明白了, 就寻找比较近的镜像(mirror)安装就好. 为了防止 Windows 用户困惑, 下面直接给出 R 语言的清华大学的镜像链接: &lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/&#34; target=&#34;_blank&#34;&gt;https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/&lt;/a&gt;
+下载完了, 一路 下一步(Next) 安装就完事了.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-emacs&#34;&gt;Install Emacs&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.gnu.org/software/emacs/&#34; target=&#34;_blank&#34;&gt;https://www.gnu.org/software/emacs/&lt;/a&gt; 官网上很明白了, 三个下载按钮, Linux, Windows 和 MacOS, 点击下载就好了.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-spacemacs&#34;&gt;Install spacemacs&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://spacemacs.org/&#34; target=&#34;_blank&#34;&gt;http://spacemacs.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://gggchen.github.io/img/Emacs_R.png&#34; alt=&#34;Emacs as R IDE screenshot&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;three-methods-to-use-r-in-emacs&#34;&gt;Three methods to use R in Emacs&lt;/h1&gt;
+
+&lt;h2 id=&#34;r-repl&#34;&gt;R REPL&lt;/h2&gt;
+
+&lt;p&gt;Read–eval–print loop(REPL) is a interactive shell for a language. For R language, it is the same as basic R.&lt;/p&gt;
+
+&lt;p&gt;You can use &lt;code&gt;SPC SPC R return&lt;/code&gt; or &lt;code&gt;M-x R return&lt;/code&gt; to start a new R session.&lt;/p&gt;
+
+&lt;h2 id=&#34;r-scripts&#34;&gt;R scripts&lt;/h2&gt;
+
+&lt;p&gt;By using R scripts, you can edit and save your R command history.
+   After creating a R file, &lt;code&gt;C-return&lt;/code&gt; to run a line. You can also selected then run a block of R code.&lt;/p&gt;
+
+&lt;h2 id=&#34;literature-programming-in-org-mode&#34;&gt;Literature programming in org mode&lt;/h2&gt;
+
+&lt;p&gt;Literature programming enable one to write codes in essay. One advantage of such paradigm is that more comments than code can be written.
+Logic of codes can be explained before programming.
+It is also easier to reread codes after a few weeks or for other people. By typing &lt;code&gt;&amp;lt;s TAB&lt;/code&gt;, code environment is created automatically. &lt;code&gt;C-c C-c&lt;/code&gt; to run current code block.&lt;/p&gt;
+
+&lt;p&gt;If you are used to Rmarkdown, org-mode can also export result to PDF and HTML. By &lt;code&gt;C-c C-e&lt;/code&gt;, you can choose format of export file.&lt;/p&gt;
+
+&lt;p&gt;Not good for trail. If you want to try parameters of one method using R, org mode is not a good choice. But it will fit if you have created a script R files and want to write an essay about your research process.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>我的 Podcast 节目收听列表</title>
       <link>http://gggchen.github.io/post/podcast/</link>
       <pubDate>Sat, 23 Mar 2019 00:00:00 +0100</pubDate>
@@ -1083,64 +1149,6 @@ C站上的&lt;a href=&#34;https://www.coursera.org/learn/learning-how-to-learn/h
 &lt;li&gt;还需要有耐心, 和持之以恒.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>中年男人的放飞自我</title>
-      <link>http://gggchen.github.io/post/comeing_up_for_air/</link>
-      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
-      
-      <guid>http://gggchen.github.io/post/comeing_up_for_air/</guid>
-      <description>&lt;p&gt;人在任何时候都会危机, 其中中年危机好像尤为明显, 据说中年的三大情结: 没推倒的女同学, 不似从前的母校和回不去的故乡. 最近读了两本中年危机追寻人生意义的小说, 一本是毛姆的《月亮和六便士》, 另一本是乔治奥威尔的《上来透口气》. 乔治奥威尔完胜, 我很喜欢这本小说, 也很推荐阅读.&lt;/p&gt;
-
-&lt;p&gt;《月亮与六便士》里的斯特里克兰德, 一个伦敦的证券经纪人, 四十岁之后突然感觉自己老了, 来不及了, 抛弃家庭和孩子, 去巴黎学画了, 最后成为了一代绘画大师, 也是真实人物画家高更的生活改编的.
-乔治奥威尔的《上来透口气》写了一个四十岁的卖保险的中年男人, 有天早上他拿到了新做的假牙后，突然感到需要「上来透口气」, 也开始折腾寻找人生, 童年, 青春.&lt;/p&gt;
-
-&lt;p&gt;首先是视角, 毛姆的《月亮和六便士》读起来感觉很假, 可能是因为叙述视角不是斯特里克兰德本人, 而是作者, 旁观者的角度看斯特里克兰德, 看他的生活, 看他的家庭, 看斯特里克兰德学画之前的生活和学画之后的生活. 就像之前读的一些不是自传的传记, 作者走不进主人公本人的生活, 只能揣测, 读者也只能猜, 猜为啥放着本来的工作不要, 学画, 猜学画要遭遇哪些困难, 支撑他一路走下来的动力是什么, 最后有没有遗憾. 但是这种猜测总是感觉不可靠.&lt;/p&gt;
-
-&lt;p&gt;而乔治奥威尔就高明多了, 小说的展开是中年男人本人, 我可以清楚地了解这个男人平时的生活是怎么样的, 对老婆没什么感情, 也聊不来, 孩子像个吸血鬼只知道整天要钱, 工作索然无味, 描写沉闷地快要把他淹死的生活, 很真实. 所以这个中年人想脱离沉闷的生活, 上来透口气, 我就不感觉吃惊, 一开始读到这种生活, 我就希望这个人能脱离了. 最后他回忆到小时候的爱好钓鱼, 但是生活总是不如意, 真正开心钓鱼的时间很少, 那么这个男人选择去老家那个大湖钓鱼来放松, 我感觉也是很合理的.&lt;/p&gt;
-
-&lt;p&gt;但是《月亮与六便士》的人物啊, 突然就抛弃家庭去学画了, 也不知道学画的钱是怎么来的, 最后莫名其妙又跑到另一个南太平洋的小岛上了, 突兀啊! 《上来透口气》还铺垫了回老家, 买钓具的钱是怎么意外来的.&lt;/p&gt;
-
-&lt;p&gt;故事其他方面的真实性上, 《上来透口气》又赢了. 毛姆为了说明斯特里克兰德追求梦想去学画的做法如何对, 用了很多笔墨来说明斯特里克兰德的对女性的性吸引力, 读起来莫名其妙. 先是作者去巴黎找斯特里克兰德, 去咖啡馆吃饭, 一个妓女主动过来搭讪, 帅哥来一发吗? 斯特里克兰德拒绝了, 妓女说不要钱的, 只是被这个男人所吸引, 斯特里克兰德还是拒绝了她&amp;hellip; 太假了, 为了说明斯特里克兰德很有雄性魅力, 追求梦想的男人很具有吸引力, 用这种故事, 只能让读者感觉作者叙述能力太差. 后来又来了, 讲另一个巴黎的男性画家朋友, 家有娇妻, 这个太太看到斯特里克兰德就发现这才是真男人, 然后爱上他了&amp;hellip; 我的天, 我已经烦了&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;《上来透口气》中的老男人, 终于回到自己的故乡下宾菲尔德, 那里已经完全变了. 而且他也并不会在家乡有一场艳遇, 他在住的宾馆看上了个局子优雅的女士, 上去搭讪, 对方保持冷淡的克制. 见到自己初恋, 她也体型完全走形了, 他进了她的店里买东西, 最后决定还是不说出来自己是谁.&lt;/p&gt;
-
-&lt;p&gt;还有在价值观上, 毛姆有些吹捧追求自己梦想的好处, 不敢这样做的, 都是懦夫. George Orwell 就很克制, 最后回到家乡, 那个鱼塘也不见了. 「因为世事难料啊」乔治奥威尔说, 不是想干一些事情, 就一定能完成啊.&lt;/p&gt;
-
-&lt;p&gt;毛姆还有一种道德上高高在上的优越感, 梦想高于一切. 写斯特里克兰德最后出名之后, 他的妻子和孩子态度转变. 成名之前对斯特里克兰德是恨, 等他出名之后, 就靠斯特里克兰德的名气来吸引眼球获得优越感. 虽然这种势利的心态有些讨厌, 也是正常人的表现了. 而且人家斯特里克兰德没说明白就抛弃家庭和孩子出去学画了, 虽然画画很厉害, 那作为丈夫和父亲, 还是失败的.&lt;/p&gt;
-
-&lt;p&gt;最后我很喜欢乔治奥威尔诙谐的语言, 读起来一点也不说教, 读着读着就能遇见一句让我笑出声的话, 当然也有孙仲旭翻译的味道保持很好. 之前读了他的《动物农场》和《1984》并没有感觉到他的幽默, 读这本小说开心死了哈哈哈哈&lt;/p&gt;
-
-&lt;p&gt;比如开始说自己胖:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;我外表是胖，但内在的我是瘦的。你有没有想到过每个胖人的内部都有个瘦人，就像有人所说，每块石头里都有座雕像？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;一种世事无奈的感叹:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;几乎紧接着那时候，冒出来一些事情，让我无法按计划去做。如果冒出来的不是这件事，也会有别的。世事无常啊。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;说婚姻的无趣, 孩子是枷锁:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;再说还有孩子，孩子是“纽带”，人们这样说，要么说是个“结”，可就不说是铅球加镣铐。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;中年危机的绝望心态:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;前一天夜里上床时，还感觉多少还年轻，还对女的有想法什么的，第二天早晨一觉醒来，就清清楚楚地意识到自己不过是个可怜的老胖子，往前看除了进坟墓就没什么指望了，你只能拼了老命干活，好给孩子们买靴子穿。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;参加一个无聊的会议, 等着开始却总是不开始:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这种会议从来不会准时开始，总是会拖上一阵子，装作说不准还会来几个人。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
     </item>
     
   </channel>
