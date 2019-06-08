@@ -203,95 +203,6 @@ Mac OS 和其余PC 客户端可以在 &lt;a href=&#34;https://shadowsocks.org/en
     </item>
     
     <item>
-      <title>在大陆使用 Google Scholar</title>
-      <link>http://gggchen.github.io/post/google-scholar/</link>
-      <pubDate>Fri, 04 May 2018 00:00:00 +0200</pubDate>
-      
-      <guid>http://gggchen.github.io/post/google-scholar/</guid>
-      <description>
-
-&lt;p&gt;使用 shadowsocks 科学上网时, Google 和其他很多网站都能正常访问, 唯独 Google Scholar 会提示下面的错误, 而且没有 CAPTCHA 来验证自己不是电脑.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;We’re sorry… but your computer or network may be sending automated queries. To protect our users, we can’t process your request right now.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;之前我为了检索论文, 只好自己买 VPN. 这个月到期之后决定不买 VPN 了, 因为我自己就有 shadowsocks, 为什么不解决这个问题. 据说是因为服务器的同一 IP 服务段有人使用爬虫, 所以 Google 限制访问了, 需要使用 ipv6 访问 Google. 我尝试了一下, 现在也终于能正常访问了.&lt;/p&gt;
-
-&lt;h2 id=&#34;enable-ipv6&#34;&gt;Enable ipv6&lt;/h2&gt;
-
-&lt;p&gt;要使用 ipv6 访问 Google, 首先需要先保证 ss 的服务器开启了 ipv6 的. 开启 ipv6 的部份可以参考 &lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-enable-ipv6-for-digitalocean-droplets&#34; target=&#34;_blank&#34;&gt;How To Enable IPv6 for DigitalOcean Droplets&lt;/a&gt;. 在确保了服务器已经开启 ipv6 后, 再进行以下配置.&lt;/p&gt;
-
-&lt;h2 id=&#34;修改-shadowsocks-配置&#34;&gt;修改 shadowsocks 配置&lt;/h2&gt;
-
-&lt;p&gt;打开 shadowsocks 的配置:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo vim /etc/shadowsocks.json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改第一行的 &lt;code&gt;&amp;quot;server&amp;quot;:&amp;quot;ipadress&amp;quot;&lt;/code&gt; 为 &lt;code&gt;&amp;quot;server&amp;quot;: &amp;quot;::&amp;quot;&lt;/code&gt;, 保证 shadowsocks 不仅仅使用 ipv4.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-    &amp;quot;server&amp;quot;:&amp;quot;::&amp;quot;,
-    &amp;quot;server_port&amp;quot;:8388,
-    &amp;quot;local_address&amp;quot;: &amp;quot;127.0.0.1&amp;quot;,
-    &amp;quot;local_port&amp;quot;:1080,
-    &amp;quot;password&amp;quot;:&amp;quot;mypassword&amp;quot;,
-    &amp;quot;timeout&amp;quot;:300,
-    &amp;quot;method&amp;quot;:&amp;quot;aes-256-cfb&amp;quot;,
-    &amp;quot;fast_open&amp;quot;: false
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面是可行解法, 另外我尝试过 &lt;a href=&#34;https://github.com/shadowsocks/shadowsocks-libev/issues/254&#34; target=&#34;_blank&#34;&gt;ss github issue 中提到的设置方法&lt;/a&gt; 改为 &lt;code&gt;&amp;quot;server&amp;quot;:[&amp;quot;[::0]&amp;quot;, &amp;quot;0.0.0.0&amp;quot;]&lt;/code&gt; 并不可行, 只能依照上面代码设置为 &lt;code&gt;&amp;quot;server&amp;quot;: &amp;quot;::&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;修改-hosts&#34;&gt;修改 hosts&lt;/h2&gt;
-
-&lt;p&gt;ssh 到服务器, 修改 hosts 文件, 手动设定 &lt;code&gt;scholar.google.com&lt;/code&gt; 网站的服务网址:&lt;/p&gt;
-
-&lt;p&gt;打开 hosts 文件:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo vim /etc/hosts
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在文件末尾加上:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# google scholar
-2404:6800:4008:c06::be scholar.google.com
-2404:6800:4008:c06::be scholar.google.com.hk
-2404:6800:4008:c06::be scholar.google.com.tw
-2401:3800:4001:10::101f scholar.google.cn
-2404:6800:4008:c06::be scholar.google.com.sg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后重启 shadowsocks 的服务:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo ssserver -c /etc/shadowsocks.json -d restart
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;ipv6-地址变动&#34;&gt;ipv6 地址变动&lt;/h2&gt;
-
-&lt;p&gt;需要注意的是, &lt;code&gt;scholar.google.com&lt;/code&gt; 的 ipv6 的地址更换过, 因为早一点的教程, 会告诉你把 hosts 改成:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;2607:f8b0:4007:805::100f scholar.google.com
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;但是这些 2607 的 ipv6 地址根本没法连接, 上面的 2404 的才是现在2018年5月4日能使用的. 以后变动的话, 还要搜索新 ipv6 地址, 再做更改. 更改的地址可以参考 &lt;a href=&#34;https://raw.githubusercontent.com/lennylxx/ipv6-hosts/master/hosts&#34; target=&#34;_blank&#34;&gt;这个 hosts 文件&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;感受&#34;&gt;感受&lt;/h2&gt;
-
-&lt;p&gt;在国内总有一种被强奸的感觉, 一个很好的网站, 说不让你连接, 就不让你连接. 我今天花了一上午研究如何绕过长城, 整个人都很暴躁. 时间都浪费在争取那些应该能自由获取的东西, 这个政权还在投入大量人力物力阻碍信息的流动.&lt;/p&gt;
-
-&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.chenchen.co.uk/2017/11/30/Google_scholar_error.html&#34; target=&#34;_blank&#34;&gt;Digital Ocean + SS无法访问Google Scholar的解决方法&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.finaltheory.me/note/Solve-Google-Problems.html&#34; target=&#34;_blank&#34;&gt;解决DigitalOcean的VPS上Google搜索无法使用的问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.polarxiong.com/archives/%E6%90%AD%E5%BB%BAipv6-VPN-%E8%AE%A9ipv4%E4%B8%8Aipv6-%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%8F%90%E5%8D%87%E5%88%B0100M.html&#34; target=&#34;_blank&#34;&gt;使用shadowsocks，搭建ipv6 VPN&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
       <title>用爬虫批量下载课程主页的课件</title>
       <link>http://gggchen.github.io/post/scraping/</link>
       <pubDate>Mon, 30 Apr 2018 00:00:00 +0200</pubDate>
@@ -1149,6 +1060,64 @@ C站上的&lt;a href=&#34;https://www.coursera.org/learn/learning-how-to-learn/h
 &lt;li&gt;还需要有耐心, 和持之以恒.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>中年男人的放飞自我</title>
+      <link>http://gggchen.github.io/post/comeing_up_for_air/</link>
+      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/comeing_up_for_air/</guid>
+      <description>&lt;p&gt;人在任何时候都会危机, 其中中年危机好像尤为明显, 据说中年的三大情结: 没推倒的女同学, 不似从前的母校和回不去的故乡. 最近读了两本中年危机追寻人生意义的小说, 一本是毛姆的《月亮和六便士》, 另一本是乔治奥威尔的《上来透口气》. 乔治奥威尔完胜, 我很喜欢这本小说, 也很推荐阅读.&lt;/p&gt;
+
+&lt;p&gt;《月亮与六便士》里的斯特里克兰德, 一个伦敦的证券经纪人, 四十岁之后突然感觉自己老了, 来不及了, 抛弃家庭和孩子, 去巴黎学画了, 最后成为了一代绘画大师, 也是真实人物画家高更的生活改编的.
+乔治奥威尔的《上来透口气》写了一个四十岁的卖保险的中年男人, 有天早上他拿到了新做的假牙后，突然感到需要「上来透口气」, 也开始折腾寻找人生, 童年, 青春.&lt;/p&gt;
+
+&lt;p&gt;首先是视角, 毛姆的《月亮和六便士》读起来感觉很假, 可能是因为叙述视角不是斯特里克兰德本人, 而是作者, 旁观者的角度看斯特里克兰德, 看他的生活, 看他的家庭, 看斯特里克兰德学画之前的生活和学画之后的生活. 就像之前读的一些不是自传的传记, 作者走不进主人公本人的生活, 只能揣测, 读者也只能猜, 猜为啥放着本来的工作不要, 学画, 猜学画要遭遇哪些困难, 支撑他一路走下来的动力是什么, 最后有没有遗憾. 但是这种猜测总是感觉不可靠.&lt;/p&gt;
+
+&lt;p&gt;而乔治奥威尔就高明多了, 小说的展开是中年男人本人, 我可以清楚地了解这个男人平时的生活是怎么样的, 对老婆没什么感情, 也聊不来, 孩子像个吸血鬼只知道整天要钱, 工作索然无味, 描写沉闷地快要把他淹死的生活, 很真实. 所以这个中年人想脱离沉闷的生活, 上来透口气, 我就不感觉吃惊, 一开始读到这种生活, 我就希望这个人能脱离了. 最后他回忆到小时候的爱好钓鱼, 但是生活总是不如意, 真正开心钓鱼的时间很少, 那么这个男人选择去老家那个大湖钓鱼来放松, 我感觉也是很合理的.&lt;/p&gt;
+
+&lt;p&gt;但是《月亮与六便士》的人物啊, 突然就抛弃家庭去学画了, 也不知道学画的钱是怎么来的, 最后莫名其妙又跑到另一个南太平洋的小岛上了, 突兀啊! 《上来透口气》还铺垫了回老家, 买钓具的钱是怎么意外来的.&lt;/p&gt;
+
+&lt;p&gt;故事其他方面的真实性上, 《上来透口气》又赢了. 毛姆为了说明斯特里克兰德追求梦想去学画的做法如何对, 用了很多笔墨来说明斯特里克兰德的对女性的性吸引力, 读起来莫名其妙. 先是作者去巴黎找斯特里克兰德, 去咖啡馆吃饭, 一个妓女主动过来搭讪, 帅哥来一发吗? 斯特里克兰德拒绝了, 妓女说不要钱的, 只是被这个男人所吸引, 斯特里克兰德还是拒绝了她&amp;hellip; 太假了, 为了说明斯特里克兰德很有雄性魅力, 追求梦想的男人很具有吸引力, 用这种故事, 只能让读者感觉作者叙述能力太差. 后来又来了, 讲另一个巴黎的男性画家朋友, 家有娇妻, 这个太太看到斯特里克兰德就发现这才是真男人, 然后爱上他了&amp;hellip; 我的天, 我已经烦了&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;《上来透口气》中的老男人, 终于回到自己的故乡下宾菲尔德, 那里已经完全变了. 而且他也并不会在家乡有一场艳遇, 他在住的宾馆看上了个局子优雅的女士, 上去搭讪, 对方保持冷淡的克制. 见到自己初恋, 她也体型完全走形了, 他进了她的店里买东西, 最后决定还是不说出来自己是谁.&lt;/p&gt;
+
+&lt;p&gt;还有在价值观上, 毛姆有些吹捧追求自己梦想的好处, 不敢这样做的, 都是懦夫. George Orwell 就很克制, 最后回到家乡, 那个鱼塘也不见了. 「因为世事难料啊」乔治奥威尔说, 不是想干一些事情, 就一定能完成啊.&lt;/p&gt;
+
+&lt;p&gt;毛姆还有一种道德上高高在上的优越感, 梦想高于一切. 写斯特里克兰德最后出名之后, 他的妻子和孩子态度转变. 成名之前对斯特里克兰德是恨, 等他出名之后, 就靠斯特里克兰德的名气来吸引眼球获得优越感. 虽然这种势利的心态有些讨厌, 也是正常人的表现了. 而且人家斯特里克兰德没说明白就抛弃家庭和孩子出去学画了, 虽然画画很厉害, 那作为丈夫和父亲, 还是失败的.&lt;/p&gt;
+
+&lt;p&gt;最后我很喜欢乔治奥威尔诙谐的语言, 读起来一点也不说教, 读着读着就能遇见一句让我笑出声的话, 当然也有孙仲旭翻译的味道保持很好. 之前读了他的《动物农场》和《1984》并没有感觉到他的幽默, 读这本小说开心死了哈哈哈哈&lt;/p&gt;
+
+&lt;p&gt;比如开始说自己胖:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;我外表是胖，但内在的我是瘦的。你有没有想到过每个胖人的内部都有个瘦人，就像有人所说，每块石头里都有座雕像？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一种世事无奈的感叹:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;几乎紧接着那时候，冒出来一些事情，让我无法按计划去做。如果冒出来的不是这件事，也会有别的。世事无常啊。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;说婚姻的无趣, 孩子是枷锁:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;再说还有孩子，孩子是“纽带”，人们这样说，要么说是个“结”，可就不说是铅球加镣铐。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;中年危机的绝望心态:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;前一天夜里上床时，还感觉多少还年轻，还对女的有想法什么的，第二天早晨一觉醒来，就清清楚楚地意识到自己不过是个可怜的老胖子，往前看除了进坟墓就没什么指望了，你只能拼了老命干活，好给孩子们买靴子穿。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;参加一个无聊的会议, 等着开始却总是不开始:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这种会议从来不会准时开始，总是会拖上一阵子，装作说不准还会来几个人。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

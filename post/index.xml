@@ -55,17 +55,6 @@ apt-get install python-pip pip install shadowsocks  接下来需要配置 shadow
     </item>
     
     <item>
-      <title>在大陆使用 Google Scholar</title>
-      <link>http://gggchen.github.io/post/google-scholar/</link>
-      <pubDate>Fri, 04 May 2018 00:00:00 +0200</pubDate>
-      
-      <guid>http://gggchen.github.io/post/google-scholar/</guid>
-      <description>使用 shadowsocks 科学上网时, Google 和其他很多网站都能正常访问, 唯独 Google Scholar 会提示下面的错误, 而且没有 CAPTCHA 来验证自己不是电脑.
-We’re sorry… but your computer or network may be sending automated queries. To protect our users, we can’t process your request right now.  之前我为了检索论文, 只好自己买 VPN. 这个月到期之后决定不买 VPN 了, 因为我自己就有 shadowsocks, 为什么不解决这个问题. 据说是因为服务器的同一 IP 服务段有人使用爬虫, 所以 Google 限制访问了, 需要使用 ipv6 访问 Google. 我尝试了一下, 现在也终于能正常访问了.
-Enable ipv6 要使用 ipv6 访问 Google, 首先需要先保证 ss 的服务器开启了 ipv6 的. 开启 ipv6 的部份可以参考 How To Enable IPv6 for DigitalOcean Droplets.</description>
-    </item>
-    
-    <item>
       <title>用爬虫批量下载课程主页的课件</title>
       <link>http://gggchen.github.io/post/scraping/</link>
       <pubDate>Mon, 30 Apr 2018 00:00:00 +0200</pubDate>
