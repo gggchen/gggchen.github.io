@@ -11,6 +11,77 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>我的 MacOS 应用</title>
+      <link>http://gggchen.github.io/post/macos-application/</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/macos-application/</guid>
+      <description>
+
+&lt;h2 id=&#34;编辑器&#34;&gt;编辑器&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.gnu.org/software/emacs/&#34; target=&#34;_blank&#34;&gt;Emacs&lt;/a&gt;: 免费, 最常用的编辑器了, 用 &lt;code&gt;org-mode&lt;/code&gt; 记笔记, &lt;code&gt;ess&lt;/code&gt; 运行 R 语言, 爱不释手. 虽然配置和学习麻烦了些, 用了好多年了, 但是每次想改动什么的时候, 还是发现自己是个新手.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.sublimetext.com/&#34; target=&#34;_blank&#34;&gt;sublime&lt;/a&gt;: 付费, 最常用的功能是&lt;a href=&#34;https://www.youtube.com/watch?v=YgEuzl9nnbc&#34; target=&#34;_blank&#34;&gt;多行同时编辑&lt;/a&gt;并且合并.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://macdown.uranusjr.com/&#34; target=&#34;_blank&#34;&gt;MacDown&lt;/a&gt;: 免费, Markdown 编辑器, 虽然 Emacs 也可以编辑 Markdown, 有时候还是想所见即所得&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;menu-bar-常驻&#34;&gt;Menu bar 常驻&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.hammerspoon.org/&#34; target=&#34;_blank&#34;&gt;Hammerspoon&lt;/a&gt;: 免费, 功能丰富, 我用来快速启动应用和管理窗口大小. 比如使用 左边的 &lt;code&gt;option&lt;/code&gt; 键作为 meta 键, &lt;code&gt;option + m&lt;/code&gt; 快速启动 &lt;code&gt;emacs&lt;/code&gt;. 缩放窗口定义为 &lt;code&gt;option + f&lt;/code&gt; 当前活跃窗口到最大. 可以参考我的配置文件 &lt;a href=&#34;https://gist.github.com/gggchen/ad4aff91a5d0d941364aad860ac50f65&#34; target=&#34;_blank&#34;&gt;.hammerspoon&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pqrs.org/osx/karabiner/&#34; target=&#34;_blank&#34;&gt;Karabiner-Elements&lt;/a&gt;: 免费, 改键工具, 上一次 MacOS 升级到 macOS High Sierra 之后, Karabiner 不能兼容, 我这才发现这个软件对我多么重要, 只好回退了 MacOS 的版本. 作为一个 Emacs 用户, 我经常需要用到 Control 键. Karabiner-Elements 帮我把右边的 return 键, 改成当和其他键一起按动时候, 就成了 control 键. 不敢想象没有这个改键工具的 MacOS 体验.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://rime.im/&#34; target=&#34;_blank&#34;&gt;鼠须管&lt;/a&gt;: 免费, 虽然配置很麻烦, 还是趁手的, 中英文切换用 shift 很顺手&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dropbox.com&#34; target=&#34;_blank&#34;&gt;Dropbox&lt;/a&gt;: 付费, 同步数据&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.alfredapp.com/&#34; target=&#34;_blank&#34;&gt;Alfred&lt;/a&gt;: 付费, 购买了 lifetime license, 应用启动器, 文件搜索器, 拼写检查器, 剪贴板管理器, 还用这个应用来强制杀死其他应用.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;书影音&#34;&gt;书影音&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.marginnote.com/&#34; target=&#34;_blank&#34;&gt;MarginNote&lt;/a&gt;: 付费, 有教育优惠, 读 pdf 教材的时候, 可以列出来本书结构, 并且在树状结构上做笔记, 很方便.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://fbreader.org/&#34; target=&#34;_blank&#34;&gt;FBReader&lt;/a&gt;: 免费, 方便打开比如 &lt;code&gt;awz&lt;/code&gt;, &lt;code&gt;epub&lt;/code&gt; 和 &lt;code&gt;mobi&lt;/code&gt; 格式的书&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://iina.io/&#34; target=&#34;_blank&#34;&gt;IINA&lt;/a&gt;: 免费, 方便打开视频和音乐文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;语言学习&#34;&gt;语言学习&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.eudic.net/v4/en/app/eudic&#34; target=&#34;_blank&#34;&gt;欧陆词典&lt;/a&gt;: 付费, 查单词方便一些, 自己导入词库之后, 可以查同义词, 英语解释, 例句, 可以参考&lt;a href=&#34;https://www.douban.com/note/278501822/&#34; target=&#34;_blank&#34;&gt;奶爸1.6G Mdict词库的补充及在Bluedict中使用的心得&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://apps.ankiweb.net/&#34; target=&#34;_blank&#34;&gt;Anki&lt;/a&gt;: 免费, 背单词软件. 背单词一般在手机上背, 编辑单词卡片一般在电脑上完成, 需要查单词音频, 连系图片, 具体操作流程可以读书&lt;a href=&#34;https://www.goodreads.com/book/show/19661852-fluent-forever&#34; target=&#34;_blank&#34;&gt;Fluent Forever&lt;/a&gt; 或者看网页&lt;a href=&#34;https://blog.fluent-forever.com/chapter2/&#34; target=&#34;_blank&#34;&gt;Using Anki Online: Chapter 2&lt;/a&gt; 和 &lt;a href=&#34;https://blog.fluent-forever.com/tag/anki/&#34; target=&#34;_blank&#34;&gt;Fluent forever Anki&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;信息源和笔记&#34;&gt;信息源和笔记&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://reederapp.com/&#34; target=&#34;_blank&#34;&gt;Reeder&lt;/a&gt;: 付费, RSS 阅读器, 新闻和博客文章信息源, 虽然现在软件升级到 4 了, 我还在用着版本 3, 感觉已经够好用了&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://evernote.com/&#34; target=&#34;_blank&#34;&gt;Evernote&lt;/a&gt;: 免费, 我付费了高级功能, 在&lt;a href=&#34;https://www.gchen.me/post/read-it-later/&#34; target=&#34;_blank&#34;&gt;稍后读并且存档&lt;/a&gt; 文章里提到过, 因为需要把文章通过邮件收藏到 evernote, 必须解锁高级功能.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://app.getpocket.com/&#34; target=&#34;_blank&#34;&gt;Pocket&lt;/a&gt;: 免费, 稍后读, 把 Reeder 中的文章, 暂时没时间读的, 加入稍后读&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;chrome-插件&#34;&gt;Chrome 插件&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Vimium: 在网页上使用 vim 键位, 常用翻页, 到页头, 页尾&lt;/li&gt;
+&lt;li&gt;AdGuard: 屏蔽广告&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/evernote-web-clipper/pioclpoplcdbaefihamjohnefbikjilc&#34; target=&#34;_blank&#34;&gt;Evernote Web Clipper&lt;/a&gt;: 剪切收藏网页&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://chrome.google.com/webstore/detail/save-to-pocket/niloccemoadcdkdjlinkgdfekeahmflj&#34; target=&#34;_blank&#34;&gt;Save to Pocket&lt;/a&gt;: 把文章保存到 Pocket&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;其他&#34;&gt;其他&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.omnigroup.com/more/&#34; target=&#34;_blank&#34;&gt;OmniDisksweeper&lt;/a&gt;: 免费, 磁盘清理工具. 经常发现电脑硬盘又快满了, 但是又不知道到底哪些文件占据了大量空间. Mac OS 自带大文件检测功能, 但是问题是系统自带功能有限, 很多时候, 我都发现硬盘系统的文件占了太多空间, 而系统文件是不在大文件检测功能扫描范围内的. 这时候就需要 OmniDisksweeper 了, 扫描系统文件需要一些时间, 但是之后删除就方便多了&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://macpassapp.org/&#34; target=&#34;_blank&#34;&gt;Macpass&lt;/a&gt;: 免费, 密码管理软件, 虽然 Mac OS 有 Kyechain 这个软件可以管理密码, 但是毕竟信不过把所有密码交给苹果公司.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.iterm2.com/&#34; target=&#34;_blank&#34;&gt;iTerm2&lt;/a&gt;: 免费, 最好用的 terminal emulator&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.ocenaudio.com/&#34; target=&#34;_blank&#34;&gt;ocenaudio&lt;/a&gt;: 免费, 音频处理软件, 有时候需要把一段音频裁剪一小段放入 Anki, 背单词时候跟读, 这个软件完全能够满足我的需求.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;header Photo by &lt;a href=&#34;https://unsplash.com/photos/rsQZm3wNu0I&#34; target=&#34;_blank&#34;&gt;Fabian Grohs on Unsplash&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Use Emacs as R IDE</title>
       <link>http://gggchen.github.io/post/emacs_as_r_ide/</link>
       <pubDate>Sun, 26 May 2019 00:00:00 +0200</pubDate>
@@ -1036,151 +1107,6 @@ C站上的&lt;a href=&#34;https://www.coursera.org/learn/learning-how-to-learn/h
 &lt;blockquote&gt;
 &lt;p&gt;这种会议从来不会准时开始，总是会拖上一阵子，装作说不准还会来几个人。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>机器学习中的线性回归</title>
-      <link>http://gggchen.github.io/post/ml-regression/</link>
-      <pubDate>Thu, 06 Oct 2016 00:00:00 +0200</pubDate>
-      
-      <guid>http://gggchen.github.io/post/ml-regression/</guid>
-      <description>
-
-&lt;h2 id=&#34;模型&#34;&gt;模型&lt;/h2&gt;
-
-&lt;h3 id=&#34;hypothesis&#34;&gt;hypothesis&lt;/h3&gt;
-
-&lt;p&gt;$$ h_{\theta}= \theta X = {\sum}_{i=1}^{n} x_i&amp;rsquo; \theta $$&lt;/p&gt;
-
-&lt;p&gt;其中：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;X is a m x n matrix
-n is the number of the features
-m is the number of training examples.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;gradient&#34;&gt;gradient&lt;/h3&gt;
-
-&lt;p&gt;\[
-\theta_j :=\theta_j- \alpha \frac{\partial}{\partial \theta_j} J(\theta_j)
-\]
-写成矩阵形式即：
-\[
-\theta := \theta - \alpha X^T(X \theta - y)
-\]&lt;/p&gt;
-
-&lt;h3 id=&#34;cost-function&#34;&gt;cost function:&lt;/h3&gt;
-
-&lt;p&gt;\[
-J(\theta) = \frac12 {(X \theta - y)}^T (X \theta - y) = \frac12 \sum_{i=1}^m(h_\theta(x^{(i)}) - y^{(i)})^2
-\]&lt;/p&gt;
-
-&lt;h2 id=&#34;解法&#34;&gt;解法&lt;/h2&gt;
-
-&lt;h3 id=&#34;梯度下降法&#34;&gt;梯度下降法&lt;/h3&gt;
-
-&lt;p&gt;核心思想：选择初始点，不断迭代直到找到最优点。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://gggchen.github.io/images/gradient-descent.png&#34; alt=&#34;gradient descent&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;为什么取 -$\frac{\partial}{\partial \theta_j} J(\theta_j)$为方向？为什么不是正的，或者是正负之间的某个夹角？&lt;/p&gt;
-
-&lt;p&gt;根据 泰勒展开式
-\[
-J(x + \alpha) \approx J(x) + \alpha \nabla J(x)  = J(x) + | \alpha | |\nabla | \cos \theta
-\]
-其中如果选择同方向，会使得 $\cos \theta = 1 $,反方向使得 $\cos \theta = -1$&lt;/p&gt;
-
-&lt;p&gt;因此选择反方向能够使得 $J(\theta) $最快下降。&lt;/p&gt;
-
-&lt;h4 id=&#34;batch-gradient-descent&#34;&gt;batch gradient descent&lt;/h4&gt;
-
-&lt;h5 id=&#34;gradient-1&#34;&gt;gradient:&lt;/h5&gt;
-
-&lt;p&gt;\[
-\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta)
-\]&lt;/p&gt;
-
-&lt;p&gt;\[
-\theta := \theta - \alpha X^T(X\theta - y)
-\]&lt;/p&gt;
-
-&lt;p&gt;$\theta_j $的每一步都是迭代都是将训练集中的所有样本点都遍历一遍才走出的，这样在大样本情况下计算量很大，这样也就有了下面的 &lt;code&gt;Stochastic gradient descent&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;stocstic-gradient-descent&#34;&gt;stocstic gradient descent&lt;/h4&gt;
-
-&lt;p&gt;每一个样本点都会走微小的一步，这样不需要遍历$m$项才走了。
-\[
-cost(\theta, (x^{(i), y^{(i)}})) = &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; (h_{\theta}(x^{(i)}) - y^{(i)})^2
-\]&lt;/p&gt;
-
-&lt;p&gt;\[
-J_{(train)}(\theta ) = 1/m \sum_{m = 1}^m cost(\theta, (X^{(i)}, y^{(i)}))
-\]&lt;/p&gt;
-
-&lt;h5 id=&#34;具体步骤&#34;&gt;具体步骤：&lt;/h5&gt;
-
-&lt;p&gt;首先需要把数据集随机排列，然后：&lt;/p&gt;
-
-&lt;p&gt;Repeat
-{
-    for i = 1,&amp;hellip;,m{
-    \[
-        \theta_j := \theta_j - \alpha (h_{\theta} (x^i) - y^i) x^i_j for j = 0,&amp;hellip;,n
-    \]
-    }&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;依靠样本点的挨个输入来调参，会比 &lt;code&gt;batch&lt;/code&gt;方法走得更加曲折，最后也不会停在全局最小点（如果能够找到的话），而是在最小附近打转。&lt;/p&gt;
-
-&lt;p&gt;经验表明外部的repeat，即从 $1 $到 $m $完全执行完成，需要大概 $1-10$ 圈能够找到全局最小点（如果能够找到的话）&lt;/p&gt;
-
-&lt;p&gt;而使用 &lt;code&gt;batch gradient descent&lt;/code&gt;的方法，$m $极大，需要计算很久才能够走上一步。&lt;/p&gt;
-
-&lt;h4 id=&#34;mini-batch-gradient-descent&#34;&gt;mini-Batch gradient descent&lt;/h4&gt;
-
-&lt;p&gt;$eg: b= 10, examples((x^i, y^i), &amp;hellip;, (x^{i+9}, y^{i+9}))$&lt;/p&gt;
-
-&lt;p&gt;\[
-\theta_j := \theta_j - \alpha (&lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;) \sum_{k=i}^{i+9} (h_{\theta}(x^{k}) - y^k) x^j_k
-\]&lt;/p&gt;
-
-&lt;p&gt;\[
-i := i+10
-\]&lt;/p&gt;
-
-&lt;p&gt;伪代码(b = 10, m = 1000)&lt;/p&gt;
-
-&lt;p&gt;repeat{
-    for i = 1, 11, 21, 31, 991{
-    \[
-        \theta_j = \theta_j - \alpha (&lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;) \sum_{k=i}^{i+9} (h_{\theta}(x^{k}) - y^k) x^j_k \ for \ every \ j = 0,&amp;hellip;,n
-        \]
-}
-}&lt;/p&gt;
-
-&lt;h4 id=&#34;各种方法的对比&#34;&gt;各种方法的对比&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;batch: 每次循环使用所有 m个样本点
-
-sotchastic: 每次循环只用 1 个样本点
-
-mini-batch: 使用 b 个样本点每次循环（b: mini-batch size, 可取 b = 2:100
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;牛顿法&#34;&gt;牛顿法：&lt;/h3&gt;
-
-&lt;p&gt;不使用一阶&lt;/p&gt;
-
-&lt;p&gt;原理：&lt;/p&gt;
-
-&lt;p&gt;拟牛顿法&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://www.coursera.org/learn/machine-learning/home&#34; target=&#34;_blank&#34;&gt;Machine Learning by Stanford University&lt;/a&gt;&lt;/p&gt;
-</description>
     </item>
     
   </channel>

@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2019 Chen</copyright>
-    <lastBuildDate>Sun, 26 May 2019 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 16 Oct 2019 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="http://gggchen.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>我的 MacOS 应用</title>
+      <link>http://gggchen.github.io/post/macos-application/</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0200</pubDate>
+      
+      <guid>http://gggchen.github.io/post/macos-application/</guid>
+      <description>编辑器  Emacs: 免费, 最常用的编辑器了, 用 org-mode 记笔记, ess 运行 R 语言, 爱不释手. 虽然配置和学习麻烦了些, 用了好多年了, 但是每次想改动什么的时候, 还是发现自己是个新手. sublime: 付费, 最常用的功能是多行同时编辑并且合并. MacDown: 免费, Markdown 编辑器, 虽然 Emacs 也可以编辑 Markdown, 有时候还是想所见即所得  Menu bar 常驻  Hammerspoon: 免费, 功能丰富, 我用来快速启动应用和管理窗口大小. 比如使用 左边的 option 键作为 meta 键, option + m 快速启动 emacs. 缩放窗口定义为 option + f 当前活跃窗口到最大. 可以参考我的配置文件 .hammerspoon Karabiner-Elements: 免费, 改键工具, 上一次 MacOS 升级到 macOS High Sierra 之后, Karabiner 不能兼容, 我这才发现这个软件对我多么重要, 只好回退了 MacOS 的版本.</description>
+    </item>
     
     <item>
       <title>Use Emacs as R IDE</title>
