@@ -205,16 +205,93 @@ R 是统计编程语言环境, Emacs 是一个编辑器, 可以理解为给原�
 
 <h2 id="r">R</h2>
 
-<p>官方网站在 <a href="https://www.r-project.org/" target="_blank">https://www.r-project.org/</a>, 官网上说得很明白了, 就寻找比较近的镜像(mirror)安装就好. 为了防止 Windows 用户困惑, 下面直接给出 R 语言的清华大学的镜像链接: <a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/" target="_blank">https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/</a>
+<p>官方网站在 <a href="https://www.r-project.org/" target="_blank">https://www.r-project.org/</a>, 官网上说得很明白了, 直接下载或者寻找比较近的镜像(mirror)安装就好. 比如这是 R 的清华大学的镜像链接: <a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/" target="_blank">https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/</a>
 下载完了, 一路 下一步(Next) 安装就完事了.</p>
 
 <h2 id="install-emacs">Install Emacs</h2>
 
-<p><a href="https://www.gnu.org/software/emacs/" target="_blank">https://www.gnu.org/software/emacs/</a> 官网上很明白了, 三个下载按钮, Linux, Windows 和 MacOS, 点击下载就好了.</p>
+<p><a href="https://www.gnu.org/software/emacs/" target="_blank">https://www.gnu.org/software/emacs/</a> 官网上很明白了, 三个下载按钮, Linux, Windows 和 MacOS, 点击下载安装就好了.</p>
 
 <h2 id="install-spacemacs">Install spacemacs</h2>
 
-<p><a href="http://spacemacs.org/" target="_blank">http://spacemacs.org/</a></p>
+<p>Emacs 因为配置繁琐并且上手不容易, 推荐使用别人配置好的 <a href="https://www.emacswiki.org/emacs/StarterKits" target="_blank">starter kit</a>, 帮你写好好不冲突的配置文件, 只需要下载使用即可. 可选的方案有很多, 比如流行的 <a href="https://github.com/bbatsov/prelude" target="_blank">prelude</a> 和 <a href="https://github.com/hlissner/doom-emacs" target="_blank">doom-emacs</a>, 这里我推荐 <a href="http://spacemacs.org/" target="_blank">spacemacs</a>, 因为足够简单.</p>
+
+<p>spacemacs 的安装方法可以参考官网介绍, 这里描述我的备选方法, 可以点击主页上的下载按钮, 下载压缩包, 解压, 并且移动压缩包到<code>~/.emacs.d</code>. 可以打开 terminal:</p>
+
+<pre><code>cd Download/
+mv spacemacs-master ~/.emacs.d
+</code></pre>
+
+<p>接下来就可以打开 Emacs 了, 第一次打开会弹出几个选项, 这里就选择默认选项按回车键到最后.
+接下来 spacemacs 会安装一些包, 需要等待一段时间包安装完毕.</p>
+
+<h3 id="配置-spacemacs-optional">配置 spacemacs(optional)</h3>
+
+<p>虽然 spacemacs 已经将 Emacs 配置得差不多了, 但是还是有些地方最好修改配置文件配置的, 比如字体字号, 打开最大化窗口和背景透明.</p>
+
+<p>打开配置文件为, 使用快捷键 <code>SPC e d</code> 打开 <code>~/.spacemacs</code>, 其中 <code>SPC</code> 为空格键.
+接下来修改配置文件.</p>
+
+<h4 id="字体字号">字体字号</h4>
+
+<p>搜索 <code>font</code> 关键字: 在键盘上敲出 <code>/font</code>, 回车搜索结果, 然后修改字体, 字号等关键词, 这里也可以把 <code>Monaco</code> 替换成你喜欢的其他字体:</p>
+
+<pre><code>dotspacemacs-default-font '(&quot;Monaco&quot;
+                               :size 18
+                               :weight normal
+                               :width normal
+                               :powerline-scale 1.1)
+</code></pre>
+
+<h4 id="窗口最大化">窗口最大化</h4>
+
+<p>找到 <code>dotspacemacs-maximized-at-startup</code>, 并且把值 <code>nil</code> 改成 <code>t</code></p>
+
+<pre><code class="language-elisp">   ;; If non nil the frame is maximized when Emacs starts up.
+   ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
+   ;; (default nil) (Emacs 24.4+ only)
+   dotspacemacs-maximized-at-startup t
+</code></pre>
+
+<h4 id="背景透明">背景透明</h4>
+
+<p>这里修改两处, 首先将 <code>dotspacemacs-active-transparency</code> 后的值改小一些, 比如说 <code>85</code>.</p>
+
+<pre><code class="language-elisp">   ;; A value from the range (0..100), in increasing opacity, which describes
+   ;; the transparency level of a frame when it's active or selected.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
+   dotspacemacs-active-transparency 85
+</code></pre>
+
+<p>然后还需要在 <code>user-config ()</code> 后加入一行开启透明</p>
+
+<pre><code class="language-eslip">(defun dotspacemacs/user-config ()
+  &quot;Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration.
+This is the place where most of your configurations should be done. Unless it is
+explicitly specified that a variable should be set before a package is loaded,
+you should place your code here.&quot;
+  (spacemacs/toggle-transparency)
+  )
+
+</code></pre>
+
+<h3 id="ess">ESS</h3>
+
+<p>想要在 Emacs 中使用 R 语言还需要支持工具 Emacs Speaks Statistic(ESS). 只需要在<code>layer</code> 中加入一行 <code>ess</code>:</p>
+
+<pre><code class="language-eslip">dotspacemacs-configuration-layers
+   '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press &lt;SPC f e R&gt; (Vim style) or
+     ;; &lt;M-m f e R&gt; (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     helm
+     ess
+     )
+</code></pre>
 
 <p><img src="/img/Emacs_R.png" alt="Emacs as R IDE screenshot" /></p>
 
