@@ -114,7 +114,7 @@ R 是统计编程语言环境, Emacs 是一个编辑器, 可以理解为给原�
 
 &lt;h2 id=&#34;install-emacs&#34;&gt;Install Emacs&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://www.gnu.org/software/emacs/&#34; target=&#34;_blank&#34;&gt;https://www.gnu.org/software/emacs/&lt;/a&gt; 官网上很明白了, 三个下载按钮, Linux, Windows 和 MacOS, 点击下载安装就好了.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.gnu.org/software/emacs/&#34; target=&#34;_blank&#34;&gt;https://www.gnu.org/software/emacs/&lt;/a&gt; 官网上可以选择 Linux, Windows 和 MacOS 的各自安装方式.&lt;/p&gt;
 
 &lt;h2 id=&#34;install-spacemacs&#34;&gt;Install spacemacs&lt;/h2&gt;
 
@@ -123,7 +123,7 @@ R 是统计编程语言环境, Emacs 是一个编辑器, 可以理解为给原�
 &lt;p&gt;spacemacs 的安装方法可以参考官网介绍, 这里描述我的备选方法, 可以点击主页上的下载按钮, 下载压缩包, 解压, 并且移动压缩包到&lt;code&gt;~/.emacs.d&lt;/code&gt;. 可以打开 terminal:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cd Download/
-mv spacemacs-master ~/.emacs.d
+mv spacemacs-master/* ~/.emacs.d
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;接下来就可以打开 Emacs 了, 第一次打开会弹出几个选项, 这里就选择默认选项按回车键到最后.
