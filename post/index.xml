@@ -13,6 +13,19 @@
     
     
     <item>
+      <title>2019 读书总结</title>
+      <link>http://gggchen.github.io/post/books2019/</link>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0100</pubDate>
+      
+      <guid>http://gggchen.github.io/post/books2019/</guid>
+      <description>Fluent forever 不仅介绍了学语言的规律而且总结了如何学习.
+比如推荐了分辨语言中难易辨别音的方法, 之前我从来没有搞明白过德语的 e 和 i 有什么区别, 我尝试用他介绍的方法, 把这两个音放在 Anki 卡片里, 听音做选择, 并没有收获. 后来看又看了一些资料终于明白了.
+还介绍了怎么背单词, 当然是利用类似 Anki 的卡片间隔重复记忆, 关键是他总结了一套记单词的一套工作流程. 我真的服气了, 我本来想写个博客来介绍我的背单词流程, 和这本书一比起来就是 nothing, 他也早写好博客 并且做好视频教程了, 甚至还有配套的 Anki 的模板, 在 Download and install my model deck 中可以找到下载.
+ 用 Eudic 等词典查单词意思以及音标 利用 https://forvo.com/ 下载单词发音 谷歌搜索这个单词相关的图片, 因为大脑更容易记住图形 然后在 Anki 里面背单词, 自动规律间断重复  另外一个收获是, 一张卡片最好只记忆一个东西. 单词有时有几个记忆点时, 我应该把单词分开背, 一次只背一项. 现在我背德语, 一张卡片记忆德语对应的含义, 第二张卡片记忆含义对应的德语, 第三张卡片记忆该德语名词的复数, 这样不会盯着一张卡片想完成三个动作, 然后崩溃, 再也不想背了. 我之前很多次痛苦的学习记忆就是一张卡片想背的东西太多.
+《娱乐至死》 这本书写了电视的出现对书本作为传播媒介的影响, 技术从来不是中立的, 技术和工具会束缚限制塑造我的思维</description>
+    </item>
+    
+    <item>
       <title>我的 MacOS 应用</title>
       <link>http://gggchen.github.io/post/macos-application/</link>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0200</pubDate>
