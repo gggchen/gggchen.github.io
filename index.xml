@@ -367,6 +367,81 @@ It is also easier to reread codes after a few weeks or for other people. By typi
 &lt;p&gt;If you are used to Rmarkdown, org-mode can also export result to PDF and HTML. By &lt;code&gt;C-c C-e&lt;/code&gt;, you can choose format of export file.&lt;/p&gt;
 
 &lt;p&gt;Not good for trail. If you want to try parameters of one method using R, org mode is not a good choice. But it will fit if you have created a script R files and want to write an essay about your research process.&lt;/p&gt;
+
+&lt;h1 id=&#34;按照关键词搜索文件&#34;&gt;按照关键词搜索文件&lt;/h1&gt;
+
+&lt;p&gt;R 代码、数据和图片可能都放在一个文件夹之中, 这样日后想重用文件, 搜索起来可能是个问题.
+如果是刚创建的文件还好, 记忆是鲜活的, 比较容易找到.
+但是如果是半年甚至一年前的 R 代码, 检索就是问题.
+一般的 R 脚本, 文件名是不足以概括该脚本内的内容的, 所以我需要按照 R 脚本里的内容来搜索.
+返回所有包含特定关键词的 R 脚本, 这样搜索范围就缩小很多.
+下面是我经常使用这一功能的场景:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;做图的改动: 之前做了一个图, 半年后需要做 beamer 展示参加会议, 发现这张图能作为关键结果, 想改动标题名称, 加粗标题, 加大字号. 需要找到当初是怎么生成这张图的, 需要稍微做改动, 重新生成新图.&lt;/li&gt;
+&lt;li&gt;重用过去的一段 R 代码: 之前跑的一段代码, 现在数据集有更新, 需要找到之前使用这个方法的 R 代码, 重新对新数据集运行新结果.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;文件搜索的其他方法&#34;&gt;文件搜索的其他方法&lt;/h2&gt;
+
+&lt;p&gt;一般的文件搜索系统都自带, 不管是 Linux, Max OS 还是 Windows 都有全局检索的功能. 比如 Mac OS 系统自带搜索 spotlight. 但是这些搜索都是全局搜索, 搜索出来的结果不仅仅包括 R 脚本文件, 还包括自己写的日志文件和报告, 返回结果太多. 在干草堆里找一根针&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;grep | &amp;quot;keyword&amp;quot;&lt;/code&gt; 也能搜索特定文件夹下的文件, 但是命令行每次输入不是很方便.
+并且这两种方法都不能按照文件内的内容搜索.&lt;/p&gt;
+
+&lt;h2 id=&#34;project-ag-可以搜索一个特定文件夹作为项目&#34;&gt;project-ag 可以搜索一个特定文件夹作为项目&lt;/h2&gt;
+
+&lt;p&gt;使用的一个展示: &lt;code&gt;M-x projectile-ag&lt;/code&gt; 进入项目搜索的模式, 输入任一关键词, 回车, 就能返回结果了&lt;/p&gt;
+
+&lt;p&gt;鼠标点击, 可以在不同文件中跳动.&lt;/p&gt;
+
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+
+&lt;p&gt;在 MacOS 的 Spacemacs 中, 安装分为两步:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;在操作系统上安装 &lt;code&gt;silver search&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在 Spacemacs 中安装 &lt;code&gt;ag.el&lt;/code&gt; (add &lt;code&gt;ag&lt;/code&gt; to &lt;code&gt;dotspacemacs-additional-packages&lt;/code&gt;).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;想要特定文件夹为 &lt;code&gt;projectile&lt;/code&gt; 能识别的文件夹, 还需要在文件夹里加入 &lt;code&gt;.projectile&lt;/code&gt; 文件.&lt;/p&gt;
+
+&lt;h2 id=&#34;文件管理&#34;&gt;文件管理&lt;/h2&gt;
+
+&lt;p&gt;参考书 &lt;a href=&#34;https://www.crcpress.com/Reproducible-Research-with-R-and-R-Studio/Gandrud/p/book/9781498715379&#34; target=&#34;_blank&#34;&gt;Reproducible Research with R and R Studio&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fig: 存放输出图片&lt;/li&gt;
+&lt;li&gt;data: 存放外来数据&lt;/li&gt;
+&lt;li&gt;output: 存放自己产生的数据, RData, rda, csv&lt;/li&gt;
+&lt;li&gt;R: R 代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;图片的生成和保存&#34;&gt;图片的生成和保存&lt;/h2&gt;
+
+&lt;p&gt;最好保存图片的时候, 把图片的文件名, 尺寸等信息都保存在 R 代码里, 最好不要在 RStudio 利用图片保存功能保存, 这样之后不很好检索.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;pdf(file=&amp;quot;../figs/rbf-parp-persp.pdf&amp;quot;, width=6, height=5)
+par(mfrow = c(1, 1), mar = c(0.5, 0.5, 1, 0.5))
+persp(x=g.lon,y=g.lat, z=surf.mat1, theta = 30, phi = 20,  xlab = &amp;quot;longitude&amp;quot;, ylab = &amp;quot;latitude&amp;quot;, zlab = &amp;quot;&amp;quot;, col = &amp;quot;lightblue&amp;quot;, border=&amp;quot;black&amp;quot;, lwd=0.1, axes = TRUE, cex.axis=0.5, cex.lab=0.5, ticktype = &amp;quot;detailed&amp;quot;, main = &amp;quot;&amp;quot;)
+dev.off()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;exclude-files-文件夹&#34;&gt;exclude files/文件夹&lt;/h2&gt;
+
+&lt;p&gt;使用场景: 有太多的文件夹, 根本不想全部搜索, 首先是把搜索结果变慢了, 其次是返回关联结果太多, 还需要在结果中逐个查看. 可以在上面提到的 &lt;code&gt;.projectile&lt;/code&gt; 加入想排除的文件名称比如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/figs/plotly
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;下集预告&#34;&gt;下集预告&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;基本 Vim 操作&lt;/li&gt;
+&lt;li&gt;Mac OS 和 Linux 改键位, 方便 Emacs 用户&lt;/li&gt;
+&lt;li&gt;i3wm 的使用&lt;/li&gt;
+&lt;li&gt;Emacs + Latex&lt;/li&gt;
+&lt;/ol&gt;
 </description>
     </item>
     
